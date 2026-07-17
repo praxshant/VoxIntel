@@ -1,0 +1,13 @@
+dataset: slurp
+
+asr_model: facebook/wav2vec2-base-960h
+
+intent_model: distilbert-base-uncased
+
+metric_asr:
+  - wer
+  - cer
+
+metric_intent:
+  - accuracy
+  - macro_f1
