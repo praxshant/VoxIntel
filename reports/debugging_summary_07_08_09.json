@@ -1,0 +1,38 @@
+{
+  "notebook_07": {
+    "n_validation_rows": 2032,
+    "accuracy": 0.8681102362204725,
+    "top3_accuracy": 0.9483267716535433,
+    "mean_confidence": 0.9204777459670276,
+    "median_confidence": 0.9807604000000001,
+    "n_intents_with_support": 70,
+    "n_zero_f1_intents": 14
+  },
+  "notebook_08": {
+    "trusted": [
+      "overall accuracy / macro-F1 / top-3 comparisons across transcript sources",
+      "confidence trend: ground_truth > finetuned > baseline",
+      "recovery summary from baseline to fine-tuned ASR"
+    ],
+    "use_with_caution": [
+      "per_intent_f1_comparison.csv may not be true one-vs-rest per-intent F1",
+      "intent fragility rankings built on that table may be distorted"
+    ]
+  },
+  "notebook_09": {
+    "status": "broken",
+    "evidence": [
+      "All 8,688 baseline rows are labeled no_error",
+      "All 8,688 fine-tuned rows are labeled no_error",
+      "Alignment summary is exact_match for every row",
+      "But 93.5% of baseline transcripts differ from ground truth",
+      "And 78.8% of fine-tuned transcripts differ from ground truth"
+    ],
+    "likely_root_causes": [
+      "tokenization/alignment bug inside analyze_transcript_error()",
+      "taxonomy logic producing empty or mismatched token sequences",
+      "stale saved taxonomy outputs generated before a patch"
+    ],
+    "consequence": "Notebook 09 tables and plots are not trustworthy in current form."
+  }
+}

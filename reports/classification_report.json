@@ -1,0 +1,561 @@
+{
+  "addcontact": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "alarm_query": {
+    "precision": 0.9375,
+    "recall": 0.7894736842105263,
+    "f1-score": 0.8571428571428571,
+    "support": 19.0
+  },
+  "alarm_remove": {
+    "precision": 1.0,
+    "recall": 0.9285714285714286,
+    "f1-score": 0.9629629629629629,
+    "support": 14.0
+  },
+  "alarm_set": {
+    "precision": 0.8787878787878788,
+    "recall": 0.9666666666666667,
+    "f1-score": 0.9206349206349206,
+    "support": 30.0
+  },
+  "audio_volume_down": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 8.0
+  },
+  "audio_volume_mute": {
+    "precision": 0.9230769230769231,
+    "recall": 0.8,
+    "f1-score": 0.8571428571428571,
+    "support": 15.0
+  },
+  "audio_volume_other": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "audio_volume_up": {
+    "precision": 0.9166666666666666,
+    "recall": 0.9166666666666666,
+    "f1-score": 0.9166666666666666,
+    "support": 12.0
+  },
+  "calendar_query": {
+    "precision": 0.8469387755102041,
+    "recall": 0.8383838383838383,
+    "f1-score": 0.8426395939086294,
+    "support": 99.0
+  },
+  "calendar_remove": {
+    "precision": 0.9583333333333334,
+    "recall": 0.9787234042553191,
+    "f1-score": 0.968421052631579,
+    "support": 47.0
+  },
+  "calendar_set": {
+    "precision": 0.9609375,
+    "recall": 0.9461538461538461,
+    "f1-score": 0.9534883720930233,
+    "support": 130.0
+  },
+  "cleaning": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1.0
+  },
+  "coffee": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "convert": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "cooking_query": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2.0
+  },
+  "cooking_recipe": {
+    "precision": 0.8536585365853658,
+    "recall": 0.8536585365853658,
+    "f1-score": 0.8536585365853658,
+    "support": 41.0
+  },
+  "createoradd": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "currency": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "datetime_convert": {
+    "precision": 1.0,
+    "recall": 0.8888888888888888,
+    "f1-score": 0.9411764705882353,
+    "support": 9.0
+  },
+  "datetime_query": {
+    "precision": 0.9104477611940298,
+    "recall": 0.9682539682539683,
+    "f1-score": 0.9384615384615385,
+    "support": 63.0
+  },
+  "definition": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "email_addcontact": {
+    "precision": 0.625,
+    "recall": 1.0,
+    "f1-score": 0.7692307692307693,
+    "support": 5.0
+  },
+  "email_query": {
+    "precision": 0.9571428571428572,
+    "recall": 0.9305555555555556,
+    "f1-score": 0.9436619718309859,
+    "support": 72.0
+  },
+  "email_querycontact": {
+    "precision": 0.65,
+    "recall": 0.8125,
+    "f1-score": 0.7222222222222222,
+    "support": 16.0
+  },
+  "email_sendemail": {
+    "precision": 0.9833333333333333,
+    "recall": 0.9365079365079365,
+    "f1-score": 0.959349593495935,
+    "support": 63.0
+  },
+  "events": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "factoid": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1.0
+  },
+  "game": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "general_greet": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1.0
+  },
+  "general_joke": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 15.0
+  },
+  "general_quirky": {
+    "precision": 0.5833333333333334,
+    "recall": 0.5436893203883495,
+    "f1-score": 0.5628140703517588,
+    "support": 103.0
+  },
+  "greet": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1.0
+  },
+  "hue_lightdim": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "hue_lightoff": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1.0
+  },
+  "hue_lightup": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1.0
+  },
+  "iot_cleaning": {
+    "precision": 0.85,
+    "recall": 0.9444444444444444,
+    "f1-score": 0.8947368421052632,
+    "support": 18.0
+  },
+  "iot_coffee": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 14.0
+  },
+  "iot_hue_lightchange": {
+    "precision": 0.875,
+    "recall": 0.9545454545454546,
+    "f1-score": 0.9130434782608695,
+    "support": 22.0
+  },
+  "iot_hue_lightdim": {
+    "precision": 1.0,
+    "recall": 0.9411764705882353,
+    "f1-score": 0.9696969696969697,
+    "support": 17.0
+  },
+  "iot_hue_lightoff": {
+    "precision": 0.8823529411764706,
+    "recall": 0.9375,
+    "f1-score": 0.9090909090909091,
+    "support": 16.0
+  },
+  "iot_hue_lighton": {
+    "precision": 1.0,
+    "recall": 0.8,
+    "f1-score": 0.8888888888888888,
+    "support": 5.0
+  },
+  "iot_hue_lightup": {
+    "precision": 0.8461538461538461,
+    "recall": 1.0,
+    "f1-score": 0.9166666666666666,
+    "support": 11.0
+  },
+  "iot_wemo_off": {
+    "precision": 0.625,
+    "recall": 1.0,
+    "f1-score": 0.7692307692307693,
+    "support": 5.0
+  },
+  "iot_wemo_on": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 7.0
+  },
+  "joke": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "lists_createoradd": {
+    "precision": 0.8214285714285714,
+    "recall": 0.92,
+    "f1-score": 0.8679245283018868,
+    "support": 25.0
+  },
+  "lists_query": {
+    "precision": 0.9333333333333333,
+    "recall": 0.875,
+    "f1-score": 0.9032258064516129,
+    "support": 48.0
+  },
+  "lists_remove": {
+    "precision": 0.8918918918918919,
+    "recall": 0.8918918918918919,
+    "f1-score": 0.8918918918918919,
+    "support": 37.0
+  },
+  "music": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 7.0
+  },
+  "music_dislikeness": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2.0
+  },
+  "music_likeness": {
+    "precision": 0.7058823529411765,
+    "recall": 0.8,
+    "f1-score": 0.75,
+    "support": 15.0
+  },
+  "music_query": {
+    "precision": 0.8846153846153846,
+    "recall": 0.7666666666666667,
+    "f1-score": 0.8214285714285714,
+    "support": 30.0
+  },
+  "music_settings": {
+    "precision": 0.8888888888888888,
+    "recall": 1.0,
+    "f1-score": 0.9411764705882353,
+    "support": 8.0
+  },
+  "news_query": {
+    "precision": 0.7659574468085106,
+    "recall": 0.8780487804878049,
+    "f1-score": 0.8181818181818182,
+    "support": 82.0
+  },
+  "play_audiobook": {
+    "precision": 0.9090909090909091,
+    "recall": 0.8571428571428571,
+    "f1-score": 0.8823529411764706,
+    "support": 35.0
+  },
+  "play_game": {
+    "precision": 0.9047619047619048,
+    "recall": 0.8636363636363636,
+    "f1-score": 0.8837209302325582,
+    "support": 22.0
+  },
+  "play_music": {
+    "precision": 0.8709677419354839,
+    "recall": 0.9310344827586207,
+    "f1-score": 0.9,
+    "support": 116.0
+  },
+  "play_podcasts": {
+    "precision": 0.8181818181818182,
+    "recall": 0.84375,
+    "f1-score": 0.8307692307692308,
+    "support": 32.0
+  },
+  "play_radio": {
+    "precision": 0.9333333333333333,
+    "recall": 0.9130434782608695,
+    "f1-score": 0.9230769230769231,
+    "support": 46.0
+  },
+  "podcasts": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2.0
+  },
+  "post": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1.0
+  },
+  "qa_currency": {
+    "precision": 0.9696969696969697,
+    "recall": 1.0,
+    "f1-score": 0.9846153846153847,
+    "support": 32.0
+  },
+  "qa_definition": {
+    "precision": 0.8888888888888888,
+    "recall": 0.8727272727272727,
+    "f1-score": 0.8807339449541285,
+    "support": 55.0
+  },
+  "qa_factoid": {
+    "precision": 0.723404255319149,
+    "recall": 0.7640449438202247,
+    "f1-score": 0.7431693989071039,
+    "support": 89.0
+  },
+  "qa_maths": {
+    "precision": 0.7272727272727273,
+    "recall": 0.6153846153846154,
+    "f1-score": 0.6666666666666666,
+    "support": 13.0
+  },
+  "qa_stock": {
+    "precision": 0.92,
+    "recall": 0.9583333333333334,
+    "f1-score": 0.9387755102040817,
+    "support": 24.0
+  },
+  "query": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 10.0
+  },
+  "querycontact": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "quirky": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2.0
+  },
+  "radio": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "recommendation_events": {
+    "precision": 0.72,
+    "recall": 0.6923076923076923,
+    "f1-score": 0.7058823529411765,
+    "support": 26.0
+  },
+  "recommendation_locations": {
+    "precision": 0.9032258064516129,
+    "recall": 0.9032258064516129,
+    "f1-score": 0.9032258064516129,
+    "support": 31.0
+  },
+  "recommendation_movies": {
+    "precision": 0.8461538461538461,
+    "recall": 0.9166666666666666,
+    "f1-score": 0.88,
+    "support": 12.0
+  },
+  "remove": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "sendemail": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "set": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2.0
+  },
+  "settings": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "social_post": {
+    "precision": 0.875,
+    "recall": 0.8571428571428571,
+    "f1-score": 0.865979381443299,
+    "support": 49.0
+  },
+  "social_query": {
+    "precision": 0.8888888888888888,
+    "recall": 0.8888888888888888,
+    "f1-score": 0.8888888888888888,
+    "support": 18.0
+  },
+  "takeaway_order": {
+    "precision": 0.7,
+    "recall": 0.7,
+    "f1-score": 0.7,
+    "support": 20.0
+  },
+  "takeaway_query": {
+    "precision": 0.7931034482758621,
+    "recall": 0.9583333333333334,
+    "f1-score": 0.8679245283018868,
+    "support": 24.0
+  },
+  "ticket": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "traffic": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "transport_query": {
+    "precision": 0.918918918918919,
+    "recall": 0.9444444444444444,
+    "f1-score": 0.9315068493150684,
+    "support": 36.0
+  },
+  "transport_taxi": {
+    "precision": 0.9642857142857143,
+    "recall": 1.0,
+    "f1-score": 0.9818181818181818,
+    "support": 27.0
+  },
+  "transport_ticket": {
+    "precision": 0.8928571428571429,
+    "recall": 1.0,
+    "f1-score": 0.9433962264150944,
+    "support": 25.0
+  },
+  "transport_traffic": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 22.0
+  },
+  "volume_other": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "weather_query": {
+    "precision": 0.9285714285714286,
+    "recall": 0.9512195121951219,
+    "f1-score": 0.9397590361445783,
+    "support": 123.0
+  },
+  "wemo_off": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "wemo_on": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+  },
+  "accuracy": 0.8681102362204725,
+  "macro avg": {
+    "precision": 0.5390358824075451,
+    "recall": 0.5520801538264575,
+    "f1-score": 0.5435947280116153,
+    "support": 2032.0
+  },
+  "weighted avg": {
+    "precision": 0.8559492514044084,
+    "recall": 0.8681102362204725,
+    "f1-score": 0.8607760749941012,
+    "support": 2032.0
+  }
+}

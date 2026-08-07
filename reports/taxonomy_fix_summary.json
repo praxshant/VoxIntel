@@ -1,0 +1,17 @@
+{
+  "postfix_sanity": {
+    "baseline_no_error_rate": 0.06503222836095764,
+    "finetuned_no_error_rate": 0.2121316758747698,
+    "baseline_exact_match_rate": 0.06503222836095764,
+    "finetuned_exact_match_rate": 0.2121316758747698,
+    "baseline_diff_rate": 0.9349677716390423,
+    "finetuned_diff_rate": 0.7879834254143646
+  },
+  "final_checks": {
+    "baseline_has_multiple_error_types": true,
+    "baseline_no_error_not_all": true,
+    "baseline_exact_match_not_all": true,
+    "finetuned_no_error_not_all": true,
+    "finetuned_exact_match_not_all": true
+  }
+}
