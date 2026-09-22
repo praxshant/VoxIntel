@@ -1,0 +1,18 @@
+# Keep the build context small — only src/ and the one model file are COPYed.
+.git/
+data/
+notebooks/
+reports/
+experiments/
+artifacts/
+configs/
+tests/
+.github/
+**/__pycache__/
+*.pyc
+*.ipynb
+README.md
+requirements.txt
+# don't ship the whole models/ dir; the Dockerfile COPYs the one joblib it needs
+models/*
+!models/voxintel_r_intent_rf.joblib

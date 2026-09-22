@@ -387,7 +387,7 @@ The research work is ahead of the production layer. Productionization remains a 
 - reusable training / inference scripts
 - model registry
 - FastAPI service ✅ (`/predict` + `/reliability`, reference-free risk scoring)
-- Docker
+- Docker ✅ (`Dockerfile` + `.dockerignore` — lean reference-free reliability image)
 - MLflow
 - DVC
 - tests ✅ (`tests/test_reliability.py` — reliability path + frozen-split invariants, dependency-free)
@@ -426,6 +426,8 @@ The research work is ahead of the production layer. Productionization remains a 
     ├── models/                       # trained checkpoints (git-ignored)
     ├── artifacts/                    # label mappings (id2label / label2id)
     ├── tests/                        # test_reliability.py (dependency-free)
+    ├── Dockerfile                    # lean reference-free reliability service
+    ├── .dockerignore
     ├── requirements.txt
     ├── README.md
     └── .gitignore
@@ -462,16 +464,20 @@ held-out split.
    tested as a hypothesis on SLURP (smart-speaker intents, no action severity) or FSC
    (simulated tiers). A small human-annotated severity schema over SLURP intents — or a
    dataset with genuine action risk — turns H4 from a sensitivity analysis into a test.
+   The annotation schema, reliability plan, and cost-matrix test are specified in
+   [Appendix B](reports/PAPER_APPENDICES.md).
 2. **N-best / decoder-LM feature family (a `16b` notebook).** This is now a
    *confirmatory*, not exploratory, experiment: the frozen split shows ASR-native
    summary statistics add nothing, so richer decoding signal (N-best disagreement,
    lattice/LM scores) is the last plausible way an ASR-native signal could help. A null
    result there would close H1 definitively; it requires a beam-search + KenLM decode
-   pass over the audio (compute, not yet run).
+   pass over the audio (compute, not yet run). Decode config, features, and the
+   flip-the-conclusion decision rule are specified in
+   [Appendix A](reports/PAPER_APPENDICES.md).
 3. **Second ASR/NLU pair and a noise-robustness sweep** to show the negative result is
    not specific to Wav2Vec2+DistilBERT — the largest external-review concern.
-4. **Finish productionization** — model registry, Docker, MLflow/DVC, CI/CD and tests
-   around the now-wired FastAPI service.
+4. **Finish productionization** — model registry, MLflow/DVC and monitoring around the
+   now-wired FastAPI service (Docker, tests, and CI are done).
 
 ## Reproducibility
 

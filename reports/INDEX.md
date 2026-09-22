@@ -21,6 +21,10 @@ Headline numbers are quoted from the JSON/CSV summaries in each folder.
 `voxintel_research_audit.md` (repo-root of `reports/`) is the August-2026
 external peer-review audit covering notebooks 01–12.
 
+`PAPER_APPENDICES.md` (repo-root of `reports/`) specifies the two deferred
+experiments — Appendix A (N-best / decoder-LM features for H1) and Appendix B
+(severity-label annotation for H4) — precisely enough to run and to judge.
+
 ---
 
 ## Phase 1 — Dataset & audio audit (NB 01–02)
