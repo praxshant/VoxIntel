@@ -1,0 +1,28 @@
+{
+  "n_total": 8688,
+  "n_train": 6081,
+  "n_test": 2607,
+  "test_failure_rate": 0.21288837744533948,
+  "seed": 42,
+  "test_size": 0.3,
+  "best_model": {
+    "experiment": "B_intent",
+    "model": "RandomForest",
+    "roc_auc": 0.912015524296226,
+    "pr_auc": 0.7885379377312851
+  },
+  "H1_asr_adds_beyond_intent": {
+    "supported": false,
+    "mean_gap_C_minus_B": -0.037253231448674325,
+    "ci95_low": -0.05089786016191941,
+    "ci95_high": -0.0245460226233866,
+    "frac_C_beats_B": 0.0,
+    "n_boot": 2000
+  },
+  "H1_repeated_split_stability": {
+    "mean_gap_C_minus_B": -0.030121371371371376,
+    "std": 0.006366228886334443,
+    "n_splits": 20,
+    "n_splits_C_beats_B": 0
+  }
+}

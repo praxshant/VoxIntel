@@ -4,6 +4,51 @@
 
 VoxIntel-R studies reference-free reliability estimation for ASR-to-intent systems. The project asks whether a voice system can estimate when its ASR-derived intent is likely to fail using only inference-time signals, and then decide whether to execute, clarify, or abstain.
 
+## Abstract
+
+Spoken-language-understanding assistants run a two-stage cascade — automatic speech
+recognition (ASR) followed by intent classification — in which ASR errors silently
+propagate into wrong intents. VoxIntel-R asks whether such a system can estimate, **at
+inference time and without any reference transcript**, when its own ASR-derived intent
+is likely to be wrong, and use that calibrated risk to execute, clarify, or abstain. On
+SLURP we find that the intent classifier's *own* predictive uncertainty over the ASR
+hypothesis (confidence, entropy, margin) predicts downstream intent failure with
+**ROC-AUC 0.912 on a frozen held-out split**, and that adding nine ASR-native
+uncertainty features does **not** improve on it (paired-bootstrap ΔAUC = −0.037, 95% CI
+[−0.051, −0.025]; 0/20 repeated splits favour the combined model). The reference-free
+risk score is well-calibrated (ECE 0.019) and yields a better risk-coverage trade-off
+than ASR- or intent-confidence thresholding (AURC 0.059 vs 0.083 vs 0.187). The negative
+result replicates in direction on a second corpus (Fluent Speech Commands). We release
+the full pipeline, a two-stage leakage audit, and a deployable reliability endpoint.
+
+## Contributions
+
+1. **A strict reference-free formulation** of ASR→intent failure prediction with a
+   two-stage leakage audit that separates inference-time signals (ASR/intent
+   uncertainty) from reference-derived ones (WER/CER/taxonomy).
+2. **A clean negative result:** ASR-native uncertainty adds no measurable value over
+   intent-native uncertainty — confirmed on a frozen SLURP split (bootstrap CI entirely
+   negative, 0/20 repeated splits favour combined) and replicated in direction on FSC.
+3. **A calibrated, deployable reliability score** that improves selective prediction
+   (risk-coverage / AURC) over naive confidence thresholds, exposed through a working
+   inference endpoint (`src/serving/app.py`, `/reliability`).
+4. **A reproducible, phase-organized artifact trail** (notebooks 01–18 + `reports/INDEX.md`)
+   from dataset audit through cross-dataset validation, including a documented and
+   corrected taxonomy-pipeline bug (kept as a transparency asset).
+
+## Key Results (SLURP, frozen 70/30 held-out split, n_test = 2,607)
+
+| Reference-free feature set | ROC-AUC | PR-AUC | Brier |
+|---|---:|---:|---:|
+| ASR-confidence only (9 feat) | 0.615 | 0.311 | 0.165 |
+| **Intent-confidence only (3 feat)** | **0.912** | 0.789 | 0.087 |
+| Combined VoxIntel-R (12 feat) | 0.875 | 0.688 | 0.105 |
+
+H1 (ASR adds beyond intent): **NOT SUPPORTED** — ΔAUC(C−B) = −0.037, 95% CI
+[−0.051, −0.025]. Calibration ECE 0.019; selective-prediction AURC 0.059 (risk) <
+0.083 (intent) < 0.187 (ASR) < 0.213 (always-execute). Reproduce with
+`python src/analysis/frozen_split_eval.py` (see `reports/phase6_voxintel_r_slurp/FROZEN_SPLIT_RESULTS.md`).
+
 ## Research Question
 
 > Can a voice system predict when its ASR-derived intent is likely to fail using only information available at inference time, and use that calibrated risk to selectively execute or clarify the command?
@@ -105,7 +150,7 @@ These notebooks cover dataset validation, audio quality checks, baseline ASR eva
 ### 07–08: downstream intent modeling and ASR→intent propagation
 These notebooks compare intent performance under clean transcripts, baseline ASR transcripts, and fine-tuned ASR transcripts. They quantify the empirical downstream effect of ASR quality.
 
-![ASR quality propagates into downstream intent understanding](reports/intent_metric_comparison.png)
+![ASR quality propagates into downstream intent understanding](reports/phase3_intent_propagation/intent_metric_comparison.png)
 
 Caption: ASR quality propagates into downstream intent understanding. On the SLURP validation set, replacing baseline ASR transcripts with fine-tuned ASR transcripts substantially recovered downstream intent performance.
 
@@ -131,7 +176,7 @@ and the project explicitly concluded that further refinement was needed. The tax
 ### 14: high-impact semantic error analysis
 This notebook reframed the problem from generic WER analysis toward semantic impact. It established that downstream failure reduction varied substantially across ASR error categories, and that WER alone is an insufficient proxy for semantic understanding risk.
 
-![Earlier post-hoc analysis showed that downstream failure reduction varied substantially across observed ASR error categories](reports/category_recovery_analysis.png)
+![Earlier post-hoc analysis showed that downstream failure reduction varied substantially across observed ASR error categories](reports/phase5_semantic_risk/category_recovery_analysis.png)
 
 Caption: Earlier post-hoc analysis showed that downstream failure reduction varied substantially across observed ASR error categories.
 
@@ -190,9 +235,12 @@ Adding ASR-native features (C) did **not** beat it. The top features are all
 intent-native (`intent_margin`, `intent_confidence`, `intent_entropy`); every
 ASR feature individually contributes ~0.04–0.06 importance.
 
-> Caveat: these SLURP numbers come from 5-fold CV over the full evaluation
-> population (no frozen held-out split), so they are treated as **provisional**
-> in the cross-dataset comparison below.
+> **Held-out confirmation (resolved).** These numbers originally came from 5-fold
+> CV over the whole evaluation population. They have since been re-validated on a
+> frozen stratified 70/30 held-out split (`python src/analysis/frozen_split_eval.py`):
+> intent-only RF ROC-AUC **0.912** held, combined **0.875**, and the paired-bootstrap
+> C−B gap is entirely negative (−0.037, 95% CI [−0.051, −0.025]; 0/20 repeated splits
+> favour combined). The SLURP result is **no longer provisional**.
 
 ### Notebook 17 — Cross-Dataset Validation on FSC
 External validation of the reference-free formulation on Fluent Speech
@@ -222,14 +270,15 @@ risk layer is (re)fit; nothing upstream is retrained.
 | H1 — ASR adds beyond intent uncertainty | NOT SUPPORTED | NOT SUPPORTED |
 | H2 — calibration | **SUPPORTED** (ECE 0.019, Brier 0.103) | PARTIALLY (ECE 0.017, MCE 0.66) |
 | H3 — selective prediction (AURC ↓) | **SUPPORTED** (risk 0.059 < intent 0.083 < asr 0.187 < always-execute 0.213) | PARTIALLY (beats always-execute; not intent-confidence) |
-| H4 — cost-sensitive decisions | INCONCLUSIVE (no held-out split) | INCONCLUSIVE (simulated severity) |
+| H4 — cost-sensitive decisions | INCONCLUSIVE (no real severity labels) | INCONCLUSIVE (simulated severity) |
 
 ## Results Summary
 
 The central, honest result of the VoxIntel-R phase:
 
 1. **Intent-model uncertainty already captures most of the downstream-failure
-   signal.** A 3-feature intent-confidence model reaches ROC-AUC 0.911 on SLURP;
+   signal.** A 3-feature intent-confidence model reaches ROC-AUC **0.912 on a frozen
+   SLURP held-out split** (0.911 under 5-fold CV — the estimate is stable);
    ASR-native confidence alone is weak (~0.62).
 2. **Reference-free ASR uncertainty does not add measurable value on top of
    intent uncertainty** (H1 not supported on both SLURP and FSC, same
@@ -239,9 +288,10 @@ The central, honest result of the VoxIntel-R phase:
    prediction over naive baselines** (H2/H3 supported on SLURP, partial on FSC
    where the test set has only 23 positive failures and confidence intervals
    are wide).
-4. **Cost-sensitivity is untested** for lack of real severity labels — SLURP has
-   no held-out split and FSC severity tiers are simulated (H4 inconclusive on
-   both).
+4. **Cost-sensitivity (H4) remains untestable as a hypothesis** for lack of real
+   severity labels. SLURP now has a frozen risk-model split, but it carries no
+   real action-severity labels, and the FSC severity tiers are simulated — so H4 is
+   a sensitivity analysis, not a test (inconclusive on both).
 
 No notebooks 19+ are required for this phase; see the roadmap below for the
 recommended next step.
@@ -336,7 +386,7 @@ The research work is ahead of the production layer. Productionization remains a 
 ### Future Phase 7
 - reusable training / inference scripts
 - model registry
-- FastAPI service
+- FastAPI service ✅ (`/predict` + `/reliability`, reference-free risk scoring)
 - Docker
 - MLflow
 - DVC
@@ -355,11 +405,12 @@ The research work is ahead of the production layer. Productionization remains a 
     ├── configs/
     ├── src/
     │   ├── asr/                      # Wav2Vec2 loading + inference
+    │   ├── analysis/                 # frozen-split validation + risk scoring
     │   ├── data/                     # SLURPDataset loader
     │   ├── evaluation/               # WER/CER helpers
     │   ├── intent/                   # DistilBERT intent helpers
     │   ├── optimization/             # quantization / latency (production stub)
-    │   ├── serving/                  # FastAPI app (production stub)
+    │   ├── serving/                  # FastAPI app + /reliability endpoint
     │   └── utils/                    # audio + text normalization
     ├── experiments/                  # early/superseded fine-tuning attempts (history)
     ├── reports/                      # organized phase-wise — see reports/INDEX.md
@@ -386,35 +437,54 @@ The research work is ahead of the production layer. Productionization remains a 
 
 ## Installation
 
-    git clone https://github.com/<your-username>/VoxIntel.git
+    git clone https://github.com/praxshant/VoxIntel.git
     cd VoxIntel
     pip install -r requirements.txt
 
 ## Future Work
 
 The VoxIntel-R phase produced a clear, honest result (intent-native uncertainty
-dominates; ASR-native uncertainty adds little). The recommended next steps,
-in priority order:
+dominates; ASR-native uncertainty adds little), now confirmed on a frozen SLURP
+held-out split.
 
-1. **Re-run notebook 16 with a frozen SLURP held-out split.** The current SLURP
-   AUCs use 5-fold CV over the whole evaluation population, which is why H1 is
-   labelled "provisional" in notebook 17. A frozen train/val/test split makes
-   the SLURP and FSC numbers directly comparable and lets H4 (cost-sensitive)
-   actually be tested on SLURP. This is the single highest-value fix.
-2. **Add the N-best / decoder-LM feature family (a new `16b` notebook).** ASR
-   mean/entropy confidence is a weak signal; N-best disagreement and
-   lattice/decoder scores are the most likely way to make ASR-native features
-   add value on top of intent uncertainty. If they still don't, that strengthens
-   the negative result.
-3. **Obtain or design real severity labels** so H4 stops being simulated —
-   otherwise cost-sensitive selective prediction cannot be evaluated as a
-   hypothesis, only as a sensitivity analysis.
-4. **Then, and only then, productionize** (model registry, FastAPI service,
-   Docker, MLflow/DVC, CI/CD) — the `src/serving` and `src/optimization` stubs
-   are already in place for this.
+**Done in the latest iteration**
 
-The immediate priority remains the VoxIntel-R reliability research itself,
-specifically item 1.
+- ✅ **Frozen SLURP held-out split** (`src/analysis/frozen_split_eval.py`) — promotes
+  the SLURP H1 result from provisional (5-fold CV) to a confirmed negative on a
+  never-touched test set, with a paired-bootstrap CI and a 20-split stability check.
+- ✅ **Deployable reliability endpoint** — the validated intent-confidence risk model
+  is persisted and served at `POST /reliability` (`src/serving/app.py`), returning a
+  calibrated risk score and an execute/defer decision from inference-time signals only.
+
+**Recommended next steps, in priority order**
+
+1. **Real severity labels for H4.** Cost-sensitive selective prediction cannot be
+   tested as a hypothesis on SLURP (smart-speaker intents, no action severity) or FSC
+   (simulated tiers). A small human-annotated severity schema over SLURP intents — or a
+   dataset with genuine action risk — turns H4 from a sensitivity analysis into a test.
+2. **N-best / decoder-LM feature family (a `16b` notebook).** This is now a
+   *confirmatory*, not exploratory, experiment: the frozen split shows ASR-native
+   summary statistics add nothing, so richer decoding signal (N-best disagreement,
+   lattice/LM scores) is the last plausible way an ASR-native signal could help. A null
+   result there would close H1 definitively; it requires a beam-search + KenLM decode
+   pass over the audio (compute, not yet run).
+3. **Second ASR/NLU pair and a noise-robustness sweep** to show the negative result is
+   not specific to Wav2Vec2+DistilBERT — the largest external-review concern.
+4. **Finish productionization** — model registry, Docker, MLflow/DVC, CI/CD and tests
+   around the now-wired FastAPI service.
+
+## Reproducibility
+
+Headline SLURP results reproduce **without audio or GPU** from the cached
+inference-time features:
+
+    python src/analysis/frozen_split_eval.py     # frozen-split H1 + persisted risk model
+    python src/serving/app.py                     # reliability-scoring self-check
+
+Both scripts end in an `assert`-based self-check. The full feature-extraction and
+model-training pipeline (notebooks 01–18) does require the SLURP/FSC audio and the
+fine-tuned checkpoints, which are git-ignored; see `reports/INDEX.md` for the artifact
+each notebook produces. Random seed is fixed at 42 throughout.
 
 ## Project Goal
 
