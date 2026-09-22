@@ -1,0 +1,9 @@
+dataset,hypothesis,verdict,note
+slurp,H1,NOT SUPPORTED,"Evaluated in Notebook 17 (provisional, FSC-frozen); not rerun here."
+slurp,H2,SUPPORTED,"existing risk: ECE=0.0192, MCE=0.0841, Brier=0.1025"
+slurp,H3,SUPPORTED,"AURC existing_risk=0.058600 vs always_execute=0.213052, asr_confidence=0.187328, intent_confidence=0.083179; AURC-bootstrap favors risk vs asr=True, vs intent=True"
+slurp,H4,INCONCLUSIVE,"Not evaluated: cost-optimal threshold selection requires optimizing against labels, which needs an independent split to avoid evaluating the threshold on the same labels used to pick it. SLURP's artifact (existing evaluation population) provides no such split."
+fsc,H1,NOT SUPPORTED,Evaluated in Notebook 17; not rerun here.
+fsc,H2,PARTIALLY SUPPORTED,"model C, sigmoid (pre-specified): ECE=0.0169, MCE=0.6625, Brier=0.0061"
+fsc,H3,PARTIALLY SUPPORTED,"AURC voxintel_r_risk_C=0.003103 vs always_execute=0.006064, asr_confidence=0.004590, intent_confidence=0.002840; AURC-bootstrap favors risk vs asr=False, vs intent=False (n_test=3793, 23 positives -- see Section 27b)"
+fsc,H4,INCONCLUSIVE,"Reported INCONCLUSIVE: cost model uses SIMULATED/hash-assigned severity (Section 28), so this is a sensitivity analysis only, not a hypothesis test. Under that simulated cost model, voxintel_r_severity_aware achieved the lowest cost in 2/9 regime x clarification-cost combinations -- see fsc_voxintel_r_cost_sensitive_results.csv for detail."

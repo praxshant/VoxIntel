@@ -1,0 +1,6 @@
+error_type,baseline,finetuned,delta_finetuned_minus_baseline
+deletion,19,59,40
+entity_error,43,46,3
+no_error,565,1843,1278
+number_error,488,253,-235
+proper_noun_error,7573,6487,-1086

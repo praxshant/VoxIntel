@@ -1,0 +1,5 @@
+component,status,reason
+07_upper_bound_intent_classifier,trusted,Strong text-only upper bound with known minority-class limitations.
+08_error_propagation_analysis,trusted,Core downstream result is consistent: better ASR improves intent understanding.
+10_results_diagnosis_debugging,trusted,Valid forensic reasoning about which outputs were safe and unsafe.
+11_fix_error_taxonomy,trusted_pending_result_review,Produces corrected taxonomy outputs that are now promoted to canonical report files.

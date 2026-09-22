@@ -1,0 +1,5 @@
+next_notebook_or_task,purpose
+13_high_impact_error_analysis,Rank taxonomy categories by downstream failure rate and support.
+14_is_wer_a_good_proxy,Test whether lower WER always predicts better downstream intent understanding.
+15_predict_intent_change_from_asr_error,Model whether a transcript error will flip intent prediction.
+16_final_research_summary,"Assemble the final research narrative, claims, and figures."

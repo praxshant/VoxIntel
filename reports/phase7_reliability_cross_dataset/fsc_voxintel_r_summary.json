@@ -1,0 +1,50 @@
+{
+  "notebook_id": "17",
+  "dataset": "FSC",
+  "hypothesis": "H1",
+  "random_seed": 42,
+  "asr_features": [
+    "asr_mean_confidence",
+    "asr_min_confidence",
+    "asr_std_confidence",
+    "asr_median_confidence",
+    "asr_mean_entropy",
+    "asr_max_entropy",
+    "asr_std_entropy",
+    "asr_num_frames",
+    "audio_duration"
+  ],
+  "intent_features": [
+    "intent_confidence",
+    "intent_entropy",
+    "intent_margin"
+  ],
+  "forbidden_features_checked": [
+    "cer",
+    "error_type",
+    "ground_truth_intent",
+    "lexical_overlap",
+    "reference_transcript",
+    "taxonomy",
+    "wer"
+  ],
+  "asr_checkpoint_trained": true,
+  "intent_checkpoint_trained": true,
+  "feature_matrix_built": true,
+  "n_validation_rows": 3118,
+  "n_test_rows": 3793,
+  "risk_experiments_run": true,
+  "fsc_roc_auc": {
+    "asr_native_roc_auc": 0.69513896897705,
+    "intent_native_roc_auc": 0.7353246453696229,
+    "combined_roc_auc": 0.7106100795755967
+  },
+  "c_vs_b_delta_roc_auc": -0.0247145657940262,
+  "c_vs_b_ci": [
+    -0.1433053096986529,
+    0.08956815158368119
+  ],
+  "h1_verdict": "H1 NOT SUPPORTED",
+  "pattern": "Pattern B \u2014 ASR uncertainty adds little beyond intent uncertainty",
+  "status": "complete \u2014 H1 NOT SUPPORTED (Pattern B \u2014 ASR uncertainty adds little beyond intent uncertainty)"
+}

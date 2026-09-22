@@ -1,0 +1,3 @@
+system,proxy,auc
+baseline,edit_count_only,0.6936175402633729
+finetuned,edit_count_only,0.6347642858695121

@@ -1,0 +1,101 @@
+intent,scenario,ground_truth,finetuned_transcript,finetuned_primary_error_type,finetuned_proper_noun_subtype,finetuned_alignment_summary,finetuned_correct,finetuned_confidence
+lists_remove,lists,remove a list,REMOVE LIST,deletion,not_applicable,delete:a,True,0.98696893
+lists_createoradd,lists,create a new list of,CREATE NEW LIST OF,deletion,not_applicable,delete:a,True,0.98077595
+datetime_query,datetime,what day is it today,WHAT DAY IS TODAY,deletion,not_applicable,delete:it,True,0.955389
+audio_volume_mute,audio,mute the speaker please,MUTE SPEAKER PLEASE,deletion,not_applicable,delete:the,True,0.9770225
+datetime_query,datetime,what day is it today,WHAT DAY IS TODAY,deletion,not_applicable,delete:it,True,0.955389
+calendar_remove,calendar,delete from the calendar the next event,DELETE FROM CALENDAR NEXT EVENT,deletion,not_applicable,delete:the | delete:the,True,0.98586303
+play_game,play,let's play checkers,PLAY CHECKERS,deletion,not_applicable,delete:let's,True,0.95626616
+email_query,email,please let me know new emails from michael,LET ME KNOW NEW EMAILS FROM MICHAEL,deletion,not_applicable,delete:please,True,0.9916037
+datetime_query,datetime,what day is it today,WHAT DAY IS TODAY,deletion,not_applicable,delete:it,True,0.955389
+calendar_query,calendar,what events are in my calendar for today,WHAT EVENTS ARE IN MY CALENDAR TODAY,deletion,not_applicable,delete:for,True,0.9913669
+set,alarm,set an alarm for five am,SET ALARM FOR FIVE AM,deletion,not_applicable,delete:an,False,0.987404
+qa_definition,qa,find a definition,FIND DEFINITION,deletion,not_applicable,delete:a,True,0.9925659
+datetime_query,datetime,what day is it today,WHAT DAY IS TODAY,deletion,not_applicable,delete:it,True,0.955389
+qa_currency,qa,what is s. d. in francs,WHAT IS IN FRANCS,deletion,not_applicable,delete:s d,True,0.9618397
+transport_taxi,transport,get me a taxi to take me to the airport on friday at five thirty am,GET ME A TAXI TO TAKE ME TO THE AIRPORT ON FRIDAY FIVE THIRTY AM,deletion,not_applicable,delete:at,True,0.9798693
+general_quirky,general,how was your day,HOW YOUR DAY,deletion,not_applicable,delete:was,True,0.9678349
+lists_query,lists,list the availables,LIST AVAILABLES,deletion,not_applicable,delete:the,True,0.98720413
+lists_createoradd,lists,include an item to a list,INCLUDE ITEM TO LIST,deletion,not_applicable,delete:an | delete:a,True,0.9796464
+qa_definition,qa,define xy,DEFINE,deletion,not_applicable,delete:xy,True,0.9918378
+datetime_query,datetime,what is the time for the eastern time zone,WHAT IS THE TIME FOR EASTERN TIME ZONE,deletion,not_applicable,delete:the,True,0.94871324
+weather_query,weather,what is the weather like in miami florida today,WHAT IS WEATHER LIKE IN FLORIDA TODAY,entity_error,not_applicable,delete:the | delete:miami,True,0.9847239
+email_sendemail,email,reply with thanks,REPLY WITH,entity_error,not_applicable,delete:thanks,True,0.98232335
+iot_hue_lightchange,iot,can the lights be changed to green,CAN THE LIGHTS BE CHANGED TO,entity_error,not_applicable,delete:green,True,0.88167965
+qa_definition,qa,what is the definition of pda,WHAT IS THE DEFINITION OF,entity_error,not_applicable,delete:pda,True,0.993755
+alarm_remove,alarm,olly cancel alarms,CANCEL ALARMS,entity_error,not_applicable,delete:olly,True,0.9701707
+lists_query,lists,hey olly what are my lists,HEY WHAT ARE MY LISTS,entity_error,not_applicable,delete:olly,True,0.9895029
+lists_query,lists,hey what are my lists,WHAT ARE MY LISTS,entity_error,not_applicable,delete:hey,True,0.9886308
+audio_volume_mute,audio,set mute until said otherwise,MUTE UNTIL SAID OTHERWISE,entity_error,not_applicable,delete:set,True,0.9764715
+email_sendemail,email,send email to marissa,SEND EMAIL TO,entity_error,not_applicable,delete:marissa,True,0.98626584
+general_quirky,general,i went to walmart today,I WENT TO WALMART,entity_error,not_applicable,delete:today,True,0.9762496
+iot_hue_lightchange,iot,make the lights in the house red,THE LIGHTS IN THE HOUSE RED,entity_error,not_applicable,delete:make,True,0.9724468
+transport_query,transport,hey what time can i catch the nearest train to me,WHAT TIME CAN I CATCH THE NEAREST TRAIN TO ME,entity_error,not_applicable,delete:hey,True,0.990212
+alarm_remove,alarm,remove the alarm set for four hundred am,REMOVE THE ALARM SET FOR FOUR AM,entity_error,not_applicable,delete:hundred,True,0.9681618
+audio_volume_mute,audio,hey olly mute the speakers,HEY MUTE THE SPEAKERS,entity_error,not_applicable,delete:olly,True,0.9786041
+audio_volume_mute,audio,hey olly mute the speakers,HEY MUTE THE SPEAKERS,entity_error,not_applicable,delete:olly,True,0.9786041
+audio_volume_mute,audio,hey olly mute the speakers,HEY MUTE THE SPEAKERS,entity_error,not_applicable,delete:olly,True,0.9786041
+general_quirky,general,i would like it if my robot could do my work for me,I WOULD LIKE IT IF MY COULD DO MY WORK FOR ME,entity_error,not_applicable,delete:robot,True,0.99484456
+audio_volume_mute,audio,hey olly mute the speakers,HEY MUTE THE SPEAKERS,entity_error,not_applicable,delete:olly,True,0.9786041
+email_sendemail,email,send email to marissa,SEND EMAIL TO,entity_error,not_applicable,delete:marissa,True,0.98626584
+audio_volume_mute,audio,hey olly mute the speakers,HEY MUTE THE SPEAKERS,entity_error,not_applicable,delete:olly,True,0.9786041
+qa_stock,qa,send me the stock market updates for today,SEND ME THE STOCK MARKET UPDATES FOR TODAY,no_error,not_applicable,exact_match,True,0.986896
+audio_volume_down,audio,lower the volume,LOWER THE VOLUME,no_error,not_applicable,exact_match,True,0.88470554
+query,lists,what are my lists,WHAT ARE MY LISTS,no_error,not_applicable,exact_match,False,0.9886308
+music_query,music,what song is this,WHAT SONG IS THIS,no_error,not_applicable,exact_match,True,0.9718346
+alarm_remove,alarm,get rid of my eight am alarm,GET RID OF MY EIGHT AM ALARM,no_error,not_applicable,exact_match,True,0.97064656
+iot_hue_lightdim,iot,lights down,LIGHTS DOWN,no_error,not_applicable,exact_match,True,0.8940103
+datetime_query,datetime,what is the time in new york,WHAT IS THE TIME IN NEW YORK,no_error,not_applicable,exact_match,True,0.98130655
+play_music,play,play music,PLAY MUSIC,no_error,not_applicable,exact_match,True,0.9698836
+query,weather,is it raining outside,IS IT RAINING OUTSIDE,no_error,not_applicable,exact_match,False,0.9789797
+qa_factoid,qa,when did the statue of liberty made,WHEN DID THE STATUE OF LIBERTY MADE,no_error,not_applicable,exact_match,True,0.98675704
+music_likeness,music,please check my playlist,PLEASE CHECK MY PLAYLIST,no_error,not_applicable,exact_match,False,0.76185626
+calendar_query,calendar,do i have any events today,DO I HAVE ANY EVENTS TODAY,no_error,not_applicable,exact_match,True,0.9916911
+iot_hue_lightchange,iot,change the color of the lights,CHANGE THE COLOR OF THE LIGHTS,no_error,not_applicable,exact_match,True,0.9765777
+audio_volume_up,audio,volume up,VOLUME UP,no_error,not_applicable,exact_match,True,0.96065414
+cooking_recipe,cooking,recipes,RECIPES,no_error,not_applicable,exact_match,True,0.9830163
+audio_volume_up,audio,can you speak louder,CAN YOU SPEAK LOUDER,no_error,not_applicable,exact_match,True,0.9633509
+music,play,play my favorite song,PLAY MY FAVORITE SONG,no_error,not_applicable,exact_match,False,0.9855493
+lists_createoradd,lists,can you create a new list,CAN YOU CREATE A NEW LIST,no_error,not_applicable,exact_match,True,0.982025
+datetime_query,datetime,is it monday today,IS IT MONDAY TODAY,no_error,not_applicable,exact_match,True,0.43893284
+play_music,play,open playlist,OPEN PLAYLIST,no_error,not_applicable,exact_match,True,0.9185657
+email_querycontact,email,please delete the contacts that i havent spoken to in three of months,PLEASE DELETE THE CONTACTS THA I HAVENT SPOKEN TO IN THRE MONTHS,number_error,not_applicable,replace:that->tha | replace:three of->thre,False,0.6314147
+calendar_set,calendar,please mark my calendar for a holiday in cuba on april two,PLEASE MARTE MY CALENDAR FOR A HOLIDAY IN CUBER ON APRIL SECOND,number_error,not_applicable,replace:mark->marte | replace:cuba->cuber | replace:two->second,True,0.9966504
+calendar_set,calendar,set reminder for meeting at three pm tomorrow,SET REMINDER FOR METING AT THRE PM TOMOROW,number_error,not_applicable,replace:meeting->meting | replace:three->thre | replace:tomorrow->tomorow,True,0.99600047
+cooking_recipe,cooking,what ingredient can be used to replace white wine,WHAT INGREDIENT CAN BE USED REPLACE ONE ONE,number_error,not_applicable,delete:to | replace:white wine->one one,True,0.9714578
+general_quirky,general,i need to keep two toddlers busy tell me what to do,I NED TO KEP TO TODELUS ISI TEL ME WHAT TO DO,number_error,not_applicable,replace:need->ned | replace:keep two toddlers busy tell->kep to todelus isi tel,True,0.31884372
+calendar_query,calendar,what meetings do i have between eight ten today,WHAT METINGS DO I HAVE BETWEN EIGHT TAND TODAY,number_error,not_applicable,replace:meetings->metings | replace:between->betwen | replace:ten->tand,True,0.5308196
+calendar_set,calendar,add an event starting at three pm in goshen new york on may fifth for dan's graduation,AD AN EVENT STARTING AT THRE PM IN WASHING NEW YORK ON MAY FIFTH FOR DENCE GRADUATION,number_error,not_applicable,replace:add->ad | replace:three->thre | replace:goshen->washing | replace:dan's->dence,True,0.962932
+alarm_remove,alarm,remove the alarm set for four hundred am,A ARMR SET FOR FOURAM,number_error,not_applicable,replace:remove the alarm->a armr | replace:four hundred am->fouram,False,0.6673546
+social_query,social,my facebook update in every three hour should be available,MY SAUPDATE IN EVERY THRE HOURS SHOULD BE AVAILABLE,number_error,not_applicable,replace:facebook update->saupdate | replace:three hour->thre hours,False,0.45457208
+alarm_set,alarm,alert me in three hours,ALERT ME IN THRE HOURS,number_error,not_applicable,replace:three->thre,True,0.6208715
+play_music,play,please let me hear six hundred and sixty six the number of the beast,PLEASE LET ME HEAR SIX HUNDRED AND SIXTY SIXTY NUMBER OF THE BEAST,number_error,not_applicable,replace:six the->sixty,True,0.79399854
+calendar_set,calendar,remember to pick me up by twelve noon from the airport i have a three pm meeting,REMEMBER TO PICK ME UP BY TWELVE NON THE AIRPORT I HAVE A THRE PM METING,number_error,not_applicable,replace:noon from->non | replace:three->thre | replace:meeting->meting,True,0.94136584
+qa_maths,qa,what is three times seven,WHAT IS FRE TIMES SEVEN,number_error,not_applicable,replace:three->fre,True,0.94656676
+calendar_set,calendar,set a remainder at three pm to pick jo,SET AN REMINDER AT THRE PM TO PICK DRO,number_error,not_applicable,replace:a remainder->an reminder | replace:three->thre | replace:jo->dro,True,0.9951084
+iot_hue_lightdim,iot,nighttime mode,NINE TIME MOD,number_error,not_applicable,replace:nighttime mode->nine time mod,False,0.5873522
+alarm_set,alarm,please set alarm for,PLEASE SET ALARM FOR TWELVE PM,number_error,not_applicable,insert:twelve pm,True,0.98803246
+alarm_remove,alarm,remove the alarm set for four hundred am,REMOVE THE ALARM SET FOR FOURAM,number_error,not_applicable,replace:four hundred am->fouram,True,0.96866757
+social_query,social,my facebook update in every three hour should be available,MY FACEBOK UPDATE IN EVERY THRE HOURS SHOULD BE AVAILABLE,number_error,not_applicable,replace:facebook->facebok | replace:three hour->thre hours,False,0.42782056
+lists_remove,lists,remove item three,REMOVE ITEM THRE,number_error,not_applicable,replace:three->thre,True,0.9840406
+takeaway_order,takeaway,hey olly order two wings with french fries from the chinese food store,HEYOLY ORDER TOWITO WINGSWITH FRENCH PRICE FROM THE CHINESE BSTORE,number_error,not_applicable,replace:hey olly->heyoly | replace:two wings with->towito wingswith | replace:fries->price | replace:food store->bstore,True,0.97782534
+social_post,social,post to facebook aww i'm sick,POST TO FACEBOK OFAL ANSIG,proper_noun_error,entity_like,replace:facebook aww i'm sick->facebok ofal ansig,True,0.94285303
+transport_taxi,transport,book a taxi,BOK A TAXI,proper_noun_error,capitalized_name_like,replace:book->bok,True,0.9763382
+news_query,news,what's the news in politics,WHATS THE NEWST IN POLITICS,proper_noun_error,uppercase_formatting_like,replace:what's->whats | replace:news->newst,True,0.9952388
+alarm_remove,alarm,siri cancel yoga alarms,SIRI CANCEL AL HEOGA ALARMS,proper_noun_error,uppercase_formatting_like,replace:yoga->al heoga,True,0.9636274
+qa_currency,qa,what's the exchange rates between usa and china,WHATS THE EXCHANGE RATES BETWEN US R AND CHINA,proper_noun_error,capitalized_name_like,replace:what's->whats | replace:between usa->betwen us r,True,0.9746562
+query,weather,will it be raining tomorrow,WIL IT BE RAINING TOMOROW,proper_noun_error,uppercase_formatting_like,replace:will->wil | replace:tomorrow->tomorow,False,0.9847035
+email_query,email,did bert write me today,DIDFER RAD MY TODAY,proper_noun_error,uppercase_formatting_like,replace:did bert write me->didfer rad my,False,0.7764962
+datetime_query,datetime,what day is it on fifth december,WHAT DAY IS IT ON THE FIFTH DECEMBER,proper_noun_error,uppercase_formatting_like,insert:the,True,0.9835157
+recommendation_locations,recommendation,i'm starving whats good to eat in cincinnati,IM STARVING WHATS GOD TO EAT IN SINSINATI,proper_noun_error,uppercase_formatting_like,replace:i'm->im | replace:good->god | replace:cincinnati->sinsinati,False,0.46053484
+play_music,play,play boogie in your butt by eddie murphy,PLAY BOGIE IN YO BOK BY HEADE MILPHY,proper_noun_error,uppercase_formatting_like,replace:boogie->bogie | replace:your butt->yo bok | replace:eddie murphy->heade milphy,True,0.9784339
+general_quirky,general,wakey wakey eggs and bakey,WAKE WAKE EGS AN BAKE,proper_noun_error,uppercase_formatting_like,replace:wakey wakey eggs and bakey->wake wake egs an bake,False,0.62434834
+play_audiobook,play,can you play my favorite audio book of harry potter,CAN YOU PLAY MY FAVORITE AUDIOBOK OF HARY POTER,proper_noun_error,uppercase_formatting_like,replace:audio book->audiobok | replace:harry potter->hary poter,True,0.95151806
+weather_query,weather,what is this week's weather forecast,WHAT IS THE WEKS WEATHER FORECAST,proper_noun_error,uppercase_formatting_like,replace:this week's->the weks,True,0.97823846
+iot_hue_lightchange,iot,change my room lights so that i can get a good sleep,CHANGE MY ROM LIGHT SO THAT I CAN GET A GOD SLEP,proper_noun_error,capitalized_name_like,replace:room lights->rom light | replace:good sleep->god slep,True,0.85336095
+general_quirky,general,do you like my girlfriend,DO YOU LIKE MY GIRL FRIEND,proper_noun_error,uppercase_formatting_like,replace:girlfriend->girl friend,True,0.9913607
+calendar_query,calendar,what are my current alerts,WHAT ARE MYCURENT ALERTS,proper_noun_error,uppercase_formatting_like,replace:my current->mycurent,True,0.75691056
+lists_query,lists,google translate,GOGLE TRANSLATE,proper_noun_error,entity_like,replace:google->gogle,False,0.44840094
+qa_definition,qa,please describe an elephant to me,PLEASE DESCRIBE AN ELIFHIT TO ME,proper_noun_error,uppercase_formatting_like,replace:elephant->elifhit,True,0.9929051
+recommendation_events,recommendation,what exhibits or shows are scheduled at the metropolitan theater,WHAT INTERVITS OR SHOWES ARE SCHEDULED AT THE MEXIPOLITAN THEATRE,proper_noun_error,uppercase_formatting_like,replace:exhibits->intervits | replace:shows->showes | replace:metropolitan theater->mexipolitan theatre,True,0.61773014
+transport_traffic,transport,how is traffic,HOW IS TRAFIC,proper_noun_error,uppercase_formatting_like,replace:traffic->trafic,False,0.6261574

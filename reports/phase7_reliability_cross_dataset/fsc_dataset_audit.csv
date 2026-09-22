@@ -1,0 +1,4 @@
+split,n_rows,n_missing_audio,n_duplicate_ids,n_duplicate_transcripts,n_speakers,n_intents
+train,23132,0,0,22884,77,31
+validation,3118,0,0,2870,10,31
+test,3793,0,0,3545,10,31

@@ -1,1 +1,5 @@
-"""Serving/inference package placeholder for VoxIntel."""
+"""Serving layer for VoxIntel."""
+
+from .app import create_app
+
+__all__ = ["create_app"]

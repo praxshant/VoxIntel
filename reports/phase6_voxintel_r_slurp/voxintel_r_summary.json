@@ -1,0 +1,159 @@
+{
+  "notebook": "16_reference_free_voxintel_risk_prediction",
+  "run_timestamp": "2026-08-24T17:41:12.530774",
+  "checkpoint_used": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\models\\wav2vec2_slurp_debug\\checkpoint-46500",
+  "intent_model_used": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\models\\distilbert_intent",
+  "config": {
+    "RANDOM_STATE": 42,
+    "N_SPLITS": 5,
+    "MAX_SAMPLES": null,
+    "CHECKPOINT_EVERY": 250,
+    "DECISION_THRESHOLD": 0.5,
+    "SPLIT_COLUMN_CANDIDATES": [
+      "split",
+      "subset",
+      "partition"
+    ],
+    "SPLIT_VALUE_CANDIDATES": [
+      "val",
+      "validation",
+      "dev",
+      "test"
+    ],
+    "INTENT_COLUMN_CANDIDATES": [
+      "intent",
+      "ground_truth_intent",
+      "label"
+    ],
+    "SCENARIO_COLUMN_CANDIDATES": [
+      "scenario"
+    ],
+    "AUDIO_COLUMN_CANDIDATES": [
+      "audio_path",
+      "audio_filepath",
+      "path"
+    ]
+  },
+  "n_eval_examples": 8688,
+  "n_extraction_failures": 0,
+  "feature_columns": [
+    "asr_mean_confidence",
+    "asr_min_confidence",
+    "asr_std_confidence",
+    "asr_median_confidence",
+    "asr_mean_entropy",
+    "asr_max_entropy",
+    "asr_std_entropy",
+    "asr_num_frames",
+    "audio_duration",
+    "intent_confidence",
+    "intent_entropy",
+    "intent_margin"
+  ],
+  "asr_features": [
+    "asr_mean_confidence",
+    "asr_min_confidence",
+    "asr_std_confidence",
+    "asr_median_confidence",
+    "asr_mean_entropy",
+    "asr_max_entropy",
+    "asr_std_entropy",
+    "asr_num_frames",
+    "audio_duration"
+  ],
+  "intent_features": [
+    "intent_confidence",
+    "intent_entropy",
+    "intent_margin"
+  ],
+  "model_comparison": [
+    {
+      "experiment": "B_intent_confidence",
+      "model": "RandomForest",
+      "n_features": 3,
+      "roc_auc": 0.9106080328324438,
+      "pr_auc": 0.7879681610163005,
+      "f1": 0.6933645133002047,
+      "precision": 0.7554140127388536,
+      "recall": 0.6407347379794706,
+      "brier": 0.08803687309714861
+    },
+    {
+      "experiment": "C_voxintel_r_combined",
+      "model": "RandomForest",
+      "n_features": 12,
+      "roc_auc": 0.8826146732191851,
+      "pr_auc": 0.7074906121373641,
+      "f1": 0.5963566634707574,
+      "precision": 0.7300469483568075,
+      "recall": 0.5040518638573744,
+      "brier": 0.10250023531819112
+    },
+    {
+      "experiment": "C_voxintel_r_combined",
+      "model": "LogisticRegression",
+      "n_features": 12,
+      "roc_auc": 0.8163262516290622,
+      "pr_auc": 0.6303699148599866,
+      "f1": 0.5989672977624785,
+      "precision": 0.5496389891696751,
+      "recall": 0.6580226904376013,
+      "brier": 0.15799376059393405
+    },
+    {
+      "experiment": "B_intent_confidence",
+      "model": "LogisticRegression",
+      "n_features": 3,
+      "roc_auc": 0.8161771044781521,
+      "pr_auc": 0.6262098506398792,
+      "f1": 0.5914649363613677,
+      "precision": 0.5496289424860853,
+      "recall": 0.640194489465154,
+      "brier": 0.16002614354336536
+    },
+    {
+      "experiment": "A_asr_confidence",
+      "model": "LogisticRegression",
+      "n_features": 9,
+      "roc_auc": 0.6264737417650031,
+      "pr_auc": 0.31672356921741557,
+      "f1": 0.37573715248525696,
+      "precision": 0.3079047290300311,
+      "recall": 0.48190167477039436,
+      "brier": 0.23644374453029626
+    },
+    {
+      "experiment": "A_asr_confidence",
+      "model": "RandomForest",
+      "n_features": 9,
+      "roc_auc": 0.6175101757866099,
+      "pr_auc": 0.3123818791311006,
+      "f1": 0.1622590766472434,
+      "precision": 0.4763157894736842,
+      "recall": 0.097784981091302,
+      "brier": 0.1649744603028443
+    }
+  ],
+  "top_features": [
+    {
+      "feature": "intent_margin",
+      "importance": 0.1859279793292437
+    },
+    {
+      "feature": "intent_confidence",
+      "importance": 0.1816792848178214
+    },
+    {
+      "feature": "intent_entropy",
+      "importance": 0.16507897912938563
+    },
+    {
+      "feature": "asr_median_confidence",
+      "importance": 0.05739975920788527
+    },
+    {
+      "feature": "asr_std_entropy",
+      "importance": 0.056438153358017294
+    }
+  ]
+}

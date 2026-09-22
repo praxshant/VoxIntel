@@ -1,0 +1,126 @@
+{
+  "run_stamp": "20260807_215056",
+  "archive_dir": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\archive_broken_taxonomy_20260807_215056",
+  "broken_files_archived": [
+    {
+      "file": "error_taxonomy_dataset.csv",
+      "archived_to": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\archive_broken_taxonomy_20260807_215056\\error_taxonomy_dataset.csv",
+      "status": "archived"
+    },
+    {
+      "file": "error_type_distribution.csv",
+      "archived_to": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\archive_broken_taxonomy_20260807_215056\\error_type_distribution.csv",
+      "status": "archived"
+    },
+    {
+      "file": "error_impact_matrix.csv",
+      "archived_to": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\archive_broken_taxonomy_20260807_215056\\error_impact_matrix.csv",
+      "status": "archived"
+    },
+    {
+      "file": "intent_fragility.csv",
+      "archived_to": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\archive_broken_taxonomy_20260807_215056\\intent_fragility.csv",
+      "status": "archived"
+    },
+    {
+      "file": "failure_gallery.csv",
+      "archived_to": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\archive_broken_taxonomy_20260807_215056\\failure_gallery.csv",
+      "status": "archived"
+    },
+    {
+      "file": "recovery_summary.csv",
+      "archived_to": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\archive_broken_taxonomy_20260807_215056\\recovery_summary.csv",
+      "status": "archived"
+    }
+  ],
+  "broken_files_deleted": [
+    {
+      "file": "error_taxonomy_dataset.csv",
+      "deleted": true
+    },
+    {
+      "file": "error_type_distribution.csv",
+      "deleted": true
+    },
+    {
+      "file": "error_impact_matrix.csv",
+      "deleted": true
+    },
+    {
+      "file": "intent_fragility.csv",
+      "deleted": true
+    },
+    {
+      "file": "failure_gallery.csv",
+      "deleted": true
+    },
+    {
+      "file": "recovery_summary.csv",
+      "deleted": true
+    }
+  ],
+  "fixed_files_promoted": [
+    {
+      "source": "error_taxonomy_dataset_fixed.csv",
+      "promoted_to": "error_taxonomy_dataset.csv",
+      "status": "copied"
+    },
+    {
+      "source": "error_type_distribution_fixed.csv",
+      "promoted_to": "error_type_distribution.csv",
+      "status": "copied"
+    },
+    {
+      "source": "error_impact_matrix_fixed.csv",
+      "promoted_to": "error_impact_matrix.csv",
+      "status": "copied"
+    },
+    {
+      "source": "intent_fragility_fixed.csv",
+      "promoted_to": "intent_fragility.csv",
+      "status": "copied"
+    },
+    {
+      "source": "failure_gallery_fixed.csv",
+      "promoted_to": "failure_gallery.csv",
+      "status": "copied"
+    },
+    {
+      "source": "recovery_summary_fixed.csv",
+      "promoted_to": "recovery_summary.csv",
+      "status": "copied"
+    }
+  ],
+  "canonical_verification": [
+    {
+      "file": "error_taxonomy_dataset.csv",
+      "exists_after_promotion": true,
+      "path": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\error_taxonomy_dataset.csv"
+    },
+    {
+      "file": "error_type_distribution.csv",
+      "exists_after_promotion": true,
+      "path": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\error_type_distribution.csv"
+    },
+    {
+      "file": "error_impact_matrix.csv",
+      "exists_after_promotion": true,
+      "path": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\error_impact_matrix.csv"
+    },
+    {
+      "file": "intent_fragility.csv",
+      "exists_after_promotion": true,
+      "path": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\intent_fragility.csv"
+    },
+    {
+      "file": "failure_gallery.csv",
+      "exists_after_promotion": true,
+      "path": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\failure_gallery.csv"
+    },
+    {
+      "file": "recovery_summary.csv",
+      "exists_after_promotion": true,
+      "path": "c:\\Users\\ACER\\OneDrive\\Desktop\\VoxIntel\\reports\\recovery_summary.csv"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "dataset": "slurp",
+  "h1": {
+    "verdict": "NOT SUPPORTED",
+    "source": "Notebook 17 (provisional)"
+  },
+  "h2": {
+    "verdict": "SUPPORTED",
+    "brier": 0.10250023531819112,
+    "ece": 0.019151319828115382,
+    "mce": 0.08408878504672901
+  },
+  "h3": {
+    "verdict": "SUPPORTED",
+    "aurc": {
+      "always_execute": 0.2130524861878453,
+      "asr_confidence": 0.1873281363878682,
+      "intent_confidence": 0.0831785656173156,
+      "voxintel_r_existing_risk": 0.05860044087487634
+    }
+  },
+  "h4": {
+    "verdict": "INCONCLUSIVE",
+    "detail": "Not evaluated: cost-optimal threshold selection requires optimizing against labels, which needs an independent split to avoid evaluating the threshold on the same labels used to pick it. SLURP's artifact (existing evaluation population) provides no such split."
+  },
+  "random_seed": 42,
+  "generated_at": "2026-09-05T14:09:43.243356+00:00"
+}

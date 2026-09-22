@@ -1,0 +1,3 @@
+dataset,path,raw_rows,raw_columns,shape_detail,target_column,split_available,risk_column,available_group_scores,missing_feature_values,missing_target_values,feature_schema_pass,forbidden_columns_present
+slurp,C:\Users\ACER\OneDrive\Desktop\VoxIntel\reports\voxintel_r_predictions.csv,8688,19,evaluation_population=8688,intent_failed,False,voxintel_r_risk,"{""C"": ""voxintel_r_risk""}",0,0,True,"[""ground_truth_intent""]"
+fsc,C:\Users\ACER\OneDrive\Desktop\VoxIntel\reports\fsc_voxintel_r_features.csv,6911,15,"validation=3118, test=3793",intent_failed,True,,{},0,0,True,[]

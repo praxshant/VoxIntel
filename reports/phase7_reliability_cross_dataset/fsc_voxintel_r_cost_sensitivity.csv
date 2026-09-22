@@ -1,0 +1,10 @@
+regime,clarification_cost,always_execute,asr_confidence_threshold,intent_confidence_threshold,voxintel_r_severity_aware,voxintel_r_uniform
+regime_1,0.1,0.0192,0.0236,0.0134,0.024,0.025
+regime_1,0.5,0.0192,0.0167,0.0142,0.0177,0.0182
+regime_1,1.0,0.0192,0.0158,0.0158,0.0161,0.0163
+regime_2,0.1,0.0667,0.0643,0.0996,0.0419,0.0517
+regime_2,0.5,0.0667,0.0531,0.0451,0.0874,0.0482
+regime_2,1.0,0.0667,0.0535,0.0461,0.0886,0.0538
+regime_3,0.1,0.159,0.0911,0.0996,0.0593,0.0759
+regime_3,0.5,0.159,0.1488,0.1268,0.1385,0.1582
+regime_3,1.0,0.159,0.2101,0.1055,0.1793,0.1118

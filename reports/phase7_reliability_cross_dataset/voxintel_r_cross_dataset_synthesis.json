@@ -1,0 +1,26 @@
+{
+  "active_datasets": [
+    "slurp",
+    "fsc"
+  ],
+  "skipped_datasets": {},
+  "cross_dataset_verdicts": [
+    {
+      "hypothesis": "H2 (calibration)",
+      "status": "CONSISTENT",
+      "detail": "slurp=SUPPORTED, fsc=PARTIALLY SUPPORTED"
+    },
+    {
+      "hypothesis": "H3 (selective prediction)",
+      "status": "CONSISTENT",
+      "detail": "slurp=SUPPORTED, fsc=PARTIALLY SUPPORTED"
+    },
+    {
+      "hypothesis": "H4 (cost-sensitive decision making)",
+      "status": "SINGLE-DATASET / NOT COMPARABLE",
+      "detail": "{'slurp': 'INCONCLUSIVE', 'fsc': 'INCONCLUSIVE'} -- SLURP's artifact contract does not support this hypothesis (see Section 16)."
+    }
+  ],
+  "protocol_note": "SLURP is an existing evaluation population (no independent split); FSC has a genuine validation/test split. H4 is FSC-only by design -- see Section 16.",
+  "generated_at": "2026-09-05T14:09:43.408826+00:00"
+}

@@ -1,0 +1,4 @@
+comparison,metric,delta_mean,ci_lo,ci_hi,significant,favors_risk
+voxintel_r_existing_risk vs always_execute,aurc,-0.15453438198247438,-0.16089103838272925,-0.1480751648909863,True,True
+voxintel_r_existing_risk vs asr_confidence,aurc,-0.12894722098585834,-0.1396040310526496,-0.11852236937120704,True,True
+voxintel_r_existing_risk vs intent_confidence,aurc,-0.024600489781644797,-0.029118987687499313,-0.02034892986524809,True,True

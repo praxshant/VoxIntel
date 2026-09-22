@@ -1,0 +1,31 @@
+{
+  "dataset": "fsc",
+  "h1": {
+    "verdict": "NOT SUPPORTED",
+    "source": "Notebook 17"
+  },
+  "h2": {
+    "verdict": "PARTIALLY SUPPORTED",
+    "ece": 0.016853988206022526,
+    "mce": 0.6625367157901014,
+    "brier": 0.006112920098400497,
+    "calibration_variant": "sigmoid",
+    "calibration_variant_prespecified": true
+  },
+  "h3": {
+    "verdict": "PARTIALLY SUPPORTED",
+    "aurc": {
+      "intent_confidence": 0.002840012386615607,
+      "voxintel_r_risk_C": 0.003102926830128294,
+      "asr_confidence": 0.004589954748982954,
+      "always_execute": 0.006063801740047456
+    }
+  },
+  "h4": {
+    "verdict": "INCONCLUSIVE",
+    "severity_aware_wins_of_9": 2,
+    "severity_is_simulated": true
+  },
+  "random_seed": 42,
+  "generated_at": "2026-09-05T14:09:43.288175+00:00"
+}

@@ -1,0 +1,6 @@
+baseline_primary_error_type,samples,mean_baseline_confidence,mean_finetuned_confidence
+proper_noun_error,3166,0.6373321761054959,0.9213384974415666
+number_error,247,0.605004174291498,0.9202827331578948
+no_error,13,0.6302757284615385,0.6518502015384615
+deletion,2,0.74799395,0.96290904
+entity_error,2,0.69847608,0.972361665

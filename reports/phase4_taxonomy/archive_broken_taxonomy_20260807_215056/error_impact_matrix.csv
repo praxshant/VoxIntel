@@ -1,0 +1,3 @@
+system,error_type,samples,intent_failure_rate,low_impact_rate,mean_edits,mean_overlap
+baseline,no_error,8688,0.6151012891344383,0.0,0.0,1.0
+finetuned,no_error,8688,0.2656537753222836,0.0,0.0,1.0

@@ -1,0 +1,7 @@
+{
+  "baseline_proper_noun_fraction": 0.8716620626151013,
+  "finetuned_proper_noun_fraction": 0.7466620626151013,
+  "n_baseline_subtypes": 3,
+  "n_finetuned_subtypes": 3,
+  "taxonomy_needs_more_refinement": true
+}

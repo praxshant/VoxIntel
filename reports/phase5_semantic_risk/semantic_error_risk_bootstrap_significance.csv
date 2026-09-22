@@ -1,0 +1,3 @@
+mean_auc_difference,ci_low,ci_high,fraction_positive,n_boot_used,target,comparison
+0.04587207270752519,0.032796265381422975,0.05968845753946028,1.0,2000,baseline_intent_failed,combined_full_vs_proxy_logreg
+0.13403559562092815,0.1090028788520734,0.15633621173388076,1.0,2000,finetuned_intent_failed,combined_full_vs_proxy_logreg

@@ -1,0 +1,100 @@
+intent,scenario,ground_truth,baseline_transcript,baseline_primary_error_type,baseline_proper_noun_subtype,baseline_alignment_summary,baseline_correct,baseline_confidence
+lists_query,lists,list the availables,LIST AVAILABLES,deletion,not_applicable,delete:the,True,0.98720413
+alarm_query,alarm,did i set an alarm to wake up in the morning,DID I SET ALARM TO WAKE UP IN THE MORNING,deletion,not_applicable,delete:an,True,0.9787828
+news_query,news,did the yankees win last night,THE YANKEES WIN LAST NIGHT,deletion,not_applicable,delete:did,False,0.73162705
+alarm_query,alarm,do i have an alarm set,I HAVE AN ALARM SET,deletion,not_applicable,delete:do,False,0.9685108
+news_query,news,what's happening in america,WHAT'S HAPPENING AMERICA,deletion,not_applicable,delete:in,True,0.993005
+qa_definition,qa,define xy,DEFINE,deletion,not_applicable,delete:xy,True,0.9918378
+music_query,music,is it possible for you to provide the likes of my music,POSSIBLE FOR YOU TO PROVIDE THE LIKES OF MY MUSIC,deletion,not_applicable,delete:is it,False,0.7746935
+lists_query,lists,did i make a shopping list,DID I MAKE SHOPPING LIST,deletion,not_applicable,delete:a,True,0.98530096
+datetime_query,datetime,what's the current time in orlando fl,WHAT'S THE CURRENT TIME IN ORLANDO,deletion,not_applicable,delete:fl,True,0.985642
+recommendation_locations,recommendation,near by grocery,NEAR GROCERY,deletion,not_applicable,delete:by,False,0.5274771
+datetime_query,datetime,what is the time in new york,WHAT IS TIME IN NEW YORK,deletion,not_applicable,delete:the,True,0.98605156
+alarm_query,alarm,at what time have you set alarm for me,WHAT TIME HAVE YOU SET ALARM FOR ME,deletion,not_applicable,delete:at,True,0.9764763
+play_game,play,let's play checkers,PLAY CHECKERS,deletion,not_applicable,delete:let's,True,0.95626616
+takeaway_order,takeaway,order a meal from a nice restaurant,ORDER MEAL FROM A NICE RESTAURANT,deletion,not_applicable,delete:a,True,0.97497386
+qa_maths,qa,what is the answer to two times three,WHAT IS ANSWER TO TWO TIMES THREE,deletion,not_applicable,delete:the,True,0.97239685
+music_likeness,music,i like r n b,I LIKE  N B,deletion,not_applicable,delete:r,True,0.93061465
+iot_coffee,iot,it's coffee time,COFFEE TIME,deletion,not_applicable,delete:it's,True,0.9640027
+qa_currency,qa,what is s. d. in francs,WHAT IS IN FRANCS,deletion,not_applicable,delete:s d,True,0.9618397
+weather_query,weather,how is the weather in this week,HOW IS THE WEATHER THIS WEEK,deletion,not_applicable,delete:in,True,0.98276246
+weather_query,weather,what type of weather can i expect today,WHAT TYPE OF WEATHER CAN I EXPECT,entity_error,not_applicable,delete:today,True,0.98065645
+play_music,play,play music,MUSIC,entity_error,not_applicable,delete:play,True,0.28962144
+email_sendemail,email,reply with thanks,REPLY WITH,entity_error,not_applicable,delete:thanks,True,0.98232335
+general_quirky,general,will the world come to an end when,THE WORLD COME TO AN END WHEN,entity_error,not_applicable,delete:will,True,0.7343826
+music_query,music,what song is this,WHAT SONG,entity_error,not_applicable,delete:is this,True,0.9691663
+calendar_set,calendar,john marriage anniversary,MARRIAGE ANNIVERSARY,entity_error,not_applicable,delete:john,True,0.9760299
+music_query,music,what is the name of this musical group,IS THE NAME OF THIS MUSICAL GROUP,entity_error,not_applicable,delete:what,True,0.9492726
+general_quirky,general,fashion,,entity_error,not_applicable,replace:fashion->nan,True,0.2989761
+qa_definition,qa,what does the word hypocrisy mean,DOES THE WORD HYPOCRISY MEAN,entity_error,not_applicable,delete:what,True,0.99333364
+calendar_set,calendar,remind me to pick up the laundry next monday,ME TO PICK UP THE LAUNDRY NEXT MONDAY,entity_error,not_applicable,delete:remind,True,0.863132
+qa_maths,qa,how much is twelve divided by four,MUCH IS TWELVE DIVIDED BY FOUR,entity_error,not_applicable,delete:how,True,0.973814
+email_querycontact,email,tell me the contact details of my brother,CONTACT DETAILS OF MY BROTHER,entity_error,not_applicable,delete:tell me the,True,0.98380893
+iot_hue_lightchange,iot,turn lights blue,TURN LIGHTS,entity_error,not_applicable,delete:blue,False,0.4149676
+datetime_query,datetime,tell me the hour,ME THE HOUR,entity_error,not_applicable,delete:tell,True,0.9691529
+weather_query,weather,what a sunny day,SUNNY DAY,entity_error,not_applicable,delete:what a,True,0.98554265
+datetime_query,datetime,day on twenty second april,ON TWENTY SECOND,entity_error,not_applicable,delete:day | delete:april,False,0.5377338
+calendar_remove,calendar,delete all events for the next five days,ALL EVENTS FOR THE NEXT FIVE DAYS,entity_error,not_applicable,delete:delete,False,0.98198456
+general_quirky,general,when is it,'S IT,entity_error,not_applicable,replace:when is->'s,True,0.5722518
+qa_factoid,qa,who was the twenty fifth president of the united states of america,WAS THE TWENTY FIFTH PRESIDENT OF THE UNITED STATES OF AMERICA,entity_error,not_applicable,delete:who,True,0.9848778
+transport_traffic,transport,could you please check the traffic to our home,YOU PLEASE CHECK THE TRAFFIC TO OUR HOME,entity_error,not_applicable,delete:could,True,0.978686
+datetime_query,datetime,what day of the week is thanksgiving,WHAT DAY OF THE WEEK IS THANKSGIVING,no_error,not_applicable,exact_match,True,0.97820264
+email_sendemail,email,open reply,OPEN REPLY,no_error,not_applicable,exact_match,True,0.97187537
+general_quirky,general,when is it,WHEN IS IT,no_error,not_applicable,exact_match,False,0.7446763
+email_sendemail,email,open reply,OPEN REPLY,no_error,not_applicable,exact_match,True,0.97187537
+query,datetime,show me the time,SHOW ME THE TIME,no_error,not_applicable,exact_match,False,0.9809869
+weather_query,weather,what does the weather look like this week,WHAT DOES THE WEATHER LOOK LIKE THIS WEEK,no_error,not_applicable,exact_match,True,0.98473823
+calendar_set,calendar,notification of meeting on wednesday,NOTIFICATION OF MEETING ON WEDNESDAY,no_error,not_applicable,exact_match,True,0.99478865
+general_quirky,general,do you think time travel is possible,DO YOU THINK TIME TRAVEL IS POSSIBLE,no_error,not_applicable,exact_match,True,0.6327448
+play_music,play,open my music,OPEN MY MUSIC,no_error,not_applicable,exact_match,True,0.9725062
+play_game,play,i feel like playing chess can you play that,I FEEL LIKE PLAYING CHESS CAN YOU PLAY THAT,no_error,not_applicable,exact_match,True,0.9666372
+iot_hue_lightdim,iot,dim the lights in the hall,DIM THE LIGHTS IN THE HALL,no_error,not_applicable,exact_match,True,0.94026566
+general_quirky,general,if you could talk about three things what would they be,IF YOU COULD TALK ABOUT THREE THINGS WHAT WOULD THEY BE,no_error,not_applicable,exact_match,True,0.97473043
+weather_query,weather,weather on monday,WEATHER ON MONDAY,no_error,not_applicable,exact_match,True,0.98432803
+news_query,news,tell me if an earthquake happens in the world,TELL ME IF AN EARTHQUAKE HAPPENS IN THE WORLD,no_error,not_applicable,exact_match,True,0.7666028
+lists_createoradd,lists,can you create a new list,CAN YOU CREATE A NEW LIST,no_error,not_applicable,exact_match,True,0.982025
+alarm_set,alarm,please set my alarm,PLEASE SET MY ALARM,no_error,not_applicable,exact_match,True,0.9840508
+music,play,play my favorite song,PLAY MY FAVORITE SONG,no_error,not_applicable,exact_match,False,0.9855493
+alarm_remove,alarm,turn off any morning alarms after friday,TURN OFF ANY MORNING ALARMS AFTER FRIDAY,no_error,not_applicable,exact_match,True,0.9591215
+general_quirky,general,books,BOOKS,no_error,not_applicable,exact_match,False,0.92598426
+iot_hue_lightup,iot,light up,LIGHT UP,no_error,not_applicable,exact_match,True,0.8782406
+calendar_set,calendar,remember dinner on thursday at bistro italia,TEN  REMEMBER DINNER ON THURSDAY AT BISTRARATALIA,number_error,not_applicable,insert:ten | replace:bistro italia->bistraratalia,True,0.9965491
+calendar_set,calendar,i have a meeting with al on march twenty first at ten,AND WOULD BE BUSA ON MARCH TWENTY FIRST AT TENT,number_error,not_applicable,replace:i have a meeting with al->and would be busa | replace:ten->tent,True,0.8452068
+iot_hue_lightdim,iot,dim the lights to level two,DEEM THE LIES TO LOVE ER TOO,number_error,not_applicable,replace:dim->deem | replace:lights->lies | replace:level two->love er too,False,0.8435607
+qa_maths,qa,how much is twelve divided by four,HOW WENT IS TO OUR LYING BY FULL,number_error,not_applicable,replace:much->went | replace:twelve divided->to our lying | replace:four->full,False,0.979157
+transport_taxi,transport,book a taxi for pickup at my current location in one hour's time,VUKA TEXSI FOR PICKUP AT MY CORRAGE LOCATION EVAN AN OUORS TAM,number_error,not_applicable,replace:book a taxi->vuka texsi | replace:current->corrage | replace:in one hour's time->evan an ouors tam,True,0.5762304
+play_music,play,please let me hear six hundred and sixty six the number of the beast,TE LET  E THINK THIY SAY SPHNAMA OF BE,number_error,not_applicable,replace:please->te | replace:me hear six hundred and sixty six the number->e think thiy say sphnama | replace:the beast->be,False,0.9749688
+qa_currency,qa,convert one pound to us dollar,AND THAT I WONG HARNT TO ERISTOLA,number_error,not_applicable,replace:convert one pound->and that i wong harnt | replace:us dollar->eristola,False,0.8302069
+general_quirky,general,it's very tough one,VERY TOUGH OY,number_error,not_applicable,delete:it's | replace:one->oy,True,0.58046913
+alarm_remove,alarm,turn off the six am alarm for wednesday,AAS E SA HER ON FOR DNESDAY,number_error,not_applicable,replace:turn off the six am alarm->aas e sa her on | replace:wednesday->dnesday,False,0.48684156
+play_radio,play,play nine hundred and seventy one,THIE NINE HOUDRED AND TON YOU ARE,number_error,not_applicable,replace:play->thie | replace:hundred->houdred | replace:seventy one->ton you are,False,0.33693367
+iot_cleaning,iot,turn on the vacuum,TEN OUN THE BAPOON,number_error,not_applicable,replace:turn on->ten oun | replace:vacuum->bapoon,False,0.12485078
+calendar_query,calendar,do i have anything going on this saturday between two and four pm,P A DRAV ANYTHING GOING ON THE SATURDAY BETWINTWIN VERPIAN,number_error,not_applicable,replace:do i have->p a drav | replace:this->the | replace:between two and four pm->betwintwin verpian,False,0.6734375
+play_radio,play,play bbc radio four,PLAY ME MESY READFOR,number_error,not_applicable,replace:bbc radio four->me mesy readfor,False,0.64433795
+news_query,news,what are the scores for the two ucl games going on right now,WE TO SCORSINTOUSIANE SIR HAN A,number_error,not_applicable,replace:what are the scores for the two ucl games going on right now->we to scorsintousiane sir han a,False,0.7454479
+cooking_recipe,cooking,how do you cook a four cheese omelette,HOW DO YOU COOK A FORCHEESE ONWITH,number_error,not_applicable,replace:four cheese omelette->forcheese onwith,True,0.97658885
+calendar_set,calendar,i want to go to sally's birthday on saturday at ten pm,HEON TO GOA SATT BIRD DAY ONCE ATEDIT AND BIN,number_error,not_applicable,replace:i want->heon | replace:go to sally's birthday on saturday at ten pm->goa satt bird day once atedit and bin,False,0.28248903
+qa_maths,qa,what is three times seven,WHAT IS FREETIMES CEN,number_error,not_applicable,replace:three times seven->freetimes cen,False,0.9112083
+datetime_query,datetime,what day of the week does the twenty second fall on this month,WELL THERE OF THEIR WEIGT THERE'S TWENTY SECOND FOUR ON THIS MANV,number_error,not_applicable,replace:what day->well there | replace:the week does the->their weigt there's | replace:fall->four | replace:month->manv,False,0.55411404
+email_sendemail,email,send email to marissa,SEND AMAU TWO,number_error,not_applicable,replace:email to marissa->amau two,True,0.81840366
+play_audiobook,play,start reading fifty shades of grey from chapter four,STARS RIAGING FATS E SHADES A GREATLE CHAPS AT ALL,number_error,not_applicable,replace:start reading fifty->stars riaging fats e | replace:of grey from chapter four->a greatle chaps at all,False,0.39810765
+lists_query,lists,add vodka to my party shopping list,AT VOTKA TUMA PATICHAPENISO,proper_noun_error,uppercase_formatting_like,replace:add vodka to my party shopping list->at votka tuma patichapeniso,False,0.8821939
+play_music,play,please play rap,E LAN RA,proper_noun_error,capitalized_name_like,replace:please play rap->e lan ra,False,0.33212584
+calendar_query,calendar,do i have anything booked for tomorrow,DO I HAVE ANYTHING BUT TOWARDS MORROW,proper_noun_error,capitalized_name_like,replace:booked for tomorrow->but towards morrow,True,0.9283787
+weather_query,weather,is it going to rain tomorrow,IS A GINRANGEMAN,proper_noun_error,capitalized_name_like,replace:it going to rain tomorrow->a ginrangeman,False,0.93520665
+news_query,news,olly trending hot news topics,HOLLY TRENTING COT NUSETOPIGS,proper_noun_error,uppercase_formatting_like,replace:olly trending hot news topics->holly trenting cot nusetopigs,False,0.8714764
+datetime_convert,datetime,what is the time difference between eastern and pacific,LEST O TIME DIFFERENCE BETWEEN EASTERN AND PACIFIC,proper_noun_error,capitalized_name_like,replace:what is the->lest o,True,0.90681654
+play_music,play,please play me the madonna song again,HES PLAY ME THE BADONNA SONGR GAN,proper_noun_error,uppercase_formatting_like,replace:please->hes | replace:madonna song again->badonna songr gan,True,0.9881811
+qa_definition,qa,use in a sentence,YOU THE LATES,proper_noun_error,uppercase_formatting_like,replace:use in a sentence->you the lates,False,0.8083819
+takeaway_query,takeaway,find my thai takeaways around grass market,FIND MY TIE TAKE AWAYS AROUND GRASS MARKET,proper_noun_error,uppercase_formatting_like,replace:thai takeaways->tie take aways,True,0.9026153
+email_sendemail,email,please respond to the email i just read,HE IS I TIEND TO THE EMIAN IGEST READ,proper_noun_error,capitalized_name_like,replace:please respond->he is i tiend | replace:email i just->emian igest,False,0.2536988
+news_query,news,dea guam prescription drug abuse on the rise,E GRON FOR SFINITION IS TRUGAN HE WAS ON  RICE,proper_noun_error,capitalized_name_like,replace:dea guam prescription drug abuse->e gron for sfinition is trugan he was | replace:the rise->rice,False,0.887856
+alarm_query,alarm,at what time have you set alarm for me,AT WHAT TIME HAVE TIU SE UNLARNS FOR ME,proper_noun_error,uppercase_formatting_like,replace:you set alarm->tiu se unlarns,False,0.7096714
+query,weather,will it rain,OLY RAN,proper_noun_error,uppercase_formatting_like,replace:will it rain->oly ran,False,0.6420142
+play_audiobook,play,start play johns audiobook,TAALA JOSCODO,proper_noun_error,uppercase_formatting_like,replace:start play johns audiobook->taala joscodo,False,0.8618378
+datetime_query,datetime,tell me the current time in ottawa,TELL ME THE CURRENTIME IN OCTOVA,proper_noun_error,uppercase_formatting_like,replace:current time->currentime | replace:ottawa->octova,True,0.3050526
+play_music,play,put on cannibal queen,WHAT A  CANNIBAL QUI,proper_noun_error,capitalized_name_like,replace:put on->what a | replace:queen->qui,False,0.93155414
+play_music,play,play thinking out loud next,PLAYED THINKING OUT HE LOUT NIXT A,proper_noun_error,capitalized_name_like,replace:play->played | replace:loud next->he lout nixt a,False,0.5704427
+play_music,play,play fourth song of the same album after this song,PLAYS FOURTHE SONG OF THE SAME ALBUM AFTER TE SONG,proper_noun_error,uppercase_formatting_like,replace:play fourth->plays fourthe | replace:this->te,True,0.98873
+calendar_set,calendar,set a notification for sixth march that there is a society meeting at eleven am,AT INUTIFICATION FOR THE SIXTH OF MARCH THAT THERE IS A SLITY MEETING AT EI AN ELEVEN AM,proper_noun_error,capitalized_name_like,replace:set a notification->at inutification | insert:the | insert:of | replace:society->slity | insert:ei an,True,0.98474866
+takeaway_query,takeaway,find out if the olive garden will let me do takeaway,FIND OUT OF THE OLIVE GARDEN WELL LET ME DO TAKE AWAY,proper_noun_error,uppercase_formatting_like,replace:if->of | replace:will->well | replace:takeaway->take away,True,0.934911

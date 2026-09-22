@@ -1,0 +1,8 @@
+{
+  "n_rows": 8688,
+  "ground_truth_accuracy": 0.8577348066298343,
+  "baseline_accuracy": 0.3848987108655617,
+  "finetuned_accuracy": 0.7343462246777164,
+  "baseline_edit_auc": 0.6936175402633729,
+  "finetuned_edit_auc": 0.6347642858695121
+}

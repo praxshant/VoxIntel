@@ -1,0 +1,4 @@
+hypothesis,status,detail
+H2 (calibration),CONSISTENT,"slurp=SUPPORTED, fsc=PARTIALLY SUPPORTED"
+H3 (selective prediction),CONSISTENT,"slurp=SUPPORTED, fsc=PARTIALLY SUPPORTED"
+H4 (cost-sensitive decision making),SINGLE-DATASET / NOT COMPARABLE,"{'slurp': 'INCONCLUSIVE', 'fsc': 'INCONCLUSIVE'} -- SLURP's artifact contract does not support this hypothesis (see Section 16)."

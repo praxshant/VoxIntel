@@ -1,0 +1,101 @@
+audio_path,ground_truth,prediction,intent,scenario
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1502216808-headset.flac,how long is an earth day,HOW LYNE IS ON THURSDAY,qa_factoid,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490705536-headset.flac,go to youtube and play me the best wedding songs collection,GO TO EUCHUP AND PLAY ME THE BEST WEDDING SONGS COLLECTION,play_music,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1497887646-headset.flac,what day of the week is june twenty seventh on this year,DAY OF THE WEEK HE IS JUNE TWENTY SEVENTH ON THIS YEAR,datetime_query,datetime
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1499693369-headset.flac,what concerts are due nearby,WHAT CONSS A JUNIA BY,recommendation_events,recommendation
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1495370037.flac,how is coca cola stock doing today,HOWSE COT CORDE STOCK DURING,qa_stock,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501150989.flac,give me details of my twitter handle profile including the total number of followers,GIVE ME THERE IS OF MY TREATER A HANDLE PROPIETINCLUDING THAT L NUMBER OF FOLLOWERS,social_query,social
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1434544355.flac,did mark post anything new on facebook,HE GAT POS ANYTHING IN I ON TISME,social_query,social
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1499692429-headset.flac,turn off the six am alarm for wednesday,TUN EXAMIA FOETTHEY,alarm_remove,alarm
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1434534473-headset.flac,it is hot today is not it,IT IS HART TO DAY IS IT NOT,weather_query,weather
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490200605-headset.flac,book ticket to depart in the morning,BOOK TICKER TO DEPAT IN THE MONACH,transport_ticket,transport
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501758965.flac,end this podcast start anew,AN THIS ONE COST SOMME HE,play_podcasts,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490110530-headset.flac,what are the latest articles from yahoo news,WHAT ARE THE LATEST ASICOLES FROM YEU HER NEWS,news_query,news
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1497024503.flac,olly schedule my doctors appointment on friday at two pm,LI THEY SHALL MAND UXTER'S APPOINTMENT ON FRIDAY AT TO P M,calendar_set,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio--1504198129.flac,start play johns audiobook,STAR A THE ENGEOS OTE BOOK,play_audiobook,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490263717.flac,please delete all reminder of sunday,PLEASE ME YOU REMIND IS OF SUNDAY,calendar_remove,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1502101882.flac,what things can't you do,WHAT THINGS CANNED YOU ADO,general_quirky,general
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490109806.flac,can you please tell me the current weather condition,HERNT HE STAT ME THE CURRIED TO WE EPOMISION,weather_query,weather
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501690520-headset.flac,do i have anything on my to do list,HAVE ANYTHING ON MY TUDULIST,lists_query,lists
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501764856.flac,read me the last tweet from the washington post,RAMEN ASKED WE FROM WASHINGTON POST,social_query,social
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490019287.flac,what is the exchange rate between the dollar and the euro currently,WHAT IS THE EXCHANGE OA BETWEEN AN DOLLAR AND EURO CARTELEY,qa_currency,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501698484-headset.flac,i want to hear chopin now,I WANT TO HEARSHOP THEN WRITNA,play_music,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1494422697-headset.flac,how is the traffic situation in houston street,I WAS THE TRAFFIC SITUATION IN HUSTONE STREET,transport_traffic,transport
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1499697494.flac,play a race game,THERE IS GAIN,play_game,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1489672398-headset.flac,can you send an email to chelsea please,CAN YOU SEND ANAMALE TO CHARLESEA PLACE,email_sendemail,email
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1434536010-headset.flac,how did paris hilton become famous,HOW DID EXEX BECOME FAMOUS,qa_factoid,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490283310.flac,showcase the radio,SHAWL HISTEREE,play_radio,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio--1505324011.flac,i want to hear this podcast,I WANT TO HEAD THIS CLODCAST,play_podcasts,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490182167-headset.flac,start house cleanup,STARTHOUSE CREANIN,iot_cleaning,iot
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490955529-headset.flac,what meetings are available in march,WHAT MEETINGS ARE VELYRY MARK,calendar_query,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1500900468.flac,what is the definition of marinara,WHAT IS THE DEFINITION OF MARI NARORI,qa_definition,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501692486.flac,what's the exchange rate between the us dollar and the euro,WATS IS ADRIAN BETWEEN THE OURS ON OUR EURO,qa_currency,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio--1504191144-headset.flac,please turn up the speaker volume,PLEAS TURN UP THE SPEAKER BOLUM,audio_volume_up,audio
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1495369754.flac,play the current playlist,AA CONTEMPATED,play_music,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1499696707-headset.flac,what will be the weather on monday this week,WHAT WILL BE THE WEATHER ON MONDAY DAY'S WEEK,weather_query,weather
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1434536879-headset.flac,volume up,WOIL HIM UP,audio_volume_up,audio
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490954669.flac,what does hypothesis mean,WHERAS HOUSE IS VAIN,qa_definition,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio--1504194946.flac,could you please lower the tone,OR TO PLAY FLAMMRA DE TON,audio_volume_down,audio
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1500979372-headset.flac,is there any news,IS THERE ANY NEEDS,news_query,news
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1434537268.flac,what person produced the song that is on the radio,WHY PLEASANT ME USE A SAN THAT IS ON THE RADIO,music_query,music
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1500036565-headset.flac,convert new york time to london,CONFERS NO LOTTIME TO LONDON,datetime_convert,datetime
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501158142.flac,set a reminder that i have to visit my father tomorrow,TOT THE REMIND ER THAT I HAVE TO VISIT MY FATHER TO MORROW,calendar_set,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1498569723.flac,i have a meeting with al on march twenty first at ten,I AM MEETING WITH AN AND OF MARCH TWENTY FRIDS IV DONE,calendar_set,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1502377185-headset.flac,get current news on government shutdown,GET CORRENT USED EM GO AN BE SHUT DOWN,news_query,news
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1495372452.flac,make a room darker,MAKE A ROOM DARKE,iot_hue_lightdim,iot
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1492780469.flac,today date,TODAY BET,datetime_query,datetime
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501771869.flac,i would like it to easily keep an inventory and tell me when i'm running low on something,I WOULD LIKE IT TO EASILY KEEP AN INMENTARY AND TOLD ME WHET IAM RUNNING LAWN FOMHIN,general_quirky,general
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1500387550.flac,do i have any events today,A A YOU NICE TO DAY,calendar_query,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1434536005-headset.flac,play chopin,GRE CHOPIN,play_music,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio--1504191272.flac,resume the reading of the french lesson,RESEN DE RING OF DE FRENCH SLAS,play_audiobook,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1497436811-headset.flac,jokes,JOKES,general_joke,general
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1498167434.flac,mute for the next hour please,MUT FOR THE NEXT OUR PACE,audio_volume_mute,audio
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio--1504194446.flac,please turn up the speaker volume,PLASE TRING OUT TO SPIG EN ALL IN,audio_volume_up,audio
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio--1504190533-headset.flac,weather in home town,WHETHER IN HOME CAM,weather_query,weather
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1434528504-headset.flac,where is the closest restaurant,WHERE IS THE CLOSE AST RESTAURANT,recommendation_locations,recommendation
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1495370816-headset.flac,look up meal recipe,YE ELOCOT MEAL RECIPE,cooking_recipe,cooking
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501697461.flac,what does potato mean,OR DESPETATO MIAN,qa_definition,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501687678.flac,can i get an order delivered from romero's,CAN I HA ONTER TO NE FROM REMAS,takeaway_query,takeaway
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1495371558.flac,show me delivery near me,PAD DYA I SHRE E DIVERI NEVERO,takeaway_order,takeaway
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501764150.flac,remove all my meetings for the rest of the week,REMAIVIN MY MEETINGS WITH THE REST OF THE WEEK,calendar_remove,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501768412-headset.flac,order some takeaway food,ORDER SOME TAKE AWAY FOOD,takeaway_order,takeaway
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1434532598-headset.flac,where is north dakota,VOYAGE NONSTRACATA,qa_factoid,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1498569126-headset.flac,how old is christie brinkley,HOW OLD IS CHRISTIABRINTLEY,qa_factoid,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490203470-headset.flac,what concerts are due nearby,WHAT CONCECTS ARE YOU NEAR BY,recommendation_events,recommendation
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1498567969.flac,olly turn the volume up,WHERE DO ARE YOU MAM,audio_volume_up,audio
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501751754.flac,let me know if there are any new emails from ebay,LET ME KNOW IC THERE ARE ANY NEW EVILS FROM EVIC,email_query,email
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501753747.flac,change the color of lights,GAGED THE CONO OF MINE,iot_hue_lightchange,iot
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490957275-headset.flac,can you find an animal joke for me,ARE YOU FIND HE ANIMAL JOKE FOR ME,general_joke,general
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1497868880.flac,tweet a complaint to old navy website,TREDID COMPLINED TOO ORDINARY ONSO,social_post,social
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1502309356-headset.flac,tell me about my day,TELL ME ABOUT MY DAY,general_quirky,general
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1488987074.flac,tallest building,TALLER YO'R DAR,qa_factoid,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1494607491-headset.flac,what is the time for the eastern time zone,BUT IS THE TIME FOR THE EASTERN TIMES OF,datetime_query,datetime
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1502300347-headset.flac,email the following message to this contact please,HEMIL THE FOLLOWING MESSAGE TO THIS CONDUCT LAS,email_sendemail,email
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501688507.flac,can you send a tweet to lif saying that their app crashed,PENITIAN ANTWE TOROV SANG AT THEY APCRUSHD,social_post,social
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1502200588.flac,it's too bright in here can you turn a light off,O BRIDY H CAN IT TURN ALIDA,iot_hue_lightoff,iot
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1497254141.flac,domino's has takeaway right,DO MEAN A SCASTY ARE RIGHT,takeaway_query,takeaway
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1488551593.flac,olly what's my agenda for the remainder of the week,OR WAS MY DENNA OR REMANDER OF THE WEEK,query,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1497029548.flac,can you turn off wemo plug socket,CAN YOU TUR NOT FRIMOPLIG SA,iot_wemo_off,iot
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501698182.flac,want to play a game with me,WANT TO PLAY A GAME WITH ME,play_game,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1495377565.flac,when is it,WAN AS IT,general_quirky,general
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1498758518-headset.flac,find world meaning in dictionary,FIND A WORD MEANING AND DICTIONARY,qa_definition,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490201302.flac,is it going to rain tomorrow,TI AN  MA,weather_query,weather
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1502197451.flac,play me a recent cover of cherry bomb,WLA HAD RITTEN COGER OF CHERRYBOK,play_music,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1497367585.flac,what is the definition of inchoate,WHAT'S HE TE DEHISHOT O MAN CHO COK,qa_definition,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1500037225-headset.flac,audio on,O DIUR ARM,audio_volume_up,audio
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1434542548.flac,hey olly please set a reminder for tomorrow morning ten am meeting,HALE HE FEES THAT I MIGHT BE YOU ARE LIKE THAT HANDY,calendar_set,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490019322-headset.flac,how is the weather in this week,HOW IS THE WEATHER THIS WEEK,weather_query,weather
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1497556275-headset.flac,i need to keep two toddlers busy tell me what to do,I NEED TO KEEP TWO TORTERS BUSY TELL ME WHAT TO DA,general_quirky,general
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1502893853-headset.flac,check the current playing music title,CHACK THE CURRENT PLAYIN MUSIC TITLE,music_query,music
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490705769.flac,what is six minus four,WHATTI SIX MILES FOR,qa_maths,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490355704.flac,book for me a train ticket to washingdon dc,BUT HOW BE ENCANTED AS LUSH AS  BESTE,transport_ticket,transport
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490194000.flac,trending tech news,TRADE TECHNEES,news_query,news
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501150645.flac,i need a reminder every single day at nine am,I NEETHER REMIND ET EVER PURSUED IN BED AT MY I M,calendar_set,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1488557394.flac,remove all the events on my calendar,WER MO HOURLYNENSS AR Y HEVEN,calendar_remove,calendar
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1494511949-headset.flac,order two large pizzas and pieces of hot wings from dominoes,ORDER TWO LARGE PIEZES AND TWO P PIECES OF HOT WANES FROM DOMINOS,takeaway_order,takeaway
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1488971006.flac,logan,LOWIN,recommendation_movies,recommendation
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1502311339.flac,nine hundred and ninety nine fm is currently playing what music,NINE HUNDRED AND NINETY NINE F N IS COCUPLAYING WAST MUSIC,music_query,music
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1499360650.flac,how old is jennifer lopez,HOW  IT IS GENER LOWHEZ,qa_factoid,qa
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1490021809-headset.flac,what is the latest from my feed,AH H WHAT IS THE LATUS FOR MY FEET,social_query,social
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1434538374.flac,i'd like to hear queen's barcelona,AT LENGTHHY HEDRE PEANE FAS NONO,play_music,play
+C:\Users\ACER\OneDrive\Desktop\VoxIntel\data\raw\slurp\audio\slurp_real\audio-1501768196-headset.flac,please send the email to my mom,HASEND EMA TO MY MUM,email_sendemail,email

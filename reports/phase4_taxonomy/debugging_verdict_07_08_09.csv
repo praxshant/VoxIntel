@@ -1,0 +1,4 @@
+notebook,status,main_takeaway
+07_upper_bound_intent_classifier,valid,"Strong text-only upper bound, but minority intents remain weak."
+08_error_propagation_analysis,mostly valid,Core downstream result is strong: better ASR improves intent understanding.
+09_error_taxonomy,invalid,Current taxonomy outputs are broken and should not be used in the report.

@@ -1,0 +1,4 @@
+transcript_source,mean_confidence,median_confidence,std_confidence,mean_confidence_correct,mean_confidence_incorrect
+ground_truth,0.922548,0.9802012,0.14407203,0.95136696,0.74879503
+baseline,0.73490137,0.8375623,0.26151046,0.8768561,0.6460736
+finetuned,0.86101705,0.9686173,0.20498824,0.92713374,0.6782507

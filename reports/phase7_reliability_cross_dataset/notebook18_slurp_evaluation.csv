@@ -1,0 +1,2 @@
+dataset,evaluation_mode,n_eval,n_failures,failure_rate,risk_column,h2_brier,h2_ece,h2_mce,h3_aurc_existing_risk,h3_aurc_always_execute,h3_aurc_asr_confidence,h3_aurc_intent_confidence,h4_verdict,subgroup_analysis_available,group_comparison_available
+slurp,existing_evaluation_population,8688,1851,0.2130524861878453,voxintel_r_risk,0.10250023531819112,0.019151319828115382,0.08408878504672901,0.05860044087487634,0.2130524861878453,0.1873281363878682,0.0831785656173156,INCONCLUSIVE,True,False

@@ -1,0 +1,7 @@
+{
+  "best_holdout_model": "logreg_combined_full",
+  "best_target": "baseline_intent_failed",
+  "best_holdout_roc_auc": 0.8408386363350351,
+  "best_holdout_pr_auc": 0.880965555559377,
+  "methodological_note": "Taxonomy features in this notebook are post-hoc and ground-truth-aware; this is not yet a deployable real-time risk predictor."
+}

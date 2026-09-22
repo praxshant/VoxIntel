@@ -1,0 +1,13 @@
+feature,importance
+asr_mean_entropy,0.11800650840974422
+asr_mean_confidence,0.11700797738515002
+intent_margin,0.10038688496003476
+intent_entropy,0.09962687323374136
+intent_confidence,0.08980117779107673
+asr_std_entropy,0.08782726090623447
+asr_median_confidence,0.08640760348161511
+asr_std_confidence,0.07939553936929042
+asr_max_entropy,0.07337983929382737
+asr_min_confidence,0.07156298439308857
+audio_duration,0.03905637636946989
+asr_num_frames,0.03754097440672707
