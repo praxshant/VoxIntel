@@ -390,8 +390,8 @@ The research work is ahead of the production layer. Productionization remains a 
 - Docker
 - MLflow
 - DVC
-- tests
-- CI/CD
+- tests ✅ (`tests/test_reliability.py` — reliability path + frozen-split invariants, dependency-free)
+- CI/CD ✅ (`.github/workflows/tests.yml` — runs the tests on push/PR to `main`)
 - monitoring
 
 ## Repository Structure
@@ -425,7 +425,7 @@ The research work is ahead of the production layer. Productionization remains a 
     │   └── INDEX.md
     ├── models/                       # trained checkpoints (git-ignored)
     ├── artifacts/                    # label mappings (id2label / label2id)
-    ├── tests/
+    ├── tests/                        # test_reliability.py (dependency-free)
     ├── requirements.txt
     ├── README.md
     └── .gitignore
