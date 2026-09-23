@@ -102,3 +102,4 @@ Verdicts (`nb22_final_verdicts.csv`):
 - `nb22_cost_curves.{csv,png}`, `nb22_cost_sensitivity.csv`, `nb22_h4_summary.json` — H4 cost model + Bayes rule + severity-weight sweep (simulated severities).
 - `nb22_cross_dataset.json` — SLURP→FSC transfer (AUC 0.889→0.666) + Mahalanobis support-gate flag rates.
 - `nb22_final_verdicts.csv` — consolidated H1–H4 verdict table.
+- `severity_annotation_rubric.md`, `severity_labels_TEMPLATE.csv` — **Appendix B harness**: the 3-tier action-risk rubric + the 70-intent annotation task that turns human severity labels into a real H4 verdict via `src/analysis/h4_severity_cost.py` (labels not yet collected — see PAPER_APPENDICES.md Appendix B).

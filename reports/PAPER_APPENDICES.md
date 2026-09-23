@@ -83,3 +83,13 @@ substrate. Record the dataset choice and its licence.
 **Why it is not approximated.** Assigning severities by guesswork would
 manufacture the very ground truth H4 needs. The honest status is *protocol
 specified, labels not yet collected.*
+
+**Harness (this repo).** The machinery is built and self-checked:
+[`src/analysis/h4_severity_cost.py`](../src/analysis/h4_severity_cost.py)
+generates the 70-intent annotation task
+([`reports/phase8_hypothesis_validation/severity_labels_TEMPLATE.csv`](phase8_hypothesis_validation/severity_labels_TEMPLATE.csv)),
+and `run_h4(load_labels(...))` refits the frozen-split risk model and prices the
+three policies on the frozen test set with paired-bootstrap CIs. It runs today
+on illustrative tiers only; the real verdict waits on the κ ≥ 0.7 annotation
+above. Rubric with boundary examples:
+[`severity_annotation_rubric.md`](phase8_hypothesis_validation/severity_annotation_rubric.md).
