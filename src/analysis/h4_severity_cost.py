@@ -195,6 +195,44 @@ def load_labels(path):
     return lab
 
 
+def _fleiss_kappa(counts):
+    """Fleiss' kappa from an (n_items x n_categories) rater-count matrix."""
+    counts = np.asarray(counts, float)
+    n_rt = counts.sum(1)                              # raters per item (constant)
+    p_j = counts.sum(0) / counts.sum()                # category marginals
+    P_i = (np.square(counts).sum(1) - n_rt) / (n_rt * (n_rt - 1))
+    P_bar, P_e = P_i.mean(), float(np.square(p_j).sum())
+    return 1.0 if P_e >= 1 else float((P_bar - P_e) / (1 - P_e))
+
+
+def annotator_agreement(path=TEMPLATE):
+    """Reliability gate BEFORE the verdict: Fleiss'/Cohen's kappa across the
+    tier_annotator_* columns of a filled template. Does NOT touch tier_final.
+    Returns kappa, the >=0.7 pass flag, and the disagreements to adjudicate."""
+    from itertools import combinations
+    from sklearn.metrics import cohen_kappa_score
+    t = pd.read_csv(path)
+    cols = [c for c in t.columns if c.startswith("tier_annotator_")]
+    ann = t[cols].astype(str)
+    filled = ann.apply(lambda r: all(v in TIERS for v in r), axis=1)
+    if not filled.any():
+        raise ValueError(f"no fully-annotated rows across {cols} — fill them first")
+    a = ann[filled]
+    counts = np.array([[(row == tier).sum() for tier in TIERS]
+                       for _, row in a.iterrows()], float)
+    fleiss = _fleiss_kappa(counts)
+    pair = [cohen_kappa_score(a[i], a[j], labels=list(TIERS))
+            for i, j in combinations(cols, 2)]
+    kappa = fleiss if len(cols) >= 3 else (pair[0] if pair else float("nan"))
+    disagree = [{"intent": t.loc[idx, "intent"], **{c: a.loc[idx, c] for c in cols}}
+                for idx in a.index if a.loc[idx].nunique() > 1]
+    return {"n_annotated": int(filled.sum()), "n_annotators": len(cols),
+            "fleiss_kappa": fleiss,
+            "mean_pairwise_cohen_kappa": float(np.mean(pair)) if pair else None,
+            "kappa": kappa, "passes_0.7_gate": bool(kappa >= 0.7),
+            "n_disagreements": len(disagree), "disagreements": disagree}
+
+
 def robustness_sweep(n=1000, seed=SEED):
     """How robust is the H4 decision to the two things we can't pin down without
     human labels — the borderline tier assignments and the cost weights? Fits the
@@ -269,6 +307,12 @@ def demo():
     execute = p_fail * tier_cost <= DEFER_COST
     assert np.allclose(np.where(execute, expected_always, DEFER_COST), expected_bayes)
 
+    # Fleiss' kappa gate: perfect agreement -> 1.0; one flipped rater -> lower.
+    assert abs(_fleiss_kappa([[3, 0, 0], [0, 0, 3]]) - 1.0) < 1e-9
+    assert _fleiss_kappa([[2, 1, 0], [0, 1, 2]]) < 1.0
+    assert _fleiss_kappa([[3, 0, 0], [0, 3, 0], [0, 0, 3]]) > \
+           _fleiss_kappa([[2, 1, 0], [1, 2, 0], [0, 1, 2]])   # more agreement -> higher
+
     if FEATURES.exists():
         df = pd.read_csv(FEATURES)
         res = run_h4(illustrative_tier_map(df["ground_truth_intent"].unique()), n_boot=300)
@@ -285,7 +329,16 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--illustrative", action="store_true",
                     help="run single-rater rubric + robustness sweep (NOT the H4 verdict)")
+    ap.add_argument("--agreement", metavar="PATH", nargs="?", const=str(TEMPLATE),
+                    help="compute inter-annotator kappa on a filled template (>=0.7 gate)")
     a = ap.parse_args()
+    if a.agreement:
+        r = annotator_agreement(a.agreement)
+        print(f"kappa={r['kappa']:.3f} (Fleiss {r['fleiss_kappa']:.3f}) over "
+              f"{r['n_annotated']} intents x {r['n_annotators']} raters -> "
+              f"{'PASS' if r['passes_0.7_gate'] else 'BELOW'} 0.7 gate; "
+              f"{r['n_disagreements']} to adjudicate")
+        return
     if a.illustrative:
         run_illustrative()
         return

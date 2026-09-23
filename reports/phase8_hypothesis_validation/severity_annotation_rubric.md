@@ -32,9 +32,12 @@ missing one (Appendix B: guessed tiers manufacture the ground truth H4 needs).
    70 SLURP intents, with an example transcript and utterance count. Fill
    `tier_annotator_1..3` with one of `benign` / `moderate` / `critical`.
 2. **2–3 independent annotators.** No conferring on the first pass.
-3. **Agreement gate.** Compute Cohen's κ (2 annotators) or Fleiss' κ (3). If
-   **κ < 0.7**, revise the rubric's boundary examples and re-annotate the
-   disagreements — do not proceed to the verdict below κ 0.7.
+3. **Agreement gate.** Compute Cohen's κ (2 annotators) or Fleiss' κ (3) with
+   `python src/analysis/h4_severity_cost.py --agreement <filled.csv>` (or
+   `annotator_agreement(path)`). It reports κ, the ≥0.7 pass flag, and the
+   disagreements to adjudicate. If **κ < 0.7**, revise the rubric's boundary
+   examples and re-annotate the disagreements — do not proceed to the verdict
+   below κ 0.7.
 4. **Adjudicate.** Resolve disagreements by discussion; write the agreed tier
    into `tier_final`. Every row must have a `tier_final` in the tier vocab.
 5. **Per-utterance refinement (optional).** Only for an intent flagged in step
