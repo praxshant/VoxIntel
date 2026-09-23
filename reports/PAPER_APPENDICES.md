@@ -1,7 +1,7 @@
 # Paper appendices — deferred experiments, fully specified
 
 These two experiments are named in the paper's Future Work. Appendix A has
-since been **run on its LM-free feature subset** (result below); Appendix B has
+since been **run in full** (all 6 features, result below); Appendix B has
 a **single-rater rubric + robustness run** (result below) but its real verdict
 still needs κ ≥ 0.7 human annotation. Rather than approximate or fabricate what
 remains, this document specifies each precisely enough to run and to judge —
@@ -58,12 +58,31 @@ The decision rule (CI > 0 **and** ≥ 11/20) fails by a wide margin, so **H1
 remains NOT SUPPORTED — now with beam-search N-best evidence, not just
 frame-level CTC.** This matches the stated prior: intent-native uncertainty is a
 near-sufficient statistic (B AUC 0.912 reproduces the paper's headline 0.911),
-so richer ASR uncertainty adds noise, not signal. The consistent sign across
-family A (−0.037), tuned NB20 (−0.017) and N-best (−0.022) makes a reversal from
-the 2 still-untested LM features unlikely; a KenLM build is the one remaining
-step. Harness [`src/analysis/appendix_a_nbest.py`](../src/analysis/appendix_a_nbest.py);
+so richer ASR uncertainty adds noise, not signal. This matches the stated prior;
+the 2 LM features are added in the full-family run below. Harness
+[`src/analysis/appendix_a_nbest.py`](../src/analysis/appendix_a_nbest.py);
 features `appendix_a_nbest_features.csv`; verdict `appendix_a_nbest_h1.json`
 (both in [`phase8_hypothesis_validation/`](phase8_hypothesis_validation/)).
+
+**Result (full 6-feature family, LM via neural substitute, run 2026-09-23, RTX
+3050).** The 2 LM features were then computed by re-running the same beam-search
+decode and scoring each hypothesis' text with **distilgpt2** — a neural LM
+standing in for the Windows-unavailable KenLM, a stronger fluency model than a
+4-gram scoring the same N-best texts: `lm_score` = per-token mean log-prob of the
+acoustic-best hypothesis, `acoustic_lm_disagreement` = 1 − Spearman(acoustic beam
+score, LM score) over the N-best. Refitting B vs B∪A with all 6 features on the
+frozen split, **B∪A still underperforms intent-only B**: ROC-AUC **0.895 vs
+0.912**, ΔAUC(B∪A − B) = **−0.017, 95% CI [−0.028, −0.006]** (1 / 2,000 bootstrap
+resamples positive), 4 / 20 splits. Adding the LM features to the 4 N-best
+features lifted the ASR-only union slightly (0.890 → 0.895, 0 → 4 / 20 splits) —
+the LM signal is real but small — yet the union stays significantly *worse* than
+intent-only and the decision rule (CI > 0 **and** ≥ 11/20) fails by a wide
+margin. So **H1 remains NOT SUPPORTED with the full N-best + neural-LM family**,
+consistent in sign across family A (−0.037), tuned NB20 (−0.017), N-best A′
+(−0.022) and the full family (−0.017). Using a neural LM rather than the specified
+KenLM 4-gram is the one protocol deviation; it tests a stronger fluency model, so
+a native-KenLM reversal is unlikely. Features `appendix_a_lm_features.csv`;
+verdict `appendix_a_full_h1.json`.
 
 ---
 

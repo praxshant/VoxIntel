@@ -24,9 +24,10 @@ the full pipeline, a two-stage leakage audit, and a deployable reliability endpo
 > **Status (2026-09-23): research state frozen.** The 22-notebook pipeline (phases 1–8)
 > is complete and will not be extended. Of the two confirmatory experiments specified in
 > [`reports/PAPER_APPENDICES.md`](reports/PAPER_APPENDICES.md), **Appendix A (N-best /
-> decoder features for H1) has since been run** on its LM-free subset — H1 stays NOT
-> SUPPORTED (B∪A′ AUC 0.890 < intent-only 0.912, ΔAUC −0.022, 0/20 splits); only the
-> KenLM LM features and real severity labels for H4 remain, neither of which adds a
+> decoder-LM features for H1) has since been run in full** — all 6 ASR-uncertainty
+> features (4 N-best + 2 LM, distilgpt2 substituting for the Windows-unavailable KenLM).
+> H1 stays NOT SUPPORTED (B∪A AUC 0.895 < intent-only 0.912, ΔAUC −0.017, 95% CI
+> [−0.028, −0.006], 4/20 splits); only real severity labels for H4 remain, which adds no
 > notebook. See [Future Work](#future-work).
 
 ## Contributions
@@ -118,8 +119,8 @@ Reference-free means the ground-truth/reference transcript is never used to cons
 | WER | Yes | No |
 | CER | Yes | No |
 | reference-derived taxonomy | Yes | No |
-| N-best disagreement | No | Stretch |
-| LM / decoder scores | No | Stretch |
+| N-best disagreement | No | Yes |
+| LM / decoder scores | No | Yes |
 
 This table is intended to make the anti-leakage design auditable.
 
@@ -431,7 +432,7 @@ The following are explicitly deferred rather than required milestones:
 - matched-WER perturbation study
 - multilingual evaluation
 - additional SLU datasets beyond SLURP + FSC
-- N-best / LM feature infrastructure — LM-free N-best features **done** ([Appendix A](reports/PAPER_APPENDICES.md), H1 still not supported); only the KenLM LM features remain deferred
+- N-best / decoder-LM feature family — **done** ([Appendix A](reports/PAPER_APPENDICES.md)): all 6 features run (distilgpt2 substituting for KenLM), H1 still not supported
 
 Note: **cross-dataset evaluation is no longer deferred** — it was completed in
 notebook 17 on Fluent Speech Commands (FSC) and synthesized in notebook 18.
@@ -527,16 +528,20 @@ held-out split.
    dataset with genuine action risk — turns H4 from a sensitivity analysis into a test.
    The annotation schema, reliability plan, and cost-matrix test are specified in
    [Appendix B](reports/PAPER_APPENDICES.md).
-2. **N-best / decoder-LM feature family — LM-free subset now run (H1 confirmed).**
+2. **N-best / decoder-LM feature family — now run in full (H1 confirmed).**
    [`src/analysis/appendix_a_nbest.py`](src/analysis/appendix_a_nbest.py) did a
-   GPU beam-search decode (`pyctcdecode`, beam 100, N-best 10, no LM) over all
-   8,688 SLURP-dev clips and computed 4 reference-free N-best features. On the
-   frozen split B∪A′ *underperforms* intent-only B (AUC 0.890 vs 0.912, ΔAUC
-   −0.022, 95% CI [−0.033, −0.010], 0/20 splits) — H1 NOT SUPPORTED with
-   beam-search evidence, not just frame-level CTC. **Remaining:** the 2 KenLM LM
-   features (LM score, acoustic−LM disagreement); no Windows KenLM wheel, so a
-   C++ build is the one open step. Decode config, features, and the
-   flip-the-conclusion decision rule are in [Appendix A](reports/PAPER_APPENDICES.md).
+   GPU beam-search decode (`pyctcdecode`, beam 100, N-best 10) over all 8,688
+   SLURP-dev clips and computed all 6 family-A features: 4 reference-free N-best
+   features plus 2 LM features (LM score, acoustic−LM disagreement) scored with
+   **distilgpt2** as a documented substitute for the Windows-unavailable KenLM.
+   On the frozen split B∪A *underperforms* intent-only B (AUC 0.895 vs 0.912, ΔAUC
+   −0.017, 95% CI [−0.028, −0.006], 4/20 splits) — H1 NOT SUPPORTED with the full
+   N-best + neural-LM family, not just frame-level CTC. Adding the LM features to
+   the 4 N-best features nudged the ASR-only union up (0.890 → 0.895, 0/20 → 4/20)
+   but nowhere near intent-only. A native KenLM 4-gram is the one unrun variant,
+   but a neural LM is the stronger fluency test, so a reversal is unlikely. Decode
+   config, features, and the flip-the-conclusion decision rule are in
+   [Appendix A](reports/PAPER_APPENDICES.md).
 3. **Second ASR/NLU pair and a noise-robustness sweep** to show the negative result is
    not specific to Wav2Vec2+DistilBERT — the largest external-review concern.
 4. **Finish productionization** — model registry, MLflow/DVC and monitoring around the

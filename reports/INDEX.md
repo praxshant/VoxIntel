@@ -24,9 +24,10 @@ external peer-review audit covering notebooks 01–12.
 
 `PAPER_APPENDICES.md` (repo-root of `reports/`) covers the two deferred
 experiments — Appendix A (N-best / decoder-LM features for H1) and Appendix B
-(severity-label annotation for H4). **Appendix A has since been run** on its
-LM-free feature subset (H1 still NOT SUPPORTED: B∪A′ AUC 0.890 < intent-only
-0.912, ΔAUC −0.022, 0/20 splits); Appendix B remains specified-only (needs
+(severity-label annotation for H4). **Appendix A has since been run in full** —
+all 6 ASR-uncertainty features (4 N-best + 2 LM, distilgpt2 substituting for the
+Windows-unavailable KenLM): H1 still NOT SUPPORTED (B∪A AUC 0.895 < intent-only
+0.912, ΔAUC −0.017, 4/20 splits). Appendix B remains specified-only (needs
 human annotation).
 
 ---
@@ -107,4 +108,5 @@ Verdicts (`nb22_final_verdicts.csv`):
 - `nb22_final_verdicts.csv` — consolidated H1–H4 verdict table.
 - `severity_annotation_rubric.md`, `severity_labels_TEMPLATE.csv` — **Appendix B harness**: the 3-tier action-risk rubric + the 70-intent annotation task that turns human severity labels into a real H4 verdict via `src/analysis/h4_severity_cost.py` (labels not yet collected — see PAPER_APPENDICES.md Appendix B).
 - `appendix_b_h4_illustrative.json`, `severity_labels_rubric_singlerater.csv` — **Appendix B illustrative run** (`--illustrative`): one rater's rubric tiers + a 1000-draw tier/cost robustness sweep. Risk-deferral cheapest (always 1887 / conf 1606 / risk 1057, both bootstrap gaps exclude 0) and beats both baselines in 100% of draws (mean 35% saving). **NOT the κ≥0.7 verdict** — sensitivity analysis showing the ordering survives the unknown labels/costs.
-- `appendix_a_nbest_features.csv`, `appendix_a_nbest_h1.json` — **Appendix A result** (confirmatory for H1): 4 reference-free N-best/beam features over all 8,688 SLURP-dev clips (GPU beam-search decode, no LM) + the frozen-split H1 test. B∪A′ AUC 0.890 < intent-only 0.912, ΔAUC −0.022 (95% CI [−0.033, −0.010], 0/20 splits) → **H1 NOT SUPPORTED** with N-best evidence. LM features omitted (no KenLM Windows build). Harness `src/analysis/appendix_a_nbest.py`.
+- `appendix_a_nbest_features.csv`, `appendix_a_nbest_h1.json` — **Appendix A, LM-free subset** (confirmatory for H1): 4 reference-free N-best/beam features over all 8,688 SLURP-dev clips (GPU beam-search decode, no LM) + the frozen-split H1 test. B∪A′ AUC 0.890 < intent-only 0.912, ΔAUC −0.022 (95% CI [−0.033, −0.010], 0/20 splits).
+- `appendix_a_lm_features.csv`, `appendix_a_full_h1.json` — **Appendix A, full 6-feature family**: adds the 2 LM features (LM score, acoustic−LM disagreement) scored with **distilgpt2** as a documented substitute for the Windows-unavailable KenLM. B∪A AUC 0.895 < intent-only 0.912, ΔAUC −0.017 (95% CI [−0.028, −0.006], 4/20 splits) → **H1 NOT SUPPORTED** with the full N-best + neural-LM family, not just frame-level CTC. Harness `src/analysis/appendix_a_nbest.py` (`--lm-decode`).

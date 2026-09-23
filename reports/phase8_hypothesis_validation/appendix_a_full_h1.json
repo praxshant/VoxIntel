@@ -4,23 +4,22 @@
     "nbest_entropy",
     "nbest_top_gap",
     "mean_token_posterior",
-    "nbest_lev_dispersion"
-  ],
-  "lm_features_omitted": [
+    "nbest_lev_dispersion",
     "lm_score",
     "acoustic_lm_disagreement"
   ],
-  "kenlm_available": false,
+  "lm_model": "distilgpt2",
+  "lm_note": "distilgpt2 substitute for KenLM (no Windows wheel)",
   "auc_B_intent_only": 0.912015524296226,
-  "auc_B_union": 0.8902942416100312,
+  "auc_B_union": 0.8948044535763833,
   "delta_auc_union_minus_B": {
-    "mean_gap": -0.021647267786005436,
-    "ci95_low": -0.03268692084508492,
-    "ci95_high": -0.010430396705681019,
-    "frac_positive": 0.0,
+    "mean_gap": -0.017188835831121692,
+    "ci95_low": -0.027837959172704103,
+    "ci95_high": -0.006210346713742007,
+    "frac_positive": 0.0005,
     "n_boot": 2000
   },
-  "stability_wins_of_20": 0,
+  "stability_wins_of_20": 4,
   "H1_supported": false,
   "decision_rule": "dAUC 95% CI > 0 on frozen split AND >= 11/20 splits"
 }
