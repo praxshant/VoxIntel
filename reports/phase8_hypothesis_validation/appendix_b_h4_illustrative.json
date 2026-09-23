@@ -1,0 +1,49 @@
+{
+  "status": "ILLUSTRATIVE single-rater rubric pass + robustness sweep \u2014 NOT the kappa>=0.7 multi-annotator H4 verdict Appendix B requires",
+  "rubric_point_estimate": {
+    "n_test": 2607,
+    "tier_counts": {
+      "benign": 1822,
+      "moderate": 525,
+      "critical": 260
+    },
+    "cost_always_execute": 1887.0,
+    "cost_confidence_defer": 1606.0,
+    "cost_risk_defer": 1057.0,
+    "conf_threshold": 0.7318973302841186,
+    "defer_rate_risk": 0.0728807057920982,
+    "gap_risk_minus_always": {
+      "mean_gap": -0.3171219792865362,
+      "ci95_low": -0.4238684311469122,
+      "ci95_high": -0.21475834292290008,
+      "frac_positive": 0.0,
+      "n_boot": 2000
+    },
+    "gap_risk_minus_confidence": {
+      "mean_gap": -0.21052742616033754,
+      "ci95_low": -0.2823168392788646,
+      "ci95_high": -0.14420790180283863,
+      "frac_positive": 0.0,
+      "n_boot": 2000
+    },
+    "H4_supported": true,
+    "cost_units": {
+      "benign": 1.0,
+      "moderate": 5.0,
+      "critical": 25.0
+    },
+    "defer_cost": 2.0
+  },
+  "robustness": {
+    "n_trials": 1000,
+    "p_beats_always": 1.0,
+    "p_beats_confidence": 1.0,
+    "p_H4_holds_point": 1.0,
+    "savings_vs_best_baseline": {
+      "mean": 0.34914631801944396,
+      "p05": 0.20157531915735494,
+      "p95": 0.461706607242695
+    },
+    "n_ambiguous_intents": 20
+  }
+}

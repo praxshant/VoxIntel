@@ -1,11 +1,12 @@
 # Paper appendices — deferred experiments, fully specified
 
 These two experiments are named in the paper's Future Work. Appendix A has
-since been **run on its LM-free feature subset** (result below); Appendix B
-still needs human annotation. Rather than approximate or fabricate what remains,
-this document specifies each precisely enough to run and to judge — including
-the decision rule that would change the paper's conclusions. Both build on the
-frozen 70/30 SLURP split (seed 42) used in
+since been **run on its LM-free feature subset** (result below); Appendix B has
+a **single-rater rubric + robustness run** (result below) but its real verdict
+still needs κ ≥ 0.7 human annotation. Rather than approximate or fabricate what
+remains, this document specifies each precisely enough to run and to judge —
+including the decision rule that would change the paper's conclusions. Both build
+on the frozen 70/30 SLURP split (seed 42) used in
 [`src/analysis/frozen_split_eval.py`](../src/analysis/frozen_split_eval.py) and
 reported in [`FROZEN_SPLIT_RESULTS.md`](phase6_voxintel_r_slurp/FROZEN_SPLIT_RESULTS.md).
 
@@ -114,3 +115,23 @@ three policies on the frozen test set with paired-bootstrap CIs. It runs today
 on illustrative tiers only; the real verdict waits on the κ ≥ 0.7 annotation
 above. Rubric with boundary examples:
 [`severity_annotation_rubric.md`](phase8_hypothesis_validation/severity_annotation_rubric.md).
+
+**Result (single-rater rubric + robustness sweep, run 2026-09-23).** Short of the
+κ ≥ 0.7 multi-annotator labels, one rater applied the rubric above (verb-based:
+query = benign; set/add/remove/volume/alarm = moderate; send/post/order/taxi/
+ticket/appliance = critical) and the harness priced the three policies on the
+frozen test set (n = 2607; 1822 benign / 525 moderate / 260 critical; costs
+1/5/25, defer 2.0). Risk-threshold deferral was cheapest — **always-execute 1887,
+confidence-deferral 1606, risk-deferral 1057** (defer rate 7.3%) — with both
+paired-bootstrap gaps excluding 0 (risk−always 95% CI [−0.42, −0.21];
+risk−confidence [−0.28, −0.14]). A robustness sweep (1000 draws, each flipping
+the 20 genuinely two-sided intents with p = 0.5 and resampling costs moderate ∼
+U[3,10], critical ∼ U[10,50], defer ∼ U[1,4]) found risk-deferral beat **both**
+baselines in **100%** of draws, saving mean 35% (p05 20%, p95 46%) over the best
+baseline. This is an **illustration + sensitivity analysis, not the H4 verdict**:
+a single rater's tiers are not ground truth, and the sweep shows only that the
+*ordering* survives the tier/cost uncertainty we cannot pin down without human
+labels. The verdict still waits on the κ ≥ 0.7 annotation.
+[`appendix_b_h4_illustrative.json`](phase8_hypothesis_validation/appendix_b_h4_illustrative.json),
+rubric tiers [`severity_labels_rubric_singlerater.csv`](phase8_hypothesis_validation/severity_labels_rubric_singlerater.csv)
+(`python src/analysis/h4_severity_cost.py --illustrative`).
