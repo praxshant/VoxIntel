@@ -1,0 +1,11 @@
+{
+  "family": "B_intent",
+  "model": "RandomForest",
+  "features": [
+    "intent_confidence",
+    "intent_entropy",
+    "intent_margin"
+  ],
+  "roc_auc": 0.8892708497971658,
+  "brier": 0.11529564066942671
+}

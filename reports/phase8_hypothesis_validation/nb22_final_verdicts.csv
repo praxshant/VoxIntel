@@ -1,0 +1,5 @@
+hypothesis,verdict,key_number
+H1 ASR adds beyond intent,NOT SUPPORTED,"ΔAUC(C-B)=-0.0172 CI[-0.02724959216993583, -0.007016666012863376]"
+H2 calibration,SUPPORTED,isotonic ECE=0.014 MCE=0.098
+H3 selective prediction,SUPPORTED,AURC=0.058 vs MSP 0.083
+H4 cost-sensitive (simulated severity),SUPPORTED*,"cost 1795 vs always 5113 (*sim, Appx B)"

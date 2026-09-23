@@ -1,0 +1,9 @@
+{
+  "best_method": "isotonic",
+  "ece": 0.013932868424844407,
+  "mce": 0.09780510875911974,
+  "brier": 0.09697641133351872,
+  "brier_uncal": 0.11529564066942671,
+  "H2_supported": true,
+  "H2_note": "ok"
+}

@@ -1,0 +1,13 @@
+{
+  "status": "ok",
+  "shared_features": [
+    "intent_confidence",
+    "intent_entropy",
+    "intent_margin"
+  ],
+  "auc_slurp_test": 0.8892708497971658,
+  "auc_fsc": 0.6660437441323489,
+  "auc_drop": 0.22322710566481685,
+  "ood_flag_rate_slurp_test": 0.09014192558496356,
+  "ood_flag_rate_fsc": 0.0010128780205469542
+}

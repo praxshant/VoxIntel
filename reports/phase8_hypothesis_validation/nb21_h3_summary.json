@@ -1,0 +1,8 @@
+{
+  "aurc_model": 0.05767261586953028,
+  "e_aurc_model": 0.03316629340883839,
+  "aurc_msp": 0.08260594375370046,
+  "beats_random": true,
+  "beats_or_matches_msp": true,
+  "H3_supported": true
+}

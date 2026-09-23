@@ -1,0 +1,12 @@
+{
+  "best_A": "XGBoost AUC=0.6496",
+  "best_B": "RandomForest AUC=0.8893",
+  "best_C": "LightGBM AUC=0.8720",
+  "delta_AUC_C_minus_B": -0.017152035051353227,
+  "ci95": [
+    -0.02724959216993583,
+    -0.007016666012863376
+  ],
+  "frac_bootstraps_C_wins": 0.001,
+  "H1_supported": false
+}

@@ -21,6 +21,12 @@ than ASR- or intent-confidence thresholding (AURC 0.059 vs 0.083 vs 0.187). The 
 result replicates in direction on a second corpus (Fluent Speech Commands). We release
 the full pipeline, a two-stage leakage audit, and a deployable reliability endpoint.
 
+> **Status (2026-09-23): research state frozen.** The 22-notebook pipeline (phases 1–8)
+> is complete and will not be extended. The only open work is the two confirmatory
+> experiments specified in [`reports/PAPER_APPENDICES.md`](reports/PAPER_APPENDICES.md)
+> — N-best / decoder-LM features for H1, and real severity labels for H4 — neither of
+> which adds a notebook. See [Future Work](#future-work).
+
 ## Contributions
 
 1. **A strict reference-free formulation** of ASR→intent failure prediction with a
@@ -32,7 +38,7 @@ the full pipeline, a two-stage leakage audit, and a deployable reliability endpo
 3. **A calibrated, deployable reliability score** that improves selective prediction
    (risk-coverage / AURC) over naive confidence thresholds, exposed through a working
    inference endpoint (`src/serving/app.py`, `/reliability`).
-4. **A reproducible, phase-organized artifact trail** (notebooks 01–18 + `reports/INDEX.md`)
+4. **A reproducible, phase-organized artifact trail** (notebooks 01–22 + `reports/INDEX.md`)
    from dataset audit through cross-dataset validation, including a documented and
    corrected taxonomy-pipeline bug (kept as a transparency asset).
 
@@ -248,9 +254,10 @@ Commands, with independently trained Wav2Vec2 ASR + DistilBERT intent models.
 FSC is split train → models, validation → risk-model fitting, test → frozen
 evaluation.
 
-Two files exist: `17_...validation.ipynb` is the unexecuted **scaffold** (training
-stubs, no numeric results); `17_...validation2.ipynb` is the **executed** version
-that fine-tunes both models and produces the results. Use v2.
+`17_cross_dataset_transformer_voxintel_r_validation.ipynb` is the **executed**
+cross-dataset study — it fine-tunes both models and produces the FSC results below.
+(An earlier unexecuted scaffold, `17_..._validation2.ipynb`, was removed during the
+freeze so a single canonical Notebook 17 remains.)
 
 FSC frozen-test result, combined (C) vs intent-only (B), RandomForest:
 ΔROC-AUC = **−0.025** (95% CI [−0.144, +0.093], not significant).
@@ -271,6 +278,48 @@ risk layer is (re)fit; nothing upstream is retrained.
 | H2 — calibration | **SUPPORTED** (ECE 0.019, Brier 0.103) | PARTIALLY (ECE 0.017, MCE 0.66) |
 | H3 — selective prediction (AURC ↓) | **SUPPORTED** (risk 0.059 < intent 0.083 < asr 0.187 < always-execute 0.213) | PARTIALLY (beats always-execute; not intent-confidence) |
 | H4 — cost-sensitive decisions | INCONCLUSIVE (no real severity labels) | INCONCLUSIVE (simulated severity) |
+
+### Notebooks 19–22 — Hypothesis Validation Suite (Phase 8)
+
+Notebooks 16–18 answered the four hypotheses once. A literature review then
+surfaced four reviewer-level gaps (weak MSP-style baseline, shallow ASR signal,
+no explicit cost model, no shift gate). Notebooks **19–22** close them in a
+self-contained arc that runs entirely on cached features (no audio / GPU /
+re-decode) and imports one shared, self-checked module,
+`src/analysis/reliability_metrics.py`. Artifacts land in
+`reports/phase8_hypothesis_validation/`.
+
+- **19 — roadmap** (markdown only): states the four hypotheses and decision
+  rules and what 20–22 deliver.
+- **20 — H1, the strong version:** six **hyperparameter-tuned** classifiers
+  (LogReg, RandomForest, HistGB, XGBoost, LightGBM, MLP) × three feature families,
+  tuned with `RandomizedSearchCV` on the training split only and scored once on the
+  frozen 30% test set with the full modern suite (ROC-AUC, PR-AUC, Brier,
+  FPR@95%TPR, E-AURC, NCE). The best model is persisted to
+  `models/voxintel_r_best_risk.joblib`.
+- **21 — H2 + H3:** uncalibrated vs Platt vs isotonic vs temperature calibration;
+  risk-coverage / AURC for model-risk vs MSP vs oracle vs random, with coverage at
+  1 / 5 / 10 % risk budgets.
+- **22 — H4 + shift + synthesis:** an explicit `c_FN:c_FP:c_review` cost model with
+  a Bayes-optimal deferral rule and a severity-weight sweep (severities **simulated**
+  — real labels are [Appendix B](reports/PAPER_APPENDICES.md)), SLURP→FSC transfer,
+  a Mahalanobis support gate, and a final H1–H4 verdict table.
+
+Phase-8 verdicts on the frozen SLURP test split (`nb2*_*.json` / `.csv`):
+
+| Hypothesis | Verdict | Key number |
+|---|---|---|
+| H1 — ASR adds beyond intent | **NOT SUPPORTED** | tuned ΔAUC(C−B) = −0.017, 95% CI [−0.027, −0.007]; combined wins 0.1 % of bootstraps. Best A/B/C = 0.650 / **0.889** / 0.872 |
+| H2 — calibration | **SUPPORTED** | isotonic ECE 0.014, MCE 0.098, Brier 0.115 → 0.097 |
+| H3 — selective prediction | **SUPPORTED** | model AURC 0.058 < MSP 0.083; E-AURC 0.033 |
+| H4 — cost-sensitive (simulated severity) | **SUPPORTED\*** | Bayes-rule cost 1,795 vs always-execute 5,113 vs confidence 3,397; per-sample gain CI [0.44, 0.80] at 73 % coverage. \*simulated, see Appendix B |
+
+The tuned bake-off **strengthens** the H1 negative (it holds even after tuning the
+combined model), and adds a genuine finding on shift: SLURP→FSC AUC drops
+0.889 → 0.666, yet the Mahalanobis *density* gate flags ~9 % of in-domain
+SLURP-test and only ~0.1 % of FSC — density gating alone does **not** catch this
+concept shift, so a calibrated risk score must be paired with explicit output
+monitoring.
 
 ## Results Summary
 
@@ -293,8 +342,16 @@ The central, honest result of the VoxIntel-R phase:
    real action-severity labels, and the FSC severity tiers are simulated — so H4 is
    a sensitivity analysis, not a test (inconclusive on both).
 
-No notebooks 19+ are required for this phase; see the roadmap below for the
-recommended next step.
+Notebooks 19–22 (phase 8) subsequently re-ran H1–H4 as a hardened, reviewer-facing
+confirmation on the frozen split — see the update note below, and the roadmap for
+what would still move the result.
+
+> **Update (phase 8).** Notebooks 19–22 were subsequently added as a
+> hypothesis-validation suite: a tuned six-model bake-off that **strengthens** the
+> H1 negative, plus calibration, selective-prediction, an explicit cost model, and
+> a SLURP→FSC shift gate. See "Notebooks 19–22" above. H4 now has a full
+> cost-sensitive analysis, but on **simulated** severities — real labels
+> ([Appendix B](reports/PAPER_APPENDICES.md)) remain the only route to a true test.
 
 ## Evaluation
 
@@ -401,7 +458,7 @@ The research work is ahead of the production layer. Productionization remains a 
     │   └── raw/
     │       ├── slurp/
     │       └── fsc/                  # Fluent Speech Commands (cross-dataset)
-    ├── notebooks/                    # 01–18, the full research pipeline
+    ├── notebooks/                    # 01–22, the full research pipeline
     ├── configs/
     ├── src/
     │   ├── asr/                      # Wav2Vec2 loading + inference
@@ -421,6 +478,8 @@ The research work is ahead of the production layer. Productionization remains a 
     │   ├── phase5_semantic_risk/
     │   ├── phase6_voxintel_r_slurp/
     │   ├── phase7_reliability_cross_dataset/
+    │   ├── phase8_hypothesis_validation/   # NB 19–22: tuned H1 bake-off, H2/H3, H4+shift
+    │   ├── PAPER_APPENDICES.md
     │   ├── voxintel_research_audit.md
     │   └── INDEX.md
     ├── models/                       # trained checkpoints (git-ignored)
@@ -486,11 +545,15 @@ inference-time features:
 
     python src/analysis/frozen_split_eval.py     # frozen-split H1 + persisted risk model
     python src/serving/app.py                     # reliability-scoring self-check
+    python src/analysis/reliability_metrics.py    # phase-8 metrics module self-check
 
-Both scripts end in an `assert`-based self-check. The full feature-extraction and
-model-training pipeline (notebooks 01–18) does require the SLURP/FSC audio and the
-fine-tuned checkpoints, which are git-ignored; see `reports/INDEX.md` for the artifact
-each notebook produces. Random seed is fixed at 42 throughout.
+The **phase-8 notebooks (19–22)** also run entirely on the cached feature CSVs
+(no audio/GPU): execute 20 → 21 → 22 in order (20 persists the risk model the
+others load). Both scripts above end in an `assert`-based self-check. The full
+feature-extraction and model-training pipeline (notebooks 01–18) does require the
+SLURP/FSC audio and the fine-tuned checkpoints, which are git-ignored; see
+`reports/INDEX.md` for the artifact each notebook produces. Random seed is fixed
+at 42 throughout.
 
 ## Project Goal
 

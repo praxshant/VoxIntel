@@ -1,0 +1,14 @@
+{
+  "always_execute_cost": 5113.0,
+  "bayes_cost": 1795.0,
+  "confidence_matched_cost": 3397.0,
+  "bayes_coverage": 0.7326428845416187,
+  "mean_cost_gain_vs_confidence": 0.6144994246260069,
+  "ci95": [
+    0.4426352128883774,
+    0.7978711162255465
+  ],
+  "beats_always": true,
+  "beats_confidence_CI": true,
+  "H4_supported_simulated": true
+}

@@ -17,6 +17,7 @@ Headline numbers are quoted from the JSON/CSV summaries in each folder.
 | 5 | `phase5_semantic_risk/` | 14–15 | High-impact error analysis + (reference-aware) semantic risk prediction |
 | 6 | `phase6_voxintel_r_slurp/` | 16 | Reference-free VoxIntel-R risk model (SLURP) |
 | 7 | `phase7_reliability_cross_dataset/` | 17–18 | Cross-dataset (FSC) validation, calibration, selective prediction, cost-sensitivity |
+| 8 | `phase8_hypothesis_validation/` | 19–22 | Hypothesis suite: tuned multi-model H1 bake-off, calibration (H2), selective prediction (H3), cost-sensitive + shift/OOD (H4) |
 
 `voxintel_research_audit.md` (repo-root of `reports/`) is the August-2026
 external peer-review audit covering notebooks 01–12.
@@ -31,7 +32,7 @@ experiments — Appendix A (N-best / decoder-LM features for H1) and Appendix B
 - `dataset_report.md` — SLURP split sizes (≈50.6k train / 8.7k dev / 13.1k test), intent/scenario counts, duration stats, class imbalance.
 
 ## Phase 2 — ASR baseline + fine-tuning (NB 03–06)
-Headline: corpus **WER 58.4% → 38.4%**, **CER 30.9% → 18.7%** after fine-tuning.
+Headline: corpus **WER 58.4% → 19.0%**, **CER 30.9% → 9.3%** after fine-tuning (67.4% relative WER reduction; per NB06 output cells — full-val WER 0.1947 / corpus 0.1904).
 - `baseline_predictions.csv` — 100-sample sanity check (NB03).
 - `full_validation_predictions.csv` — baseline Wav2Vec2 over full dev set (NB04).
 - `finetuned_validation_predictions.csv`, `finetuned_train_predictions.csv` — fine-tuned ASR outputs (NB05/06).
@@ -80,3 +81,24 @@ Verdicts (`voxintel_r_final_verdicts_combined.csv`, `*_final_summary.json`):
 - `slurp_voxintel_r_*` — SLURP final reliability evaluation (NB18).
 - `notebook18_*` — NB18 consolidated per-stage tables + artifact manifest + audit log.
 - `voxintel_r_cross_dataset_{summary.csv,synthesis.json}` — cross-dataset synthesis.
+
+## Phase 8 — Hypothesis validation suite (NB 19–22)
+Reviewer-facing confirmation of H1–H4, entirely on cached features (no audio/GPU/re-decode); all three code notebooks import the self-checked `src/analysis/reliability_metrics.py` and use the frozen 70/30 seed-42 split. NB19 is markdown-only (roadmap).
+
+Verdicts (`nb22_final_verdicts.csv`):
+
+| Hypothesis | Verdict | Key number |
+|---|---|---|
+| H1 — ASR adds beyond intent | **NOT SUPPORTED** | tuned ΔAUC(C−B) = −0.017, 95% CI [−0.027, −0.007]; best A/B/C = 0.650 / 0.889 / 0.872 |
+| H2 — calibration | **SUPPORTED** | isotonic ECE 0.014, MCE 0.098, Brier 0.115→0.097 |
+| H3 — selective prediction | **SUPPORTED** | model AURC 0.058 < MSP 0.083; E-AURC 0.033 |
+| H4 — cost-sensitive (simulated severity) | **SUPPORTED\*** | Bayes-rule cost 1,795 vs always 5,113 vs confidence 3,397; \*simulated, see PAPER_APPENDICES.md Appendix B |
+
+- `nb20_single_score_baselines.csv` — MSP / entropy / margin single-score detectors (the field's weak baseline).
+- `nb20_model_comparison.csv`, `nb20_metric_bars.png` — six tuned models × three families, full metric suite (ROC-AUC/PR-AUC/Brier/FPR@95/E-AURC/NCE).
+- `nb20_h1_bootstrap.json`, `nb20_best_model.json` — H1 paired-bootstrap verdict + persisted best model metadata (model → `models/voxintel_r_best_risk.joblib`).
+- `nb21_calibration_metrics.csv`, `nb21_reliability_diagram.png`, `nb21_h2_summary.json` — H2 calibration (uncalibrated/Platt/isotonic/temperature).
+- `nb21_selective_aurc.csv`, `nb21_coverage_at_risk.csv`, `nb21_risk_coverage.png`, `nb21_h3_summary.json` — H3 selective prediction.
+- `nb22_cost_curves.{csv,png}`, `nb22_cost_sensitivity.csv`, `nb22_h4_summary.json` — H4 cost model + Bayes rule + severity-weight sweep (simulated severities).
+- `nb22_cross_dataset.json` — SLURP→FSC transfer (AUC 0.889→0.666) + Mahalanobis support-gate flag rates.
+- `nb22_final_verdicts.csv` — consolidated H1–H4 verdict table.
