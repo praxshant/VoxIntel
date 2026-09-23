@@ -1,0 +1,26 @@
+{
+  "n": 8688,
+  "features_A_prime": [
+    "nbest_entropy",
+    "nbest_top_gap",
+    "mean_token_posterior",
+    "nbest_lev_dispersion"
+  ],
+  "lm_features_omitted": [
+    "lm_score",
+    "acoustic_lm_disagreement"
+  ],
+  "kenlm_available": false,
+  "auc_B_intent_only": 0.912015524296226,
+  "auc_B_union_Aprime": 0.8902942416100312,
+  "delta_auc_BA_minus_B": {
+    "mean_gap": -0.021647267786005436,
+    "ci95_low": -0.03268692084508492,
+    "ci95_high": -0.010430396705681019,
+    "frac_positive": 0.0,
+    "n_boot": 2000
+  },
+  "stability_wins_of_20": 0,
+  "H1_supported": false,
+  "decision_rule": "dAUC 95% CI > 0 on frozen split AND >= 11/20 splits"
+}

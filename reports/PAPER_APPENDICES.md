@@ -1,10 +1,11 @@
 # Paper appendices — deferred experiments, fully specified
 
-These two experiments are named in the paper's Future Work. Neither was run:
-one needs a GPU decode pass, the other needs human annotation. Rather than
-approximate or fabricate them, this document specifies each precisely enough to
-run and to judge — including the decision rule that would change the paper's
-conclusions. Both build on the frozen 70/30 SLURP split (seed 42) used in
+These two experiments are named in the paper's Future Work. Appendix A has
+since been **run on its LM-free feature subset** (result below); Appendix B
+still needs human annotation. Rather than approximate or fabricate what remains,
+this document specifies each precisely enough to run and to judge — including
+the decision rule that would change the paper's conclusions. Both build on the
+frozen 70/30 SLURP split (seed 42) used in
 [`src/analysis/frozen_split_eval.py`](../src/analysis/frozen_split_eval.py) and
 reported in [`FROZEN_SPLIT_RESULTS.md`](phase6_voxintel_r_slurp/FROZEN_SPLIT_RESULTS.md).
 
@@ -42,6 +43,26 @@ for downstream failure (B AUC 0.912 ≈ CV 0.911), so A′ is expected to add �
 
 **Compute.** One beam-search decode over the 8,688 SLURP-dev clips plus a KenLM
 build. No ASR/intent retraining. On the order of GPU-hours, not GPU-days.
+
+**Result (LM-free subset, run 2026-09-23, RTX 3050).** Beam-search decode
+(`pyctcdecode`, beam_width = 100, N-best = 10, **no LM**) over all 8,688
+SLURP-dev clips on the fine-tuned checkpoint (`checkpoint-41500`, WER 0.199),
+computing the 4 reference-free A′ features — N-best posterior entropy, top1−top2
+gap, mean token posterior, N-best Levenshtein dispersion. The 2 LM features
+(LM score, acoustic−LM disagreement) are omitted: KenLM has no Windows wheel and
+was not built. On the frozen split, **B ∪ A′ *underperforms* intent-only B**:
+ROC-AUC **0.890 vs 0.912**, ΔAUC(B∪A′ − B) = **−0.022, 95% CI [−0.033, −0.010]**
+(0 / 2,000 bootstrap resamples positive), and B∪A′ beats B in **0 / 20** splits.
+The decision rule (CI > 0 **and** ≥ 11/20) fails by a wide margin, so **H1
+remains NOT SUPPORTED — now with beam-search N-best evidence, not just
+frame-level CTC.** This matches the stated prior: intent-native uncertainty is a
+near-sufficient statistic (B AUC 0.912 reproduces the paper's headline 0.911),
+so richer ASR uncertainty adds noise, not signal. The consistent sign across
+family A (−0.037), tuned NB20 (−0.017) and N-best (−0.022) makes a reversal from
+the 2 still-untested LM features unlikely; a KenLM build is the one remaining
+step. Harness [`src/analysis/appendix_a_nbest.py`](../src/analysis/appendix_a_nbest.py);
+features `appendix_a_nbest_features.csv`; verdict `appendix_a_nbest_h1.json`
+(both in [`phase8_hypothesis_validation/`](phase8_hypothesis_validation/)).
 
 ---
 

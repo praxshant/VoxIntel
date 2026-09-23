@@ -22,10 +22,12 @@ result replicates in direction on a second corpus (Fluent Speech Commands). We r
 the full pipeline, a two-stage leakage audit, and a deployable reliability endpoint.
 
 > **Status (2026-09-23): research state frozen.** The 22-notebook pipeline (phases 1–8)
-> is complete and will not be extended. The only open work is the two confirmatory
-> experiments specified in [`reports/PAPER_APPENDICES.md`](reports/PAPER_APPENDICES.md)
-> — N-best / decoder-LM features for H1, and real severity labels for H4 — neither of
-> which adds a notebook. See [Future Work](#future-work).
+> is complete and will not be extended. Of the two confirmatory experiments specified in
+> [`reports/PAPER_APPENDICES.md`](reports/PAPER_APPENDICES.md), **Appendix A (N-best /
+> decoder features for H1) has since been run** on its LM-free subset — H1 stays NOT
+> SUPPORTED (B∪A′ AUC 0.890 < intent-only 0.912, ΔAUC −0.022, 0/20 splits); only the
+> KenLM LM features and real severity labels for H4 remain, neither of which adds a
+> notebook. See [Future Work](#future-work).
 
 ## Contributions
 
@@ -429,7 +431,7 @@ The following are explicitly deferred rather than required milestones:
 - matched-WER perturbation study
 - multilingual evaluation
 - additional SLU datasets beyond SLURP + FSC
-- N-best / LM feature infrastructure
+- N-best / LM feature infrastructure — LM-free N-best features **done** ([Appendix A](reports/PAPER_APPENDICES.md), H1 still not supported); only the KenLM LM features remain deferred
 
 Note: **cross-dataset evaluation is no longer deferred** — it was completed in
 notebook 17 on Fluent Speech Commands (FSC) and synthesized in notebook 18.
@@ -525,14 +527,16 @@ held-out split.
    dataset with genuine action risk — turns H4 from a sensitivity analysis into a test.
    The annotation schema, reliability plan, and cost-matrix test are specified in
    [Appendix B](reports/PAPER_APPENDICES.md).
-2. **N-best / decoder-LM feature family (a `16b` notebook).** This is now a
-   *confirmatory*, not exploratory, experiment: the frozen split shows ASR-native
-   summary statistics add nothing, so richer decoding signal (N-best disagreement,
-   lattice/LM scores) is the last plausible way an ASR-native signal could help. A null
-   result there would close H1 definitively; it requires a beam-search + KenLM decode
-   pass over the audio (compute, not yet run). Decode config, features, and the
-   flip-the-conclusion decision rule are specified in
-   [Appendix A](reports/PAPER_APPENDICES.md).
+2. **N-best / decoder-LM feature family — LM-free subset now run (H1 confirmed).**
+   [`src/analysis/appendix_a_nbest.py`](src/analysis/appendix_a_nbest.py) did a
+   GPU beam-search decode (`pyctcdecode`, beam 100, N-best 10, no LM) over all
+   8,688 SLURP-dev clips and computed 4 reference-free N-best features. On the
+   frozen split B∪A′ *underperforms* intent-only B (AUC 0.890 vs 0.912, ΔAUC
+   −0.022, 95% CI [−0.033, −0.010], 0/20 splits) — H1 NOT SUPPORTED with
+   beam-search evidence, not just frame-level CTC. **Remaining:** the 2 KenLM LM
+   features (LM score, acoustic−LM disagreement); no Windows KenLM wheel, so a
+   C++ build is the one open step. Decode config, features, and the
+   flip-the-conclusion decision rule are in [Appendix A](reports/PAPER_APPENDICES.md).
 3. **Second ASR/NLU pair and a noise-robustness sweep** to show the negative result is
    not specific to Wav2Vec2+DistilBERT — the largest external-review concern.
 4. **Finish productionization** — model registry, MLflow/DVC and monitoring around the

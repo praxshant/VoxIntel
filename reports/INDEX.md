@@ -22,9 +22,12 @@ Headline numbers are quoted from the JSON/CSV summaries in each folder.
 `voxintel_research_audit.md` (repo-root of `reports/`) is the August-2026
 external peer-review audit covering notebooks 01–12.
 
-`PAPER_APPENDICES.md` (repo-root of `reports/`) specifies the two deferred
+`PAPER_APPENDICES.md` (repo-root of `reports/`) covers the two deferred
 experiments — Appendix A (N-best / decoder-LM features for H1) and Appendix B
-(severity-label annotation for H4) — precisely enough to run and to judge.
+(severity-label annotation for H4). **Appendix A has since been run** on its
+LM-free feature subset (H1 still NOT SUPPORTED: B∪A′ AUC 0.890 < intent-only
+0.912, ΔAUC −0.022, 0/20 splits); Appendix B remains specified-only (needs
+human annotation).
 
 ---
 
@@ -103,3 +106,4 @@ Verdicts (`nb22_final_verdicts.csv`):
 - `nb22_cross_dataset.json` — SLURP→FSC transfer (AUC 0.889→0.666) + Mahalanobis support-gate flag rates.
 - `nb22_final_verdicts.csv` — consolidated H1–H4 verdict table.
 - `severity_annotation_rubric.md`, `severity_labels_TEMPLATE.csv` — **Appendix B harness**: the 3-tier action-risk rubric + the 70-intent annotation task that turns human severity labels into a real H4 verdict via `src/analysis/h4_severity_cost.py` (labels not yet collected — see PAPER_APPENDICES.md Appendix B).
+- `appendix_a_nbest_features.csv`, `appendix_a_nbest_h1.json` — **Appendix A result** (confirmatory for H1): 4 reference-free N-best/beam features over all 8,688 SLURP-dev clips (GPU beam-search decode, no LM) + the frozen-split H1 test. B∪A′ AUC 0.890 < intent-only 0.912, ΔAUC −0.022 (95% CI [−0.033, −0.010], 0/20 splits) → **H1 NOT SUPPORTED** with N-best evidence. LM features omitted (no KenLM Windows build). Harness `src/analysis/appendix_a_nbest.py`.
