@@ -1,0 +1,24 @@
+{
+  "asr_frontend": "openai/whisper-base.en",
+  "n_clips": 8688,
+  "intent_failure_rate": 0.3464548802946593,
+  "intent_model": "models/distilbert_intent (shared with Wav2Vec2 run)",
+  "auc_B_intent_only": 0.8644372696125071,
+  "auc_C_intent_plus_whisper_asr": 0.8445014401655411,
+  "delta_auc_C_minus_B": {
+    "mean_gap": -0.019962159078058355,
+    "ci95_low": -0.03297731855694136,
+    "ci95_high": -0.006625103453882184,
+    "frac_positive": 0.003,
+    "n_boot": 2000
+  },
+  "stability_wins_of_20": 2,
+  "H1_supported": false,
+  "decision_rule": "dAUC 95% CI > 0 on frozen split AND >= 11/20 splits",
+  "wav2vec2_reference": {
+    "auc_B_intent_only_full_8688": 0.912,
+    "delta_auc_C_minus_B_full": -0.037,
+    "H1_supported": false
+  },
+  "note": "Subset pilot unless n_clips==8688; compare SIGN of dAUC, not raw AUC magnitude (different n and transcripts than the Wav2Vec2 run)."
+}

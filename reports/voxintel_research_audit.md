@@ -590,6 +590,19 @@ base Python + scikit-learn 1.6.1, seed 42:
   Appendix B is a single-rater illustrative cost run (risk-deferral cheapest, beats
   both baselines in 100% of 1,000 tier/cost draws) — explicitly **not** the κ≥0.7
   verdict, which waits on real annotation.
+- **Phase 9 — Whisper cross-architecture check (added this review, not yet committed).**
+  `notebooks/retraining_on_whisper.ipynb` + `src/analysis/whisper_asr_eval.py` swap the
+  ASR front-end to a zero-shot Whisper (`whisper-base.en`) over the **full 8,688-clip**
+  SLURP set, same intent model / protocol / frozen split. Result (reported as-is): B
+  intent-only AUC 0.864, C +Whisper-ASR 0.845, **ΔAUC(C−B) −0.020, 95% CI
+  [−0.033, −0.007], 2/20 splits → H1 NOT SUPPORTED**, the **same direction** as
+  Wav2Vec2's −0.037 (0/20). The honest reading: the negative **generalizes across ASR
+  architectures** (CTC and seq2seq) — intent-native uncertainty dominates regardless of
+  the ASR family. Integrity note: a 2,500-clip pilot looked borderline-*positive*
+  (+0.022, CI [−0.003, +0.049]); the full corpus resolved it to clearly negative — a
+  reminder not to over-read a borderline subset CI. Confound: Whisper is zero-shot while
+  the Wav2Vec2 ASR was SLURP-fine-tuned (B AUC 0.864 vs 0.912). This directly answers
+  the single-model-pair limitation flagged in §D.1 — the result is **not** CTC-specific.
 
 ## C. Strengths that matter for a Voice-AI internship screen
 

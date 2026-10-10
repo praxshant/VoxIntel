@@ -356,6 +356,27 @@ what would still move the result.
 > cost-sensitive analysis, but on **simulated** severities — real labels
 > ([Appendix B](reports/PAPER_APPENDICES.md)) remain the only route to a true test.
 
+## Application: VoxIntel Command Arena
+
+The reliability model ships as a usable app, not just a notebook result. **VoxIntel
+Command Arena** is a game-style dashboard (FastAPI + a static UI) where each round
+shows a real SLURP voice command, the predicted intent, and the calibrated failure
+risk, and you choose **execute / clarify / abstain**. Points reward acting on commands
+the system got right and deferring the ones it got wrong — scored against the dataset's
+real `intent_failed` labels, so the score is a genuine reliability measure, not
+cosmetic gamification. Rounds, labels, and risk are all real and CPU-only (the pickled
+RandomForest over cached SLURP features); a "type your own command" box falls back to a
+clearly-labelled demo when the live intent model isn't loaded.
+
+    python src/analysis/frozen_split_eval.py                            # writes the risk model
+    python -m uvicorn src.serving.app:create_app --factory --port 8000  # http://localhost:8000
+
+Endpoints: `GET /arena/new`, `POST /arena/answer`, `GET /arena/metrics`,
+`POST /arena/score_text`, plus `/reliability`, `/predict`, `/health`. Docker, free-tier
+hosting (Cloud Run / Render), and the MLOps plan are in
+[`DEPLOYMENT.md`](DEPLOYMENT.md); recruiter-facing summary + résumé bullets in
+[`PORTFOLIO.md`](PORTFOLIO.md).
+
 ## Evaluation
 
 ### ASR and transcript metrics
@@ -446,13 +467,15 @@ The research work is ahead of the production layer. Productionization remains a 
 ### Future Phase 7
 - reusable training / inference scripts
 - model registry
-- FastAPI service ✅ (`/predict` + `/reliability`, reference-free risk scoring)
-- Docker ✅ (`Dockerfile` + `.dockerignore` — lean reference-free reliability image)
-- MLflow
-- DVC
-- tests ✅ (`tests/test_reliability.py` — reliability path + frozen-split invariants, dependency-free)
-- CI/CD ✅ (`.github/workflows/tests.yml` — runs the tests on push/PR to `main`)
-- monitoring
+- **VoxIntel Command Arena app ✅** (game-style dashboard + arena API — see above)
+- FastAPI service ✅ (`/reliability` + `/predict` + `/arena/*`, reference-free risk scoring)
+- Docker ✅ (hardened: `python:3.11-slim`, non-root `appuser`, `HEALTHCHECK`, CPU-only)
+- free-tier deploy plan ✅ ([`DEPLOYMENT.md`](DEPLOYMENT.md) — Cloud Run / Render, verified Oct 2026)
+- MLflow (optional; local file store)
+- DVC (optional)
+- tests ✅ (`tests/test_reliability.py` + `tests/test_arena.py` — reliability path, frozen-split invariants, arena unit + FastAPI e2e)
+- CI/CD ✅ (`.github/workflows/tests.yml` — reliability + arena jobs on push/PR to `main`)
+- monitoring (health endpoint + `/arena/metrics` + Mahalanobis support gate; see `DEPLOYMENT.md`)
 
 ## Repository Structure
 
@@ -542,7 +565,16 @@ held-out split.
    config, features, and the flip-the-conclusion decision rule are in
    [Appendix A](reports/PAPER_APPENDICES.md).
 3. **Second ASR/NLU pair and a noise-robustness sweep** to show the negative result is
-   not specific to Wav2Vec2+DistilBERT — the largest external-review concern.
+   not specific to Wav2Vec2+DistilBERT — the largest external-review concern. **Second
+   ASR done:** [`notebooks/retraining_on_whisper.ipynb`](notebooks/retraining_on_whisper.ipynb)
+   (phase 9) swaps in a zero-shot **Whisper** front-end over the **full 8,688-clip**
+   SLURP set. H1 is **NOT SUPPORTED on Whisper too** — ΔAUC(C−B) **−0.020, 95% CI
+   [−0.033, −0.007], 2/20 splits** — the same direction as Wav2Vec2 (−0.037), so the
+   negative **generalizes across CTC and seq2seq ASR**. (A 2,500-clip pilot had looked
+   borderline-positive, +0.022; the full run resolved it to negative — reported as-is.)
+   Confound: Whisper is zero-shot while the Wav2Vec2 ASR was SLURP-fine-tuned (intent-only
+   AUC 0.864 vs 0.912), yet intent-native uncertainty still dominates in both. A
+   noise-robustness sweep remains the open item.
 4. **Finish productionization** — model registry, MLflow/DVC and monitoring around the
    now-wired FastAPI service (Docker, tests, and CI are done).
 

@@ -45,6 +45,9 @@ data/raw/
 data/processed/
 *.csv
 *.xlsx
+# ...except the phase-9 Whisper feature table (part of the committed deliverable,
+# like the other phase report CSVs)
+!reports/phase9_whisper_cross_asr/whisper_voxintel_features.csv
 
 # Models & Checkpoints
 models/

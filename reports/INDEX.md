@@ -18,6 +18,7 @@ Headline numbers are quoted from the JSON/CSV summaries in each folder.
 | 6 | `phase6_voxintel_r_slurp/` | 16 | Reference-free VoxIntel-R risk model (SLURP) |
 | 7 | `phase7_reliability_cross_dataset/` | 17–18 | Cross-dataset (FSC) validation, calibration, selective prediction, cost-sensitivity |
 | 8 | `phase8_hypothesis_validation/` | 19–22 | Hypothesis suite: tuned multi-model H1 bake-off, calibration (H2), selective prediction (H3), cost-sensitive + shift/OOD (H4) |
+| 9 | `phase9_whisper_cross_asr/` | `retraining_on_whisper.ipynb` | Cross-architecture H1 check: zero-shot Whisper front-end vs Wav2Vec2-CTC |
 
 `voxintel_research_audit.md` (repo-root of `reports/`) is the August-2026
 external peer-review audit covering notebooks 01–12, with an **October-2026
@@ -113,3 +114,19 @@ Verdicts (`nb22_final_verdicts.csv`):
 - `appendix_b_h4_illustrative.json`, `severity_labels_rubric_singlerater.csv` — **Appendix B illustrative run** (`--illustrative`): one rater's rubric tiers + a 1000-draw tier/cost robustness sweep. Risk-deferral cheapest (always 1887 / conf 1606 / risk 1057, both bootstrap gaps exclude 0) and beats both baselines in 100% of draws (mean 35% saving). **NOT the κ≥0.7 verdict** — sensitivity analysis showing the ordering survives the unknown labels/costs.
 - `appendix_a_nbest_features.csv`, `appendix_a_nbest_h1.json` — **Appendix A, LM-free subset** (confirmatory for H1): 4 reference-free N-best/beam features over all 8,688 SLURP-dev clips (GPU beam-search decode, no LM) + the frozen-split H1 test. B∪A′ AUC 0.890 < intent-only 0.912, ΔAUC −0.022 (95% CI [−0.033, −0.010], 0/20 splits).
 - `appendix_a_lm_features.csv`, `appendix_a_full_h1.json` — **Appendix A, full 6-feature family**: adds the 2 LM features (LM score, acoustic−LM disagreement) scored with **distilgpt2** as a documented substitute for the Windows-unavailable KenLM. B∪A AUC 0.895 < intent-only 0.912, ΔAUC −0.017 (95% CI [−0.028, −0.006], 4/20 splits) → **H1 NOT SUPPORTED** with the full N-best + neural-LM family, not just frame-level CTC. Harness `src/analysis/appendix_a_nbest.py` (`--lm-decode`).
+
+## Phase 9 — Whisper cross-architecture check (`retraining_on_whisper.ipynb`)
+Does the H1 negative survive swapping the ASR front-end from Wav2Vec2-CTC to a
+**seq2seq Whisper** model? Same DistilBERT intent model, same reference-free protocol,
+same frozen 70/30 seed-42 split. Decode harness `src/analysis/whisper_asr_eval.py`
+(GPU; `whisper-base.en`, zero-shot); the notebook analyses the cached CSV in base.
+- `whisper_voxintel_features.csv` — per-clip Whisper transcript, 9 Whisper-native
+  uncertainty features (token log-probs + decoder-step entropy), re-scored intent
+  features, `intent_failed` target (git-ignored like other `*.csv`; regenerate with the harness).
+- `whisper_h1.json` — on the **full 8,688-clip** decode: intent-only B AUC 0.864,
+  combined C 0.845, **ΔAUC(C−B) −0.020, 95% CI [−0.033, −0.007], 2/20 splits** →
+  **H1 NOT SUPPORTED**, the **same direction as Wav2Vec2** (−0.037, 0/20) — the negative
+  **generalizes across CTC and seq2seq ASR**. (A 2,500-clip pilot had looked
+  borderline-positive, +0.022; the full corpus resolved it to negative.) Confound:
+  Whisper zero-shot vs Wav2Vec2 SLURP-fine-tuned.
+- `whisper_vs_wav2vec2_h1.png` — ΔAUC(C−B) comparison with the bootstrap CI.

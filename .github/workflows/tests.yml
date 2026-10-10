@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  unit:
+  reliability:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,3 +18,14 @@ jobs:
       # pandas, scikit-learn and joblib — no torch/fastapi needed to test them.
       - run: pip install numpy pandas scikit-learn joblib
       - run: python tests/test_reliability.py
+
+  arena:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      # Arena needs the serving stack (fastapi + httpx TestClient) on top.
+      - run: pip install numpy pandas scikit-learn joblib fastapi httpx
+      - run: python tests/test_arena.py

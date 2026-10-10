@@ -20,6 +20,7 @@ this beyond localhost.
 from __future__ import annotations
 
 import math
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence
 
@@ -28,7 +29,10 @@ try:
 except Exception:  # pragma: no cover - fastapi optional at import time
     FastAPI = None
 
-DEFAULT_RISK_MODEL = Path(__file__).resolve().parents[2] / "models" / "voxintel_r_intent_rf.joblib"
+_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_RISK_MODEL = _ROOT / "models" / "voxintel_r_intent_rf.joblib"
+DEFAULT_FEATURES = _ROOT / "reports" / "phase6_voxintel_r_slurp" / "voxintel_r_features.csv"
+STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 
 def load_risk_model(path: Path = DEFAULT_RISK_MODEL) -> Dict[str, Any]:
@@ -73,6 +77,17 @@ def score_reliability(risk_model: Dict[str, Any],
     return {"risk": risk, "decision": decision, "threshold": threshold, "features": features}
 
 
+def _demo_intent_probs(text: str) -> List[float]:
+    """Deterministic SIMULATED 3-class probability vector seeded by the text.
+    Used only in demo mode (no intent model loaded). The result is clearly
+    flagged simulated by callers — it is NOT a real model prediction."""
+    import hashlib
+    h = int(hashlib.sha256((text or "").encode("utf-8")).hexdigest(), 16)
+    a = 0.5 + (h % 1000) / 2000.0           # top prob in [0.5, 1.0)
+    b = (1 - a) * ((h >> 10) % 1000) / 1000.0
+    return [a, b, max(0.0, 1 - a - b)]
+
+
 def create_app(
     model: Any = None,
     tokenizer: Any = None,
@@ -94,10 +109,25 @@ def create_app(
         except FileNotFoundError:
             risk_model = None  # /reliability will report it's unavailable
 
+    # --- VoxIntel Command Arena (reference-free reliability game) ---
+    # Loads the cached SLURP feature table; real rounds, real labels, real risk.
+    arena = None
+    arena_error = None
+    try:
+        from src.serving.arena import ArenaStore
+        feats = Path(os.environ.get("VOXINTEL_FEATURES", DEFAULT_FEATURES))
+        low = float(os.environ.get("VOXINTEL_RISK_LOW", 0.33))
+        high = float(os.environ.get("VOXINTEL_RISK_HIGH", 0.66))
+        arena = ArenaStore(feats, risk_model=risk_model, low=low, high=high)
+    except Exception as e:  # missing csv / bad columns -> arena disabled, app still serves
+        arena_error = str(e)
+
     @app.get("/health")
-    def health() -> Dict[str, str]:
+    def health() -> Dict[str, Any]:
         return {"status": "ok", "service": "VoxIntel",
-                "reliability_model": "loaded" if risk_model else "unavailable"}
+                "reliability_model": "loaded" if risk_model else "unavailable",
+                "intent_inference": "live" if (prediction_fn or model) else "demo",
+                "arena": "ready" if arena else f"unavailable: {arena_error}"}
 
     @app.post("/predict")
     def predict(payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -128,6 +158,71 @@ def create_app(
                                      features=payload.get("features"))
         except (ValueError, KeyError) as e:
             return {"error": str(e), "risk": None}
+
+    def _require_arena():
+        if arena is None:
+            from fastapi import HTTPException
+            raise HTTPException(status_code=503, detail=f"arena unavailable: {arena_error}")
+        return arena
+
+    @app.get("/arena/new")
+    def arena_new() -> Dict[str, Any]:
+        return _require_arena().new_round()
+
+    @app.post("/arena/answer")
+    def arena_answer(payload: Dict[str, Any]) -> Dict[str, Any]:
+        a = _require_arena()
+        try:
+            return a.answer(payload.get("round_id", ""), payload.get("action", ""))
+        except (ValueError, KeyError) as e:
+            return {"error": str(e)}
+
+    @app.get("/arena/metrics")
+    def arena_metrics() -> Dict[str, Any]:
+        return _require_arena().metrics()
+
+    @app.get("/arena/history")
+    def arena_history(limit: int = 50) -> Dict[str, Any]:
+        return {"history": _require_arena().history(limit=limit)}
+
+    @app.post("/arena/score_text")
+    def arena_score_text(payload: Dict[str, Any]) -> Dict[str, Any]:
+        """Score a free-typed command. Real intent inference when a model is
+        attached; otherwise a clearly-flagged demo (simulated intent probs,
+        real risk model on those simulated inputs)."""
+        text = (payload.get("text") or "").strip()
+        if not text:
+            return {"error": "A non-empty command is required."}
+        mode = "demo"
+        probs = _demo_intent_probs(text)
+        predicted = None
+        if prediction_fn is not None or (model is not None and tokenizer is not None):
+            try:
+                pred = predict({"text": text})
+                if "error" not in pred:
+                    mode, predicted = "live", pred.get("prediction")
+                    if "probs" in pred:
+                        probs = pred["probs"]
+                    elif "confidence" in pred:
+                        c = float(pred["confidence"]); probs = [c, (1 - c) * 0.6, (1 - c) * 0.4]
+            except Exception:
+                mode = "demo"
+        if risk_model is None:
+            return {"mode": mode, "simulated_intent": mode == "demo",
+                    "error": "reliability model unavailable"}
+        scored = score_reliability(risk_model, intent_probs=probs)
+        from src.serving.arena import recommend
+        return {"mode": mode, "simulated_intent": mode == "demo",
+                "note": "intent is SIMULATED — not a real model prediction" if mode == "demo"
+                        else "live intent model",
+                "text": text, "predicted_intent": predicted,
+                "risk": round(scored["risk"], 4),
+                "recommended_action": recommend(scored["risk"], arena.low if arena else 0.33,
+                                                arena.high if arena else 0.66)}
+
+    if STATIC_DIR.exists():
+        from fastapi.staticfiles import StaticFiles
+        app.mount("/", StaticFiles(directory=str(STATIC_DIR), html=True), name="static")
 
     return app
 

@@ -1,8 +1,13 @@
-# Keep the build context small — only src/ and the one model file are COPYed.
+# Keep the build context small — src/, the one model file, and the one feature
+# table the Command Arena serves rounds from.
 .git/
 data/
 notebooks/
-reports/
+# reports/ is excluded except the single CSV the arena needs (re-included below)
+reports/*
+!reports/phase6_voxintel_r_slurp
+reports/phase6_voxintel_r_slurp/*
+!reports/phase6_voxintel_r_slurp/voxintel_r_features.csv
 experiments/
 artifacts/
 configs/
