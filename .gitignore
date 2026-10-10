@@ -23,6 +23,10 @@ ENV/
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
+# Notebook generators — the committed .ipynb files are the deliverable
+# (see the "Kept out of the repo" note in notebooks/_gen_*.py).
+notebooks/_gen_*.py
+
 # IDE
 .vscode/
 .idea/

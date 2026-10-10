@@ -523,4 +523,150 @@ Fine-Tuned ASR Primary Errors:
 **RECOMMENDATION:** **WEAK ACCEPT** (for Workshop / Conference Findings / Master's Thesis) | **BORDERLINE** (for main Interspeech / ICASSP pending full ASR convergence and multi-model benchmark).
 
 ---
-*End of Research Audit Report.*
+*End of original research audit (notebooks 01–12).*
+
+---
+
+# ADDENDUM — October 10, 2026: Full-Pipeline Review (NB 13–22) + Internship-Readiness Verdict
+
+**Why this addendum.** The audit above (Aug 2026) stopped at notebook 12, before
+the VoxIntel-R reliability direction existed. This section extends the review
+through the now-frozen 22-notebook state (phases 4–8) and answers a second
+question the original did not: *is this complete and strong enough to stand as
+independent student research for ASR / Voice-AI internship applications — Amazon
+Alexa, Apple Siri, Google Assistant/AI, and speech startups?*
+
+## A. What was independently verified this pass (reproducibility)
+
+Re-ran the repo's own self-checks on the cached feature CSVs (no audio, no GPU),
+base Python + scikit-learn 1.6.1, seed 42:
+
+- `frozen_split_eval.py` **reproduced the headline SLURP numbers bit-for-bit**:
+  intent-only RF ROC-AUC **0.9120**, combined **0.8747**, ASR-only **0.6150**;
+  H1 C−B gap **−0.0373**, 95% CI [−0.0509, −0.0245], **0/20** splits favour combined.
+- `reliability_metrics.py`, `appendix_a_nbest.py --selfcheck`, `serving/app.py`,
+  and `h4_severity_cost.py` self-checks all pass; `tests/test_reliability.py` 4/4.
+- Every headline figure in `README.md`, `INDEX.md`, and `PAPER_APPENDICES.md`
+  matches the saved `*.json` / `*.csv` artifacts. **No fabricated or inconsistent
+  numbers were found.**
+- Notebook health: all 22 parse, carry markdown + executed code, and have **zero
+  error cell outputs**. NB19 is markdown-only by design; a few optional plotting
+  cells in NB06/11/14/17 are unexecuted (cosmetic, not result-bearing).
+
+## B. Notebook-by-notebook (13–22), condensed
+
+- **13 — taxonomy validation/refinement.** Validated the repaired taxonomy;
+  `proper_noun_error` still dominates (baseline ≈87%, fine-tuned ≈75%); concluded
+  the taxonomy is a useful *diagnostic* layer, not a production feature set.
+- **14 — high-impact error analysis.** Category-level downstream failure rates
+  (`number_error` 0.68, `proper_noun_error` 0.65 most harmful; `deletion`/
+  `entity_error` benign). Establishes WER is an insufficient semantic proxy.
+- **15 — semantic risk prediction (reference-aware).** Taxonomy features add signal
+  over proxy metrics (combined−proxy AUC +0.046 baseline / +0.134 fine-tuned, both
+  bootstrap-significant) — but features are post-hoc/ground-truth-aware, so this is
+  the *bridge* to the reference-free problem, not a deployable model.
+- **16 — reference-free VoxIntel-R (SLURP).** First leakage-free risk model;
+  intent-only RF 0.911, combined 0.883, ASR-only ≈0.62 (5-fold CV, flagged
+  provisional). Combined does **not** beat intent-only; two-stage leakage audit passes.
+- **17 — cross-dataset FSC validation.** Independently trained Wav2Vec2 + DistilBERT;
+  H1 same direction (combined 0.711 vs intent 0.735; ΔAUC −0.025, CI [−0.144, +0.093],
+  not significant on FSC's tiny failure set).
+- **18 — final reliability & decision.** Per-dataset (never pooled): SLURP H2
+  SUPPORTED (ECE 0.019), H3 SUPPORTED (AURC 0.059 < 0.083 < 0.187), H4 inconclusive;
+  FSC partial (only 23 positive failures → wide CIs).
+- **19 — roadmap (markdown only).** States H1–H4 + decision rules; frames the four
+  reviewer-level gaps 20–22 close.
+- **20 — tuned 6-model bake-off.** *Strengthens* the H1 negative: best A/B/C =
+  0.650 / 0.889 / 0.872, ΔAUC(C−B) −0.017, CI [−0.027, −0.007], combined wins 0.1%
+  of bootstraps. Persists the best risk model.
+- **21 — H2 + H3.** Isotonic calibration ECE 0.014 / MCE 0.098 / Brier 0.115→0.097
+  (H2 SUPPORTED); selective prediction AURC 0.058 < MSP 0.083, E-AURC 0.033 (H3 SUPPORTED).
+- **22 — H4 + shift + synthesis.** Simulated-severity Bayes cost 1,795 vs
+  always-execute 5,113 vs confidence 3,397, gain CI [0.44, 0.80] (H4 SUPPORTED\*,
+  *simulated*); SLURP→FSC AUC 0.889→0.666; Mahalanobis density gate flags ~9% of
+  in-domain SLURP vs ~0.1% of FSC → density gating alone misses the concept shift.
+- **Appendices (run, not faked).** Appendix A re-ran H1 with N-best + a distilgpt2
+  LM substitute (KenLM has no Windows wheel): still NOT SUPPORTED (ΔAUC −0.017).
+  Appendix B is a single-rater illustrative cost run (risk-deferral cheapest, beats
+  both baselines in 100% of 1,000 tier/cost draws) — explicitly **not** the κ≥0.7
+  verdict, which waits on real annotation.
+
+## C. Strengths that matter for a Voice-AI internship screen
+
+1. **Scientific honesty.** The project reports a clean *negative* result (ASR-native
+   uncertainty adds nothing beyond intent-native) instead of overclaiming, backs it
+   with paired-bootstrap CIs and 20-split stability, and *keeps* the NB09 taxonomy
+   bug it caught/fixed/archived (NB10→12) as a transparency asset. This judgment —
+   knowing a negative, well-defended result is publishable — is senior-level.
+2. **Anti-leakage discipline.** An explicit, auditable reference-free/reference-aware
+   feature split, asserted in code (`frozen_split_eval.py`, `test_reliability.py`).
+3. **MLOps / engineering.** Modular `src/`, a reference-free `/reliability` FastAPI
+   endpoint, a lean pinned Dockerfile, dependency-free tests, GitHub Actions CI, a
+   persisted model, and a frozen seed-42 split — the headline results reproduce in
+   minutes with no audio or GPU.
+4. **Statistical breadth.** ROC/PR-AUC, Brier, ECE/MCE/adaptive-ECE, AURC/E-AURC/NCE,
+   FPR@95%TPR, calibration (Platt/isotonic/temperature), selective prediction, and
+   external **cross-dataset** validation (FSC).
+5. **Domain fit.** ASR→intent reliability and selective execute/clarify/abstain is
+   exactly the on-device assistant-reliability problem Alexa / Siri / Google
+   Assistant teams work on.
+
+## D. Open gaps (unchanged honesty from the project's own Future Work)
+
+1. **Single ASR/NLU pair** (Wav2Vec2-base + DistilBERT). No Whisper/Conformer, no
+   RoBERTa/LLM. The *generality* of the negative result is the biggest open question
+   — and the first thing an interviewer will probe.
+2. **ASR fine-tuning is a partial checkpoint** (~0.32 epoch). Note the two WER
+   figures a reader may trip on: the README headline uses the later
+   `checkpoint-41500/46500` (corpus WER 58.4%→19.0%), while Part 3 above quotes the
+   earlier checkpoint (58.4%→38.4%). Both are real and documented; the propagation
+   story is unchanged.
+3. **H4 is not a real test** — no annotated action-severity labels (simulated /
+   single-rater only). Protocol is specified (Appendix B); labels not collected.
+4. **Clean audio only** — no noise/SNR robustness sweep.
+5. **Intent-only** — no slot/entity (NER) evaluation.
+6. `requirements.txt` is unpinned (the Dockerfile pins its runtime, so serving is
+   reproducible; the research env is not).
+7. Independent student research with an internal self-audit — **not** peer-reviewed
+   or a SOTA claim, and it does not pretend to be.
+
+## E. Verdict — is it complete as independent research for ASR/Voice-AI internships?
+
+**Yes — complete and internship-ready as an independent student research project.**
+The 22-notebook pipeline is coherent end-to-end (dataset audit → ASR → intent →
+propagation → taxonomy → reference-free reliability → cross-dataset → hypothesis
+suite), the frozen state is internally consistent, and every headline number
+reproduces from committed artifacts. For the stated goal — a portfolio project to
+*target* internships at Amazon Alexa, Apple Siri, Google Assistant/AI, and speech
+startups — it is a strong, above-typical submission. It demonstrates exactly the
+competencies these teams screen for (SLU cascades, ASR/intent uncertainty,
+calibration, selective prediction, cross-dataset validation, reproducible MLOps)
+and, more rarely, the research maturity to run and defend a negative result.
+
+Scope-wise it is a *reliability study on one ASR/NLU family*, not a published paper
+or SOTA system — and it says so. The single-model scope is the one gap an
+interviewer will push on; the roadmap already has the answer (second ASR/NLU pair +
+noise sweep + real severity labels). Recommended before applying: pin
+`requirements.txt`, and lead the README with a 3–4 line "what I'd do next" so the
+scope limit reads as a deliberate boundary, not an omission.
+
+**Readiness by target:** internship portfolio / talking-point — *ready now*;
+undergraduate/master's thesis — *exceeds / suitable*; workshop paper — *close, needs
+the multi-model + noise extensions*; main speech conference (Interspeech/ICASSP) —
+*not yet* (same extensions), consistent with the original audit's verdict.
+
+## F. GitHub / repository state (as of this commit)
+
+- Before this commit, local `main` was level with `origin/main` at `3c991d6` — i.e.
+  the committed research **was** already pushed and current on GitHub.
+- The working tree carried uncommitted cleanup not yet on GitHub: two **superseded**
+  early fine-tuning notebooks under `experiments/` deleted (their canonical
+  replacement is `notebooks/05_fixed2v.ipynb`; history preserved in git), and the
+  notebook generator `notebooks/_gen_1922.py` left untracked (now git-ignored per
+  its own "the .ipynb files are the deliverable" note).
+- This audit commit lands those deletions + the doc updates (this addendum, the
+  `INDEX.md` pointer, and the stale `experiments/` line removed from the README
+  tree). After it is pushed, GitHub reflects the full frozen state.
+
+---
+*End of October-2026 addendum.*

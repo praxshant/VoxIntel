@@ -20,7 +20,10 @@ Headline numbers are quoted from the JSON/CSV summaries in each folder.
 | 8 | `phase8_hypothesis_validation/` | 19–22 | Hypothesis suite: tuned multi-model H1 bake-off, calibration (H2), selective prediction (H3), cost-sensitive + shift/OOD (H4) |
 
 `voxintel_research_audit.md` (repo-root of `reports/`) is the August-2026
-external peer-review audit covering notebooks 01–12.
+external peer-review audit covering notebooks 01–12, with an **October-2026
+addendum** that extends the review through the frozen state (notebooks 13–22:
+VoxIntel-R, cross-dataset validation, and the phase-8 hypothesis suite) and adds
+an independent-research / internship-readiness assessment.
 
 `PAPER_APPENDICES.md` (repo-root of `reports/`) covers the two deferred
 experiments — Appendix A (N-best / decoder-LM features for H1) and Appendix B

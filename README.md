@@ -472,7 +472,6 @@ The research work is ahead of the production layer. Productionization remains a 
     │   ├── optimization/             # quantization / latency (production stub)
     │   ├── serving/                  # FastAPI app + /reliability endpoint
     │   └── utils/                    # audio + text normalization
-    ├── experiments/                  # early/superseded fine-tuning attempts (history)
     ├── reports/                      # organized phase-wise — see reports/INDEX.md
     │   ├── phase1_dataset_audit/
     │   ├── phase2_asr/
