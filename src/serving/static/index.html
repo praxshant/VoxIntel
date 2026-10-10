@@ -3,145 +3,151 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VoxIntel Command Arena</title>
+<title>VoxIntel Reliability Dashboard</title>
 <style>
   :root{--bg:#0d1117;--card:#161b22;--line:#30363d;--fg:#e6edf3;--mut:#8b949e;
+    --model:#58a6ff;--msp:#d29922;--oracle:#2ea043;--rand:#6e7681;
     --exec:#2ea043;--clar:#d29922;--abst:#f85149;--acc:#58a6ff}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--fg);
     font:15px/1.5 system-ui,Segoe UI,Roboto,sans-serif}
   header{padding:18px 20px;border-bottom:1px solid var(--line)}
   h1{margin:0;font-size:20px}
-  .sub{color:var(--mut);font-size:13px;margin-top:3px}
-  .wrap{max-width:1000px;margin:0 auto;padding:18px 16px;display:grid;
+  .sub{color:var(--mut);font-size:13px;margin-top:4px;max-width:860px}
+  .status{font-size:12px;color:var(--mut);margin-top:6px}
+  .wrap{max-width:1060px;margin:0 auto;padding:18px 16px;display:grid;
     grid-template-columns:1fr 320px;gap:16px}
-  @media(max-width:820px){.wrap{grid-template-columns:1fr}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
-  .cmd{font-size:19px;font-weight:600;margin:6px 0 2px}
-  .lbl{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
-  .riskbar{height:12px;border-radius:6px;background:#21262d;overflow:hidden;margin:6px 0}
-  .riskfill{height:100%;transition:width .3s}
-  .btns{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  @media(max-width:860px){.wrap{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:16px}
+  .lbl{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .tile{background:#0d1117;border:1px solid var(--line);border-radius:8px;padding:10px}
+  .tile .v{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+  .tile .k{font-size:11px;color:var(--mut)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  td,th{padding:5px 6px;border-bottom:1px solid var(--line);text-align:left}
+  th{color:var(--mut);font-weight:600}
+  input{width:100%;padding:9px;border-radius:8px;border:1px solid var(--line);
+    background:#0d1117;color:var(--fg);font-size:14px}
   button{cursor:pointer;border:1px solid var(--line);border-radius:8px;color:var(--fg);
-    background:#21262d;padding:10px 14px;font-size:14px;font-weight:600}
+    background:#21262d;padding:9px 14px;font-size:14px;font-weight:600;margin-top:8px}
   button:hover{border-color:var(--acc)}
-  .execb{border-color:var(--exec)}.clarb{border-color:var(--clar)}.abstb{border-color:var(--abst)}
   .rec{display:inline-block;padding:2px 8px;border-radius:12px;font-size:12px;font-weight:700}
   .r-execute{background:rgba(46,160,67,.2);color:var(--exec)}
   .r-clarify{background:rgba(210,153,34,.2);color:var(--clar)}
   .r-abstain{background:rgba(248,81,73,.2);color:var(--abst)}
-  .pos{color:var(--exec);font-weight:700}.neg{color:var(--abst);font-weight:700}
-  table{width:100%;border-collapse:collapse;font-size:13px}
-  td,th{padding:5px 6px;border-bottom:1px solid var(--line);text-align:left}
-  .metric{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed var(--line)}
-  .metric b{font-variant-numeric:tabular-nums}
-  input{width:100%;padding:9px;border-radius:8px;border:1px solid var(--line);
-    background:#0d1117;color:var(--fg);font-size:14px}
-  .flag{font-size:12px;color:var(--clar)}
-  .status{font-size:12px;color:var(--mut)}
-  .big{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums}
+  .flag{font-size:12px;margin-top:6px}
+  .leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;margin-top:8px}
+  .leg span{display:inline-flex;align-items:center;gap:5px}
+  .sw{width:14px;height:3px;display:inline-block;border-radius:2px}
+  .note{font-size:12px;color:var(--mut)}
 </style>
 </head>
 <body>
 <!-- placeholder:body -->
 <header>
-  <h1>🎙️ VoxIntel Command Arena</h1>
-  <div class="sub">Reference-free reliability for an ASR→intent cascade. Decide whether to
-    <b>execute</b>, <b>clarify</b>, or <b>abstain</b> — score points for safe handling.</div>
+  <h1>📊 VoxIntel Reliability Dashboard</h1>
+  <div class="sub">Held-out evaluation of the reference-free risk model on the frozen SLURP
+    test split (stratified 70/30, seed 42). The risk score predicts when the ASR→intent
+    prediction is wrong; selective prediction defers the risky ones. Numbers below are
+    computed live from cached features — no audio, no GPU.</div>
   <div class="status" id="status">loading…</div>
 </header>
 <div class="wrap">
   <div>
-    <div class="card" id="roundCard">
-      <div class="lbl">Voice command (ASR transcript)</div>
-      <div class="cmd" id="cmd">—</div>
-      <div class="lbl">Predicted intent</div>
-      <div id="pred" style="margin-bottom:10px">—</div>
-      <div class="lbl">Calibrated failure risk <span id="risksrc" class="flag"></span></div>
-      <div class="riskbar"><div class="riskfill" id="riskfill" style="width:0%"></div></div>
-      <div><b id="riskval">—</b> · system recommends <span id="rec" class="rec">—</span></div>
-      <div class="btns">
-        <button class="execb" onclick="answer('execute')">▶ Execute</button>
-        <button class="clarb" onclick="answer('clarify')">❓ Clarify</button>
-        <button class="abstb" onclick="answer('abstain')">⛔ Abstain</button>
-      </div>
-      <div id="outcome" style="margin-top:14px"></div>
+    <div class="card">
+      <div class="lbl">Held-out metrics (frozen SLURP test split)</div>
+      <div class="tiles" id="tiles"></div>
     </div>
-
-    <div class="card" style="margin-top:16px">
-      <div class="lbl">Try your own command</div>
-      <input id="freetext" placeholder="e.g. turn off the kitchen lights" onkeydown="if(event.key==='Enter')scoreText()">
-      <div class="btns"><button onclick="scoreText()">Score command</button></div>
-      <div id="freeout" style="margin-top:8px"></div>
+    <div class="card">
+      <div class="lbl">Risk–coverage curve — lower is better</div>
+      <div id="chart"></div>
+      <div class="leg" id="legend"></div>
+      <div class="note" style="margin-top:8px">Accept the lowest-risk predictions first (x = coverage).
+        y = failure rate among accepted. A good risk score hugs the oracle and stays far below random/MSP.</div>
+    </div>
+    <div class="card">
+      <div class="lbl">Coverage at a fixed risk budget</div>
+      <table><thead><tr><th>max failure rate allowed</th><th>auto-executable coverage</th></tr></thead>
+        <tbody id="budgets"></tbody></table>
     </div>
   </div>
 
   <div>
     <div class="card">
-      <div class="lbl">Session score</div>
-      <div class="big" id="score">0</div>
-      <div id="metrics"></div>
+      <div class="lbl">Inspect a command</div>
+      <input id="t" placeholder="e.g. send a message to mom" onkeydown="if(event.key==='Enter')inspect()">
+      <button onclick="inspect()">Score</button>
+      <div id="out" style="margin-top:10px"></div>
+      <div class="note" id="mode" style="margin-top:8px"></div>
     </div>
-    <div class="card" style="margin-top:16px">
-      <div class="lbl">Recent rounds</div>
-      <table><tbody id="hist"></tbody></table>
+    <div class="card">
+      <div class="lbl">How to read this</div>
+      <div class="note">
+        <b>ROC-AUC</b> — how well risk separates right from wrong predictions.<br>
+        <b>AURC</b> — area under the risk–coverage curve (lower = better triage). Compare
+        model vs <b>MSP</b> (raw max-softmax, the standard baseline).<br>
+        <b>ECE</b> — calibration error of the risk probability.<br>
+        The inspector runs the real DistilBERT intent model when it's loaded (see status),
+        otherwise it clearly labels the intent as simulated.
+      </div>
     </div>
   </div>
 </div>
 <script>
-const $=id=>document.getElementById(id); let round=null;
-const fmt=x=>x==null?'—':(typeof x==='number'?x:x);
-const riskColor=r=>r<.33?'var(--exec)':r<.66?'var(--clar)':'var(--abst)';
+const $=id=>document.getElementById(id);
+const COLORS={model:'var(--model)',msp:'var(--msp)',oracle:'var(--oracle)',random:'var(--rand)'};
 
-async function health(){
-  try{const h=await (await fetch('/health')).json();
-    $('status').textContent=`reliability model: ${h.reliability_model} · intent: ${h.intent_inference} · arena: ${h.arena}`;
-  }catch(e){$('status').textContent='backend unreachable';}
+async function load(){
+  let h; try{ h=await (await fetch('/health')).json(); }
+  catch(e){ $('status').textContent='backend unreachable'; return; }
+  $('status').textContent=`reliability model: ${h.reliability_model} · intent inference: ${h.intent_inference} · dashboard: ${h.dashboard}`;
+  if(h.dashboard!=='ready'){ $('tiles').innerHTML='<div class="note">dashboard unavailable — '+h.dashboard+'</div>'; return; }
+  const s=await (await fetch('/eval/summary')).json();
+  const tiles=[['ROC-AUC',s.roc_auc],['AURC (model)',s.aurc_model],['AURC (MSP)',s.aurc_msp],
+    ['ECE',s.ece],['Brier',s.brier],['test n / fail',s.n_test+' / '+(s.failure_rate*100).toFixed(1)+'%']];
+  $('tiles').innerHTML=tiles.map(([k,v])=>`<div class="tile"><div class="v">${v}</div><div class="k">${k}</div></div>`).join('');
+  const rc=await (await fetch('/eval/risk_coverage')).json();
+  drawChart(rc.curves);
+  $('budgets').innerHTML=rc.budgets.map(b=>`<tr><td>${(b.risk_budget*100).toFixed(0)}%</td>
+    <td>${(b.max_coverage*100).toFixed(1)}%</td></tr>`).join('');
 }
-async function newRound(){
-  $('outcome').innerHTML='';
-  const r=await (await fetch('/arena/new')).json();
-  if(r.detail){$('cmd').textContent='Arena unavailable: '+r.detail;return;}
-  round=r;
-  $('cmd').textContent=r.transcript; $('pred').textContent=r.predicted_intent;
-  $('riskval').textContent=(r.risk*100).toFixed(1)+'%';
-  $('riskfill').style.width=(r.risk*100)+'%'; $('riskfill').style.background=riskColor(r.risk);
-  $('risksrc').textContent='('+r.risk_source+')';
-  $('rec').textContent=r.recommended_action; $('rec').className='rec r-'+r.recommended_action;
+
+function drawChart(curves){
+  const W=620,H=300,pad=42, order=['oracle','model','msp','random'];
+  const ymax=Math.max(0.05,...Object.values(curves).flat().map(p=>p[1]))*1.05;
+  const X=c=>pad+c*(W-pad-10), Y=r=>H-pad-(r/ymax)*(H-pad-14);
+  const axis=`<line x1="${pad}" y1="${H-pad}" x2="${W-10}" y2="${H-pad}" stroke="var(--line)"/>
+    <line x1="${pad}" y1="14" x2="${pad}" y2="${H-pad}" stroke="var(--line)"/>
+    <text x="${(W+pad)/2}" y="${H-8}" fill="var(--mut)" font-size="11" text-anchor="middle">coverage</text>
+    <text x="12" y="${H/2}" fill="var(--mut)" font-size="11" transform="rotate(-90 12 ${H/2})" text-anchor="middle">selective risk</text>
+    <text x="${pad-6}" y="18" fill="var(--mut)" font-size="10" text-anchor="end">${ymax.toFixed(2)}</text>
+    <text x="${pad-6}" y="${H-pad}" fill="var(--mut)" font-size="10" text-anchor="end">0</text>
+    <text x="${W-10}" y="${H-pad+14}" fill="var(--mut)" font-size="10" text-anchor="end">1.0</text>`;
+  const lines=order.map(k=>{
+    const pts=curves[k].map(p=>`${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' ');
+    const dash=(k==='oracle'||k==='random')?'stroke-dasharray="4 3"':'';
+    const w=k==='model'?2.5:1.4;
+    return `<polyline points="${pts}" fill="none" stroke="${COLORS[k]}" stroke-width="${w}" ${dash}/>`;
+  }).join('');
+  $('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="risk-coverage curve">${axis}${lines}</svg>`;
+  $('legend').innerHTML=order.map(k=>`<span><i class="sw" style="background:${COLORS[k]}"></i>${k}</span>`).join('');
 }
-async function answer(action){
-  if(!round)return;
-  const r=await (await fetch('/arena/answer',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({round_id:round.round_id,action})})).json();
-  if(r.error){$('outcome').textContent=r.error;return;}
-  const cls=r.points>=0?'pos':'neg';
-  $('outcome').innerHTML=`You chose <b>${action}</b>. This command would have
-    <b>${r.would_fail?'FAILED':'succeeded'}</b> (truth: ${r.ground_truth_intent}).
-    <span class="${cls}">${r.points>=0?'+':''}${r.points} pts</span>.
-    <button onclick="newRound()" style="margin-left:8px">Next ▶</button>`;
-  refresh();
+
+async function inspect(){
+  const text=$('t').value.trim(); if(!text)return;
+  $('out').textContent='scoring…'; $('mode').textContent='';
+  let r; try{ r=await (await fetch('/inspect',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({text})})).json(); }
+  catch(e){ $('out').textContent='backend unreachable'; return; }
+  if(r.error){ $('out').textContent=r.error; return; }
+  $('out').innerHTML=`intent <b>${r.predicted_intent||'(simulated)'}</b> · risk
+    <b>${(r.risk*100).toFixed(1)}%</b> → <span class="rec r-${r.recommended_action}">${r.recommended_action}</span>`;
+  $('mode').innerHTML=r.mode==='demo'
+    ? '⚠ '+r.note : '✓ '+r.note;
+  $('mode').style.color=r.mode==='demo'?'var(--clar)':'var(--oracle)';
 }
-async function scoreText(){
-  const t=$('freetext').value.trim(); if(!t)return;
-  const r=await (await fetch('/arena/score_text',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({text:t})})).json();
-  if(r.error){$('freeout').textContent=r.error;return;}
-  $('freeout').innerHTML=`risk <b>${(r.risk*100).toFixed(1)}%</b> →
-    <span class="rec r-${r.recommended_action}">${r.recommended_action}</span>
-    ${r.mode==='demo'?'<div class="flag">⚠ '+r.note+'</div>':'<div class="flag">live: '+(r.predicted_intent||'')+'</div>'}`;
-}
-async function refresh(){
-  const m=await (await fetch('/arena/metrics')).json();
-  $('score').textContent=m.score||0;
-  const rows=[['rounds',m.rounds],['coverage (executed)',m.coverage],
-    ['execute accuracy',m.execute_accuracy],['abstain rate',m.abstain_rate],
-    ['failure catch rate',m.failure_catch_rate],['followed model',m.followed_recommendation_rate]];
-  $('metrics').innerHTML=rows.map(([k,v])=>`<div class="metric"><span>${k}</span><b>${v==null?'—':v}</b></div>`).join('');
-  const h=(await (await fetch('/arena/history?limit=12')).json()).history||[];
-  $('hist').innerHTML=h.map(x=>`<tr><td>${x.action}</td><td>${x.would_fail?'fail':'ok'}</td>
-    <td class="${x.points>=0?'pos':'neg'}">${x.points>=0?'+':''}${x.points}</td></tr>`).join('');
-}
-health(); newRound(); refresh();
+load();
 </script>
 </body>
 </html>

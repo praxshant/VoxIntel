@@ -3,7 +3,7 @@
 A reference-free reliability layer for a speech-to-intent (SLU) pipeline: it predicts,
 at inference time and without a reference transcript, when an ASR-derived intent is
 likely wrong, and turns that calibrated risk into an execute / clarify / abstain
-decision. Research is frozen across 22 notebooks; a live "Command Arena" app and a
+decision. Research is frozen across 22 notebooks; a live reliability dashboard and a
 reproducible, tested serving stack sit on top. All numbers below reproduce from
 committed artifacts (`python src/analysis/frozen_split_eval.py`, seed 42).
 
@@ -19,10 +19,11 @@ committed artifacts (`python src/analysis/frozen_split_eval.py`, seed 42).
   entirely negative, **0/20** repeated splits) — that held under a tuned six-model
   bake-off and richer N-best + neural-LM features, and replicated in direction on a
   second corpus (Fluent Speech Commands).
-- Shipped the model as a **FastAPI** reliability service and a game-style **Command
-  Arena** dashboard (real ASR→intent→risk→execute/clarify/abstain), **Dockerized**
-  (CPU-only, non-root, healthcheck) with **GitHub Actions CI** and unit + end-to-end
-  tests covering success, uncertain, invalid, and failure paths.
+- Shipped the model as a **FastAPI** reliability service and a **reliability dashboard**
+  (live held-out metrics + risk–coverage curve vs the MSP baseline, plus a real-time
+  command inspector: ASR→intent→risk→execute/clarify/abstain), **Dockerized** (CPU-only,
+  non-root, healthcheck) with **GitHub Actions CI** and unit + end-to-end tests covering
+  success, uncertain, invalid, and failure paths.
 - Engineered a **reproducible, leakage-audited** pipeline (22 notebooks, frozen seed-42
   split, dependency-free self-checks) whose headline numbers regenerate from cached
   features with no GPU; caught, fixed, and archived a taxonomy pipeline bug as a
@@ -43,8 +44,9 @@ ASR-derived intent. On SLURP, the intent model's own uncertainty predicts downst
 failure well (ROC-AUC 0.912) and calibrates cleanly, while ASR-native confidence adds
 nothing on top — a clean, reproducible negative result confirmed across models, a
 richer feature family, and a second dataset. The calibrated risk drives a selective
-execute/clarify/abstain policy, exposed through a FastAPI endpoint and a playable
-"Command Arena" dashboard, with Docker, CI, and end-to-end tests. The project is
+execute/clarify/abstain policy, exposed through a FastAPI endpoint and a reliability
+dashboard (held-out metrics, risk–coverage curve, command inspector), with Docker, CI,
+and end-to-end tests. The project is
 deliberately scoped to one ASR/NLU family and is honest about its limits (simulated
 action-severity for the cost layer; single-pair generality is the open question).
 

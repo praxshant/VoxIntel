@@ -356,26 +356,24 @@ what would still move the result.
 > cost-sensitive analysis, but on **simulated** severities — real labels
 > ([Appendix B](reports/PAPER_APPENDICES.md)) remain the only route to a true test.
 
-## Application: VoxIntel Command Arena
+## Application: VoxIntel Reliability Dashboard
 
 The reliability model ships as a usable app, not just a notebook result. **VoxIntel
-Command Arena** is a game-style dashboard (FastAPI + a static UI) where each round
-shows a real SLURP voice command, the predicted intent, and the calibrated failure
-risk, and you choose **execute / clarify / abstain**. Points reward acting on commands
-the system got right and deferring the ones it got wrong — scored against the dataset's
-real `intent_failed` labels, so the score is a genuine reliability measure, not
-cosmetic gamification. Rounds, labels, and risk are all real and CPU-only (the pickled
-RandomForest over cached SLURP features); a "type your own command" box falls back to a
-clearly-labelled demo when the live intent model isn't loaded.
+Reliability Dashboard** (FastAPI + a static UI) reproduces the frozen-split evaluation
+live and shows the numbers a reviewer cares about: ROC-AUC, Brier, ECE, the
+**risk–coverage curve** and AURC for the model vs the max-softmax (MSP) baseline vs the
+oracle, and coverage at fixed risk budgets — all computed on the cached SLURP features,
+no audio or GPU. A single-command **inspector** scores any typed command through the
+real DistilBERT intent model (when loaded) → calibrated risk → execute / clarify /
+abstain, falling back to a clearly-labelled demo when the intent model isn't available.
 
     python src/analysis/frozen_split_eval.py                            # writes the risk model
     python -m uvicorn src.serving.app:create_app --factory --port 8000  # http://localhost:8000
 
-Endpoints: `GET /arena/new`, `POST /arena/answer`, `GET /arena/metrics`,
-`POST /arena/score_text`, plus `/reliability`, `/predict`, `/health`. Docker, free-tier
-hosting (Cloud Run / Render), and the MLOps plan are in
-[`DEPLOYMENT.md`](DEPLOYMENT.md); recruiter-facing summary + résumé bullets in
-[`PORTFOLIO.md`](PORTFOLIO.md).
+Endpoints: `GET /eval/summary`, `GET /eval/risk_coverage`, `POST /inspect`, plus
+`/reliability`, `/predict`, `/health`. Docker, free-tier hosting (Cloud Run / Render),
+and the MLOps plan are in [`DEPLOYMENT.md`](DEPLOYMENT.md); recruiter-facing summary +
+résumé bullets in [`PORTFOLIO.md`](PORTFOLIO.md).
 
 ## Evaluation
 
@@ -467,15 +465,15 @@ The research work is ahead of the production layer. Productionization remains a 
 ### Future Phase 7
 - reusable training / inference scripts
 - model registry
-- **VoxIntel Command Arena app ✅** (game-style dashboard + arena API — see above)
-- FastAPI service ✅ (`/reliability` + `/predict` + `/arena/*`, reference-free risk scoring)
-- Docker ✅ (hardened: `python:3.11-slim`, non-root `appuser`, `HEALTHCHECK`, CPU-only)
+- **VoxIntel Reliability Dashboard ✅** (held-out metrics + risk–coverage curve + command inspector — see above)
+- FastAPI service ✅ (`/reliability` + `/predict` + `/eval/*` + `/inspect`, reference-free risk scoring)
+- Docker ✅ (hardened: `python:3.11-slim`, non-root `appuser`, `HEALTHCHECK`, CPU-only; build + run verified)
 - free-tier deploy plan ✅ ([`DEPLOYMENT.md`](DEPLOYMENT.md) — Cloud Run / Render, verified Oct 2026)
 - MLflow (optional; local file store)
 - DVC (optional)
-- tests ✅ (`tests/test_reliability.py` + `tests/test_arena.py` — reliability path, frozen-split invariants, arena unit + FastAPI e2e)
-- CI/CD ✅ (`.github/workflows/tests.yml` — reliability + arena jobs on push/PR to `main`)
-- monitoring (health endpoint + `/arena/metrics` + Mahalanobis support gate; see `DEPLOYMENT.md`)
+- tests ✅ (`tests/test_reliability.py` + `tests/test_eval.py` — reliability path, frozen-split invariants, dashboard metrics + FastAPI e2e)
+- CI/CD ✅ (`.github/workflows/tests.yml` — reliability + dashboard jobs on push/PR to `main`)
+- monitoring (health endpoint + `/eval/summary` + Mahalanobis support gate; see `DEPLOYMENT.md`)
 
 ## Repository Structure
 

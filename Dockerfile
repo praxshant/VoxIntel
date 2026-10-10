@@ -1,17 +1,17 @@
-# VoxIntel Command Arena + reference-free reliability endpoint.
+# VoxIntel Reliability Dashboard + reference-free reliability endpoint.
 #
-# Serves the arena UI (/) and the reliability API (/arena/*, /reliability, /health).
-# /predict returns an "attach a model" error here: live ASR/intent inference would
-# add torch+transformers (a much larger image). The arena's core loop is fully real
-# without them — it scores cached SLURP commands with the pickled RandomForest.
+# Serves the dashboard UI (/) and the API (/eval/*, /inspect, /reliability, /health).
+# Live ASR/intent inference (the inspector) would add torch+transformers (a much larger
+# image); the dashboard metrics are fully real without them (cached SLURP features +
+# the pickled RandomForest), and the inspector falls back to a clearly-labelled demo.
 #
 # SECURITY: no auth or rate limiting (see src/serving/app.py). For local / eval /
-# a private free-tier Space only — put an auth gateway in front before public use.
+# a private free-tier host only — put an auth gateway in front before public use.
 #
 # Build + run (from repo root; the risk model + feature CSV must exist locally):
 #     python src/analysis/frozen_split_eval.py        # produces the risk model
-#     docker build -t voxintel-arena .
-#     docker run -p 8000:8000 voxintel-arena          # open http://localhost:8000
+#     docker build -t voxintel .
+#     docker run -p 8000:8000 voxintel                # open http://localhost:8000
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -27,7 +27,7 @@ RUN pip install --no-cache-dir \
     scikit-learn==1.6.1 numpy==2.1.3 pandas==2.2.3 joblib==1.4.2 scipy==1.15.3 \
     fastapi==0.115.0 "uvicorn==0.53.0" pydantic==2.9.2
 
-# App code (incl. the arena static UI), the risk model, and the feature table.
+# App code (incl. the dashboard static UI), the risk model, and the feature table.
 COPY src/ ./src/
 COPY models/voxintel_r_intent_rf.joblib ./models/voxintel_r_intent_rf.joblib
 COPY reports/phase6_voxintel_r_slurp/voxintel_r_features.csv \

@@ -34,7 +34,7 @@ librosa==0.11.0
 matplotlib==3.10.8
 seaborn==0.13.2
 
-# --- serving / API (VoxIntel Command Arena) ---
+# --- serving / API (VoxIntel Reliability Dashboard) ---
 fastapi==0.136.1
 uvicorn==0.46.0
 python-multipart==0.0.27
@@ -45,7 +45,7 @@ httpx==0.27.2
 PyYAML==6.0.3
 tqdm==4.67.1
 
-# Optional MLOps tooling (roadmap, not used by the frozen pipeline or the arena).
+# Optional MLOps tooling (roadmap, not used by the frozen pipeline or the dashboard).
 # Left unpinned on purpose — not installed in the verified env, so pinning a
 # version here would be a guess. Install the current release if/when you wire them.
 # mlflow

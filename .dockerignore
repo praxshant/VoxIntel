@@ -1,9 +1,9 @@
 # Keep the build context small — src/, the one model file, and the one feature
-# table the Command Arena serves rounds from.
+# table the dashboard serves metrics from.
 .git/
 data/
 notebooks/
-# reports/ is excluded except the single CSV the arena needs (re-included below)
+# reports/ is excluded except the single CSV the dashboard needs (re-included below)
 reports/*
 !reports/phase6_voxintel_r_slurp
 reports/phase6_voxintel_r_slurp/*

@@ -19,13 +19,13 @@ jobs:
       - run: pip install numpy pandas scikit-learn joblib
       - run: python tests/test_reliability.py
 
-  arena:
+  dashboard:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      # Arena needs the serving stack (fastapi + httpx TestClient) on top.
+      # Dashboard needs the serving stack (fastapi + httpx TestClient) on top.
       - run: pip install numpy pandas scikit-learn joblib fastapi httpx
-      - run: python tests/test_arena.py
+      - run: python tests/test_eval.py
